@@ -1,0 +1,10 @@
+{
+  "name": "sensor-data-collection",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.17.0"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist"
+  }
+}
