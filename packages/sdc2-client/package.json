@@ -1,0 +1,9 @@
+{
+  "name": "sdc2-client",
+  "description": "An axios-based rest client for SDC2",
+  "main": "sdc2-client.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bunyan": "^1.8.12"
+  }
+}
