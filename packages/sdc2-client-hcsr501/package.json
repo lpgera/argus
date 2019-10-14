@@ -1,0 +1,16 @@
+{
+  "name": "sdc2-client-hcsr501",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node index.js | bunyan -L",
+    "prod": "cross-env NODE_ENV=production node index.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "bunyan": "^1.8.12",
+    "config": "^3.2.2",
+    "cross-env": "^5.2.0",
+    "onoff": "^1.1.7",
+    "request": "^2.83.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "sdc2-client-dht22",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node index.js | bunyan -L",
+    "prod": "cross-env NODE_ENV=production node index.js"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "config": "^3.2.2",
+    "cron": "^1.7.1",
+    "cross-env": "^5.2.0",
+    "dht-sensor": "0.0.4",
+    "lodash": "^4.17.4",
+    "sdc2-client": "file:../sdc2-client"
+  }
+}
