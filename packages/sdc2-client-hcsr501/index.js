@@ -2,7 +2,7 @@ const Promise = require('bluebird')
 const config = require('config')
 const Gpio = require('onoff').Gpio
 const request = Promise.promisifyAll(require('request'), { multiArgs: true })
-const log = require('./log')
+const log = require('sdc2-logger')({ name: 'sdc2-client-hcsr501' })
 
 const pin = new Gpio(18, 'in', 'both')
 

@@ -1,5 +1,5 @@
 const axios = require('axios')
-const log = require('./log')
+const log = require('sdc2-logger')({ name: 'sdc2-client' })
 
 module.exports = ({ url, apiKey, location }) => {
   axios.interceptors.response.use(

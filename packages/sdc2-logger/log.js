@@ -18,14 +18,16 @@ const productionStreams = [
   },
 ]
 
-const log = bunyan.createLogger({
-  name: 'bme280-module',
-  streams: (() => {
-    if (process.env.NODE_ENV === 'development') {
-      return developmentStreams
-    }
-    return productionStreams
-  })(),
-})
+const log = options =>
+  bunyan.createLogger({
+    name: 'sdc2',
+    streams: (() => {
+      if (process.env.NODE_ENV === 'development') {
+        return developmentStreams
+      }
+      return productionStreams
+    })(),
+    ...options,
+  })
 
 module.exports = log

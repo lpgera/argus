@@ -1,7 +1,7 @@
 const BME280 = require('bme280-sensor')
 const config = require('config')
 const cron = require('cron')
-const log = require('./log')
+const log = require('sdc2-logger')({ name: 'sdc2-client-bme280' })
 const sdc2Client = require('sdc2-client')(config.get('sdc2'))
 
 const bme280 = new BME280({

@@ -2,7 +2,7 @@ const noble = require('noble')
 const Promise = require('bluebird')
 const config = require('config')
 const sdc2Client = require('sdc2-client')(config.get('sdc2'))
-const log = require('./log')
+const log = require('sdc2-logger')({ name: 'sdc2-client-mijia' })
 
 noble.on('stateChange', state => {
   log.debug('stateChange', state)

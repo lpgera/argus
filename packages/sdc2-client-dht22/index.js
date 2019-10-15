@@ -2,7 +2,7 @@ const dht = require('dht-sensor')
 const cron = require('cron')
 const config = require('config')
 const _ = require('lodash')
-const log = require('./log')
+const log = require('sdc2-logger')({ name: 'sdc2-client-dht22' })
 const sdc2Client = require('sdc2-client')(config.get('sdc2'))
 
 function isValidHumidity(humidity) {

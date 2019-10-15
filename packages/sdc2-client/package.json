@@ -4,6 +4,6 @@
   "main": "sdc2-client.js",
   "dependencies": {
     "axios": "^0.18.0",
-    "bunyan": "^1.8.12"
+    "sdc2-logger": "file:../sdc2-logger"
   }
 }
