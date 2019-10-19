@@ -1,11 +1,11 @@
 const moment = require('moment')
 
 module.exports = {
-  port: 3000,
+  port: 4000,
   mysql: {
-    host: '127.0.0.1',
-    user: '',
-    password: '',
+    host: 'mariadb',
+    user: 'sensor_data_collection',
+    password: 'mysql-password',
     database: 'sensor_data_collection',
     timezone: 'UTC',
   },

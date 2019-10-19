@@ -3,6 +3,21 @@
   "name": "sensor-data-collection",
   "private": true,
   "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "link": "lerna link convert",
+    "dc:bootstrap": "docker-compose run --rm bootstrap",
+    "dc:up": "docker-compose up -d frontend",
+    "dc:down": "docker-compose down --remove-orphans",
+    "dc:restart": "npm run dc:up && npm run dc:down",
+    "dc:logs": "docker-compose logs -f",
+    "server:dev": "cross-env NODE_ENV=development nodemon --cwd ./packages/sdc2-server/ ./src/index.js | bunyan -L",
+    "server:start": "cross-env NODE_ENV=production node ./packages/sdc2-server/src/index.js",
+    "frontend:dev": "webpack-dev-server --inline --progress --config ./packages/sdc2-frontend/build/webpack.dev.conf.js",
+    "frontend:lint": "eslint --ext .js,.vue ./packages/sdc2-frontend/src",
+    "frontend:build": "node ./packages/sdc2-frontend/build/build.js",
+    "frontend:build-report": "node ./packages/sdc2-frontend/build/build.js --report"
+  },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
@@ -22,7 +37,7 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^3.0.9",
-    "lerna": "^3.17.0",
+    "lerna": "^3.18.1",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.12.0",
     "nodemon": "^1.17.4",
@@ -50,10 +65,6 @@
     "webpack-dev-server": "^2.11.5",
     "webpack-merge": "^4.1.0"
   },
-  "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
-    "link": "lerna link convert"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
@@ -67,10 +78,6 @@
     "sdc2-client-mijia": "file:packages/sdc2-client-mijia",
     "sdc2-frontend": "file:packages/sdc2-frontend",
     "sdc2-logger": "file:packages/sdc2-logger",
-    "sdc2-server": "file:packages/sdc2-server",
-    "xpc-connection": "sandeepmistry/node-xpc-connection#pull/26/head"
-  },
-  "resolutions": {
-    "xpc-connection": "sandeepmistry/node-xpc-connection#pull/26/head"
+    "sdc2-server": "file:packages/sdc2-server"
   }
 }

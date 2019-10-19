@@ -3,10 +3,6 @@
   "description": "A complete rewrite of the old PHP based Sensor Data Collection project.",
   "main": "index.js",
   "private": true,
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon ./src/index.js | bunyan -L",
-    "start": "cross-env NODE_ENV=production node ./src/index.js"
-  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "bunyan": "^1.8.12",

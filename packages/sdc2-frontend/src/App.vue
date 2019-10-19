@@ -53,7 +53,7 @@ import store from './store'
 
 axios.interceptors.request.use(config => {
   const backendUrl =
-    process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : ''
+    process.env.NODE_ENV === 'development' ? 'http://localhost:4000/' : ''
   const token = localStorage.getItem('token')
   return {
     ...config,
