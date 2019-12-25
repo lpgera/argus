@@ -76,6 +76,7 @@
     "sdc2-client-dht22": "file:packages/sdc2-client-dht22",
     "sdc2-client-hcsr501": "file:packages/sdc2-client-hcsr501",
     "sdc2-client-mijia": "file:packages/sdc2-client-mijia",
+    "sdc2-client-weather": "file:packages/sdc2-client-weather",
     "sdc2-frontend": "file:packages/sdc2-frontend",
     "sdc2-logger": "file:packages/sdc2-logger",
     "sdc2-server": "file:packages/sdc2-server"

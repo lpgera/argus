@@ -1,4 +1,4 @@
-**/config/local-*
+**/config/local*
 **/dist
 **/node_modules
 .idea
