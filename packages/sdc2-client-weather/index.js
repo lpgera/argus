@@ -24,7 +24,7 @@ const openWeatherMapPromise = axios.get(
 )
 
 const airVisualPromise = axios.get('http://api.airvisual.com/v2/city', {
-  params: config.get('airVisual.apiKey'),
+  params: config.get('airVisual'),
 })
 
 Promise.all([openWeatherMapPromise, airVisualPromise]).then(
