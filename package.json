@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "npx lerna bootstrap",
     "link": "lerna link convert",
     "dc:bootstrap": "docker-compose run --rm bootstrap",
     "dc:up": "docker-compose up -d frontend",
