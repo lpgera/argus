@@ -29,6 +29,15 @@ router.use('/', express.static(path.join(__dirname, '../frontend')))
 
 app.use(router)
 
+process.on('SIGINT', () => {
+  log.info('Received SIGINT, closing connections...')
+  server.close(() => {
+    log.info('Server stopped, exiting.')
+    process.exit(0)
+  })
+})
+
 server.listen(config.get('port'), () => {
   log.info(`Server is listening on port: ${config.get('port')}`)
+  process.send('ready')
 })
