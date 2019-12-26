@@ -39,5 +39,7 @@ process.on('SIGINT', () => {
 
 server.listen(config.get('port'), () => {
   log.info(`Server is listening on port: ${config.get('port')}`)
-  process.send('ready')
+  if (process.send) {
+    process.send('ready')
+  }
 })
