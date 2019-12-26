@@ -16,4 +16,5 @@ module.exports = {
     state: '',
     city: '',
   },
+  measurementCron: '*/10 * * * *',
 }

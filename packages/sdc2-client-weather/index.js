@@ -1,5 +1,6 @@
 const config = require('config')
 const axios = require('axios')
+const cron = require('cron')
 const sdc2Client = require('sdc2-client')(config.get('sdc2'))
 const log = require('sdc2-logger')({ name: 'sdc2-client-weather' })
 
@@ -16,19 +17,16 @@ axios.interceptors.response.use(
   }
 )
 
-const openWeatherMapPromise = axios.get(
-  'http://api.openweathermap.org/data/2.5/weather',
-  {
-    params: config.get('openWeatherMap'),
-  }
-)
-
-const airVisualPromise = axios.get('http://api.airvisual.com/v2/city', {
-  params: config.get('airVisual'),
-})
-
-Promise.all([openWeatherMapPromise, airVisualPromise]).then(
-  ([openWeatherMapResponse, airVisualResponse]) => {
+const onTick = async () => {
+  try {
+    const [openWeatherMapResponse, airVisualResponse] = await Promise.all([
+      axios.get('http://api.openweathermap.org/data/2.5/weather', {
+        params: config.get('openWeatherMap'),
+      }),
+      axios.get('http://api.airvisual.com/v2/city', {
+        params: config.get('airVisual'),
+      }),
+    ])
     const measurements = [
       { type: 'humidity', value: openWeatherMapResponse.data.main.humidity },
       { type: 'pressure', value: openWeatherMapResponse.data.main.pressure },
@@ -39,6 +37,19 @@ Promise.all([openWeatherMapPromise, airVisualPromise]).then(
         value: airVisualResponse.data.data.current.pollution.aqius,
       },
     ]
-    return sdc2Client.storeMeasurements({ measurements })
+    await sdc2Client.storeMeasurements({ measurements })
+  } catch (err) {
+    log.error(err)
   }
-)
+}
+
+const measurementJob = new cron.CronJob({
+  cronTime: config.get('measurementCron'),
+  onTick,
+})
+
+async function start() {
+  measurementJob.start()
+}
+
+start().catch(log.error)
