@@ -4,4 +4,5 @@ module.exports = {
     apiKey: '',
     location: '',
   },
+  measurementCron: '*/5 * * * *',
 }
