@@ -1,4 +1,4 @@
-const noble = require('noble')
+const noble = require('@abandonware/noble')
 const Promise = require('bluebird')
 const config = require('config')
 const sdc2Client = require('sdc2-client')(config.get('sdc2'))

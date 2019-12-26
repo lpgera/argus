@@ -8,7 +8,7 @@
     "bluebird": "^3.5.1",
     "config": "^3.2.2",
     "cross-env": "^5.2.0",
-    "noble": "^1.9.0",
+    "@abandonware/noble": "^1.9.2-5",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger"
   }
