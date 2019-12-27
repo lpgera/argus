@@ -19,8 +19,11 @@ router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
 router.use('/ajax', ajaxRouter.routes(), ajaxRouter.allowedMethods())
 
 app.use(router.routes(), router.allowedMethods())
-
-app.use(koaStatic(path.join(__dirname, '../frontend')))
+app.use(
+  koaStatic(path.join(__dirname, '../frontend'), {
+    maxage: process.env.NODE_ENV === 'production' ? 30 * 24 * 3600 : 0,
+  })
+)
 
 const server = app.listen(config.get('port'), () => {
   log.info(`Server is listening on port: ${config.get('port')}`)
