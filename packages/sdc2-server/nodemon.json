@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "ext": "js",
+  "ext": "js,json",
   "execMap": {
     "js": "node --trace-warnings"
   },

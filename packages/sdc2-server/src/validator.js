@@ -1,32 +1,26 @@
-const {
-  Validator,
-  ValidationError,
-} = require('express-json-validator-middleware')
+const log = require('./log')
 
-const validator = new Validator({ allErrors: true })
-const validate = validator.validate
-
-function getParamsSchema(rules) {
-  return {
-    type: 'object',
-    properties: rules,
+const validateParams = schema => async (context, next) => {
+  try {
+    await schema.validateAsync(context.params)
+  } catch (error) {
+    log.warn('Validation error', JSON.stringify(error, null, 2))
+    context.throw(400, error)
   }
+  await next()
 }
 
-const simpleString = {
-  type: 'string',
-  pattern: '^[a-zA-z0-9_\\-]+$',
-}
-
-const isoDateTime = {
-  type: 'string',
-  format: 'date-time',
+const validateRequestBody = schema => async (context, next) => {
+  try {
+    await schema.validateAsync(context.request.body)
+  } catch (error) {
+    log.warn('Validation error', JSON.stringify(error, null, 2))
+    context.throw(400, error)
+  }
+  await next()
 }
 
 module.exports = {
-  validate,
-  getParamsSchema,
-  simpleString,
-  isoDateTime,
-  ValidationError,
+  validateParams,
+  validateRequestBody,
 }

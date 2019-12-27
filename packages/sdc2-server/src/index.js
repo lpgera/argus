@@ -1,33 +1,33 @@
 const config = require('config')
-const express = require('express')
-const cors = require('cors')
-const http = require('http')
 const path = require('path')
-const router = require('express-promise-router')()
+const Koa = require('koa')
+const koaStatic = require('koa-static')
+const koaBodyparser = require('koa-bodyparser')
+const KoaRouter = require('@koa/router')
+const koaCors = require('@koa/cors')
 const log = require('./log')
-const apiController = require('./controllers/api')
-const ajaxController = require('./controllers/ajax')
+const apiRouter = require('./routers/api')
+const ajaxRouter = require('./routers/ajax')
 
-const app = express()
-const server = http.createServer(app)
+const app = new Koa()
+const router = new KoaRouter()
 
-if (process.env.NODE_ENV === 'development') {
-  const corsOptions = {
-    origin: ['http://localhost:8080'],
-    credentials: true,
+app.use(koaCors())
+app.use(koaBodyparser())
+
+router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
+router.use('/ajax', ajaxRouter.routes(), ajaxRouter.allowedMethods())
+
+app.use(router.routes(), router.allowedMethods())
+
+app.use(koaStatic(path.join(__dirname, '../frontend')))
+
+const server = app.listen(config.get('port'), () => {
+  log.info(`Server is listening on port: ${config.get('port')}`)
+  if (process.send) {
+    process.send('ready')
   }
-
-  router.use(cors(corsOptions))
-}
-
-router.use('/api', apiController)
-router.use('/ajax', ajaxController)
-router.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '../frontend/index.html'))
-)
-router.use('/', express.static(path.join(__dirname, '../frontend')))
-
-app.use(router)
+})
 
 process.on('SIGINT', () => {
   log.info('Received SIGINT, closing connections...')
@@ -35,11 +35,4 @@ process.on('SIGINT', () => {
     log.info('Server stopped, exiting.')
     process.exit(0)
   })
-})
-
-server.listen(config.get('port'), () => {
-  log.info(`Server is listening on port: ${config.get('port')}`)
-  if (process.send) {
-    process.send('ready')
-  }
 })

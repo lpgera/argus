@@ -1,37 +1,45 @@
 const apiKey = require('./models/api-key')
 const log = require('./log')
 
-async function ensureValidApiKey(req, res, next) {
-  const token = req.headers['x-api-key'] || req.query['api_key']
+async function ensureValidApiKey(context, next) {
+  const token = context.headers['x-api-key'] || context.query['api_key']
   if (!token) {
     log.warn('API called without API key')
-    return res.status(401).send({
+    context.body = {
       error: 'X-API-Key header or api_key query parameter is required.',
-    })
+    }
+    context.status = 401
+    return
   }
   const ak = await apiKey.findByToken(token)
   if (!ak) {
     log.warn('API called with invalid API key token:', token)
-    return res.status(401).send({ error: 'Invalid API key token.' })
+    context.body = { error: 'Invalid API key token.' }
+    context.status = 401
+    return
   }
-  res.locals.apiKey = ak
-  return next()
+  context.state.apiKey = ak
+  await next()
 }
 
-function ensureReadPermission(req, res, next) {
-  if (!res.locals.apiKey || !res.locals.apiKey.canRead) {
-    log.warn('Read permission denied for apiKey:', res.locals.apiKey)
-    return res.status(403).send({ error: 'Read permission required.' })
+async function ensureReadPermission(context, next) {
+  if (!context.state.apiKey || !context.state.apiKey.canRead) {
+    log.warn('Read permission denied for apiKey:', context.state.apiKey)
+    context.body = { error: 'Read permission required.' }
+    context.status = 403
+    return
   }
-  return next()
+  await next()
 }
 
-function ensureWritePermission(req, res, next) {
-  if (!res.locals.apiKey || !res.locals.apiKey.canWrite) {
-    log.warn('Write permission denied for apiKey:', res.locals.apiKey)
-    return res.status(403).send({ error: 'Write permission required.' })
+async function ensureWritePermission(context, next) {
+  if (!context.state.apiKey || !context.state.apiKey.canWrite) {
+    log.warn('Write permission denied for apiKey:', context.state.apiKey)
+    context.body = { error: 'Write permission required.' }
+    context.status = 403
+    return
   }
-  return next()
+  await next()
 }
 
 module.exports = {
