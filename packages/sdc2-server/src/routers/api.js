@@ -40,7 +40,7 @@ router.post(
     const { location } = context.params
     const measurements = _.castArray(context.request.body)
     const createdAt = moment().toDate()
-    log.debug('Received new measurements:', { location, measurements })
+    log.debug({ location, measurements }, 'Received new measurements.')
 
     await Promise.all(
       measurements.map(m => {
@@ -71,7 +71,7 @@ router.get(
   apiAuth.ensureReadPermission,
   async context => {
     const { location, type } = context.params
-    log.debug('Getting latest measurements:', { location, type })
+    log.debug({ location, type }, 'Getting latest measurements.')
 
     context.body = await measurement.getLatest({ location, type })
   }

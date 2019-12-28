@@ -2,6 +2,8 @@
   "name": "sdc2-logger",
   "main": "log.js",
   "dependencies": {
-    "bunyan": "^1.8.12"
+    "pino": "^5.15.0",
+    "pino-multi-stream": "^4.2.0",
+    "pino-pretty": "^3.5.0"
   }
 }

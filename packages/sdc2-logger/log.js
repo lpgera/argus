@@ -1,33 +1,35 @@
-const bunyan = require('bunyan')
+const pino = require('pino')
+const multistream = require('pino-multi-stream').multistream
 
-const developmentStreams = [
-  {
-    level: 'trace',
-    stream: process.stdout,
-  },
-]
-
-const productionStreams = [
-  {
-    level: 'info',
-    stream: process.stdout,
-  },
-  {
-    level: 'error',
-    stream: process.stderr,
-  },
-]
+const destination =
+  process.env.NODE_ENV === 'production'
+    ? multistream([
+        {
+          stream: process.stdout,
+          level: 'info',
+        },
+        {
+          stream: process.stderr,
+          level: 'error',
+        },
+      ])
+    : pino.destination(2)
 
 const log = options =>
-  bunyan.createLogger({
-    name: 'sdc2',
-    streams: (() => {
-      if (process.env.NODE_ENV === 'development') {
-        return developmentStreams
-      }
-      return productionStreams
-    })(),
-    ...options,
-  })
+  pino(
+    {
+      name: 'sdc2',
+      prettyPrint:
+        process.env.NODE_ENV !== 'production'
+          ? {
+              colorize: true,
+              translateTime: 'yyyy-mm-dd HH:MM:ss.l',
+            }
+          : false,
+      level: 'trace',
+      ...options,
+    },
+    destination
+  )
 
 module.exports = log

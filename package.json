@@ -11,7 +11,7 @@
     "dc:down": "docker-compose down --remove-orphans",
     "dc:restart": "npm run dc:up && npm run dc:down",
     "dc:logs": "docker-compose logs -f",
-    "server:dev": "cross-env NODE_ENV=development nodemon --cwd ./packages/sdc2-server/ ./src/index.js | bunyan -L",
+    "server:dev": "cross-env NODE_ENV=development nodemon --cwd ./packages/sdc2-server/ ./src/index.js",
     "server:start": "cross-env NODE_ENV=production node ./packages/sdc2-server/src/index.js",
     "frontend:dev": "webpack-dev-server --inline --progress --config ./packages/sdc2-frontend/build/webpack.dev.conf.js",
     "frontend:lint": "eslint --ext .js,.vue ./packages/sdc2-frontend/src",

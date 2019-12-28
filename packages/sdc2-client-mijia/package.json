@@ -2,7 +2,7 @@
   "name": "sdc2-client-mijia",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node index.js | bunyan -L"
+    "dev": "cross-env NODE_ENV=development node index.js"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

@@ -2,7 +2,7 @@
   "name": "sdc2-client-weather",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node --trace-warnings index.js | bunyan -L",
+    "dev": "cross-env NODE_ENV=development node --trace-warnings index.js",
     "prod": "cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {

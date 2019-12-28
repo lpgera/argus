@@ -42,10 +42,10 @@ const _upsertHourlyAggregationQuery = `
       type = ?;`
 
 async function insert(measurement) {
-  log.debug('Inserting measurement:', measurement)
+  log.debug(measurement, 'Inserting measurement.')
   await db.insert(measurement).into('measurement')
 
-  log.debug('Updating hourly aggregation with measurement:', measurement)
+  log.debug(measurement, 'Updating hourly aggregation with measurement.')
   await db.raw(_upsertHourlyAggregationQuery, [
     measurement.createdAt,
     measurement.location,
@@ -56,7 +56,7 @@ async function insert(measurement) {
     measurement.type,
   ])
 
-  log.debug('Updating daily aggregation with measurement:', measurement)
+  log.debug(measurement, 'Updating daily aggregation with measurement.')
   return db.raw(_upsertDailyAggregationQuery, [
     measurement.createdAt,
     measurement.location,
@@ -108,24 +108,30 @@ function _getMeasurements({ location, type, from, to }) {
 
 function get({ location, type, from, to }) {
   if (to.diff(from, 'days') >= config.get('query.threshold.daily')) {
-    log.debug('Getting daily aggregated measurements:', {
-      location,
-      type,
-      from,
-      to,
-    })
+    log.debug(
+      {
+        location,
+        type,
+        from,
+        to,
+      },
+      'Getting daily aggregated measurements.'
+    )
     return _getDailyAggregations({ location, type, from, to })
   }
   if (to.diff(from, 'days') >= config.get('query.threshold.hourly')) {
-    log.debug('Getting hourly aggregated measurements:', {
-      location,
-      type,
-      from,
-      to,
-    })
+    log.debug(
+      {
+        location,
+        type,
+        from,
+        to,
+      },
+      'Getting hourly aggregated measurements.'
+    )
     return _getHourlyAggregations({ location, type, from, to })
   }
-  log.debug('Getting measurements:', { location, type, from, to })
+  log.debug({ location, type, from, to }, 'Getting measurements.')
   return _getMeasurements({ location, type, from, to })
 }
 
