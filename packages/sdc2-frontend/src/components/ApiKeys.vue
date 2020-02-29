@@ -15,7 +15,7 @@
 
       <tbody>
         <tr v-show="apiKeys === null">
-          <td colspan="3" class="center-align loading">
+          <td colspan="4" class="center-align loading">
             <div class="preloader-wrapper active">
               <div class="spinner-layer spinner-red-only">
                 <div class="circle-clipper left">
