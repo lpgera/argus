@@ -67,11 +67,11 @@ axios.interceptors.response.use(
     return response
   },
   async err => {
-    if (err.response.status === 401) {
+    if (err.message === 'Network Error') {
+      M.toast({ html: 'Uh-oh... it looks like you are offline. 📶❌' })
+    } else if (err.response.status === 401) {
       M.toast({ html: 'Your session has expired, please login again! 🔑' })
       await store.dispatch('logout')
-    } else if (err.response.status !== 403) {
-      M.toast({ html: 'Uh-oh... it looks like you are offline. 📶❌' })
     }
     return Promise.reject(err)
   }
