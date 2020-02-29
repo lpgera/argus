@@ -8,6 +8,7 @@
     "link": "lerna link convert",
     "dc:bootstrap": "docker-compose run --rm bootstrap",
     "dc:up": "docker-compose up -d frontend",
+    "dc:seed": "docker-compose exec backend bash -c 'cd packages/sdc2-server && node db/seed.js'",
     "dc:down": "docker-compose down --remove-orphans",
     "dc:restart": "npm run dc:up && npm run dc:down",
     "dc:logs": "docker-compose logs -f",
