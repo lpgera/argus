@@ -120,9 +120,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new SWPrecacheWebpackPlugin({
       cacheId: '{{ name }}',
       filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css,png}'],
       minify: true,
-      stripPrefix: 'dist/',
     }),
   ],
 })
