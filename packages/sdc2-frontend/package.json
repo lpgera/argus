@@ -20,6 +20,9 @@
   "devDependencies": {
     "@vue/cli-plugin-pwa": "~4.3.0"
   },
+  "vue": {
+    "publicPath": "./"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
