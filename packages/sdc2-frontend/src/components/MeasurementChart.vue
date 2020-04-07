@@ -8,15 +8,26 @@
 
     <div id="chart"></div>
 
-    <p class="right-align">
+    <div>
+      <select
+        v-model="aggregationType"
+        class="browser-default"
+        style="display: inline-block"
+      >
+        <option value="average">Average</option>
+        <option value="minimum">Minimum</option>
+        <option value="maximum">Maximum</option>
+        <option value="count">Count</option>
+        <option value="sum">Sum</option>
+      </select>
       <button
-        class="btn waves-effect waves-light"
+        class="btn waves-effect waves-light right"
         @click="refresh"
         :disabled="this.chart === null"
       >
         <i class="material-icons right">refresh</i> Refresh
       </button>
-    </p>
+    </div>
   </div>
 </template>
 
@@ -36,6 +47,7 @@ export default {
       chart: null,
       series: [],
       initializing: true,
+      aggregationType: 'average',
     }
   },
   computed: {
@@ -47,6 +59,11 @@ export default {
     },
     uniqueTypes() {
       return _.uniq(this.types)
+    },
+  },
+  watch: {
+    aggregationType: function() {
+      this.afterSetExtremes()
     },
   },
   methods: {
@@ -96,7 +113,7 @@ export default {
         this.locations.map(async (l, index) => {
           const t = this.types[index]
           const response = await axios.get(
-            `/measurement/location/${l}/type/${t}/from/${from}/to/${to}`
+            `/measurement/location/${l}/type/${t}/from/${from}/to/${to}/aggregation/${this.aggregationType}`
           )
           this.chart.series[index].setData(response.data, false)
         })
@@ -234,3 +251,11 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+select {
+  display: inline-block;
+  max-width: 120px;
+  height: 34px;
+}
+</style>

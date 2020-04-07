@@ -53,7 +53,7 @@ router.get('/location', async context => {
 })
 
 router.get(
-  '/measurement/location/:location/type/:type/from/:from/to/:to',
+  '/measurement/location/:location/type/:type/from/:from/to/:to/aggregation/:aggregation',
   validateParams(
     Joi.object({
       location: Joi.string()
@@ -68,15 +68,19 @@ router.get(
       to: Joi.string()
         .isoDate()
         .required(),
+      aggregation: Joi.string()
+        .valid('average', 'minimum', 'maximum', 'count', 'sum')
+        .required(),
     })
   ),
   async context => {
-    const { location, type, from, to } = context.params
+    const { location, type, from, to, aggregation } = context.params
     const measurements = await measurement.get({
       location,
       type,
       from: moment.utc(from),
       to: moment.utc(to),
+      aggregation,
     })
     context.body = measurements.map(item => {
       return [

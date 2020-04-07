@@ -68,9 +68,15 @@ async function insert(measurement) {
   ])
 }
 
-function _getDailyAggregations({ location, type, from, to }) {
+function _getDailyAggregations({
+  location,
+  type,
+  from,
+  to,
+  aggregation = 'average',
+}) {
   return db
-    .select('measurementDay as createdAt', 'average as value') // TODO avg/min/max?
+    .select('measurementDay as createdAt', `${aggregation} as value`)
     .from('dailyAggregation')
     .where({ location, type })
     .where(
@@ -82,9 +88,15 @@ function _getDailyAggregations({ location, type, from, to }) {
     .orderBy('measurementDay')
 }
 
-function _getHourlyAggregations({ location, type, from, to }) {
+function _getHourlyAggregations({
+  location,
+  type,
+  from,
+  to,
+  aggregation = 'average',
+}) {
   return db
-    .select('measurementHour as createdAt', 'average as value') // TODO avg/min/max?
+    .select('measurementHour as createdAt', `${aggregation} as value`)
     .from('hourlyAggregation')
     .where({ location, type })
     .where(
@@ -106,7 +118,7 @@ function _getMeasurements({ location, type, from, to }) {
     .orderBy('createdAt')
 }
 
-function get({ location, type, from, to }) {
+function get({ location, type, from, to, aggregation }) {
   if (to.diff(from, 'days') >= config.get('query.threshold.daily')) {
     log.debug(
       {
@@ -117,7 +129,7 @@ function get({ location, type, from, to }) {
       },
       'Getting daily aggregated measurements.'
     )
-    return _getDailyAggregations({ location, type, from, to })
+    return _getDailyAggregations({ location, type, from, to, aggregation })
   }
   if (to.diff(from, 'days') >= config.get('query.threshold.hourly')) {
     log.debug(
@@ -129,7 +141,7 @@ function get({ location, type, from, to }) {
       },
       'Getting hourly aggregated measurements.'
     )
-    return _getHourlyAggregations({ location, type, from, to })
+    return _getHourlyAggregations({ location, type, from, to, aggregation })
   }
   log.debug({ location, type, from, to }, 'Getting measurements.')
   return _getMeasurements({ location, type, from, to })
