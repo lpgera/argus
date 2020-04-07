@@ -3,6 +3,10 @@
   "description": "A complete rewrite of the old PHP based Sensor Data Collection project.",
   "main": "index.js",
   "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
+    "start": "cross-env NODE_ENV=production node ./src/index.js"
+  },
   "dependencies": {
     "@hapi/joi": "^16.1.8",
     "@koa/cors": "^3.0.0",

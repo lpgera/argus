@@ -13,10 +13,10 @@ Sensor data collection (codenamed SDC2) is a sensor monitoring solution built wi
 ## How to setup the development environment
 
 1. This project requires NodeJS 10.x and Docker to be installed.
-2. Initialize the Docker environment: `npm run dc:bootstrap`
-3. Start the dev servers: `npm run dc:up`
-4. Seed the database: `npm run dc:seed`
-5. View logs: `npm run dc:logs`
+2. Initialize the Docker environment: `npm run bootstrap`
+3. Start the dev servers: `npm run up`
+4. Seed the database: `npm run seed`
+5. View logs: `npm run logs`
 
 That's it! Now you can visit http://localhost:8080 and login with `username` and `password`.
 
