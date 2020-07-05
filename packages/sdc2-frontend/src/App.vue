@@ -109,6 +109,7 @@ export default {
   filter: brightness(10);
   width: 36px;
   height: 36px;
+  margin-right: 8px;
 }
 
 div#app {
