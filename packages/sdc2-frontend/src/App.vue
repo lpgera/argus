@@ -11,7 +11,7 @@
             ><i class="material-icons">menu</i></a
           >
           <router-link :to="{ name: 'Dashboard' }" class="brand-logo">
-            <img src="./assets/logo.png" />
+            <img src="./assets/logo.png" alt="Sensor Data Collection logo" />
             <span class="hide-on-med-and-down">Sensor Data Collection</span>
             <span class="hide-on-large-only">SDC</span>
           </router-link>
@@ -33,13 +33,6 @@
       <login v-if="!isLoggedIn" />
       <router-view v-if="isLoggedIn" />
     </main>
-    <footer class="page-footer">
-      <div class="footer-copyright">
-        <div class="container center-align">
-          © {{ year }} All rights reserved
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 
@@ -92,9 +85,6 @@ export default {
     ...mapState({
       isLoggedIn: state => !!state.token,
     }),
-    year() {
-      return new Date().getFullYear()
-    },
   },
 }
 </script>
@@ -120,9 +110,5 @@ div#app {
 
 main {
   flex: 1 0 auto;
-}
-
-footer.page-footer {
-  padding-top: 0;
 }
 </style>
