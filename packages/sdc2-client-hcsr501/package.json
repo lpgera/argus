@@ -8,7 +8,7 @@
   "dependencies": {
     "config": "^3.2.2",
     "cross-env": "^5.2.0",
-    "onoff": "^1.1.7",
+    "onoff": "^6.0.1",
     "sdc2-logger": "file:../sdc2-logger"
   }
 }

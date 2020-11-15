@@ -6,7 +6,7 @@
     "prod": "cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {
-    "bme280-sensor": "^0.1.6",
+    "bme280-sensor": "^0.1.7",
     "config": "^3.2.2",
     "cron": "^1.7.1",
     "cross-env": "^5.2.0",

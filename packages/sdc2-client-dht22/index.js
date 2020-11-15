@@ -1,4 +1,4 @@
-const dht = require('dht-sensor')
+const dht = require('node-dht-sensor')
 const cron = require('cron')
 const config = require('config')
 const _ = require('lodash')

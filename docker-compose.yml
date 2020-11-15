@@ -16,7 +16,7 @@ services:
       - MYSQL_PASSWORD=mysql-password
       - MYSQL_ROOT_PASSWORD=mysql-root-password
   backend:
-    image: node:10
+    image: node:14
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
@@ -26,7 +26,7 @@ services:
     depends_on:
       - mariadb
   frontend:
-    image: node:10
+    image: node:14
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
@@ -36,13 +36,13 @@ services:
     depends_on:
       - backend
   bootstrap:
-    image: node:10
+    image: node:14
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
     command: npx lerna bootstrap
   build:
-    image: node:10
+    image: node:14
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
