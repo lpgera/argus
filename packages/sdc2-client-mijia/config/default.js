@@ -2,7 +2,9 @@ module.exports = {
   sdc2: {
     url: '',
     apiKey: '',
-    location: '',
+  },
+  locations: {
+    // 'mac-address': 'location',
   },
   measurementCron: '*/5 * * * *',
 }
