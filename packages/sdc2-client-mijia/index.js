@@ -7,7 +7,7 @@ const log = require('sdc2-logger')({ name: 'sdc2-client-mijia' })
 const knownAddresses = Object.keys(config.get('locations'))
 
 const locations = Object.fromEntries(
-  knownAddresses.map(address => [
+  knownAddresses.map((address) => [
     address,
     {
       client: Sdc2Client({
@@ -28,7 +28,7 @@ const onTick = async () => {
 
   try {
     await Promise.all(
-      knownAddresses.map(async address => {
+      knownAddresses.map(async (address) => {
         const { client, temperature, humidity, lastUpdatedAt } = locations[
           address
         ]
@@ -85,7 +85,7 @@ function decodeAndStoreServiceData(address, data) {
 }
 
 const run = async () => {
-  noble.on('discover', async peripheral => {
+  noble.on('discover', async (peripheral) => {
     const address = peripheral.address
     const data = [...peripheral.advertisement.serviceData[0].data].slice(11)
     log.debug({

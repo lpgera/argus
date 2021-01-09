@@ -44,7 +44,7 @@ import NavItems from './components/NavItems'
 import Login from './components/Login'
 import store from './store'
 
-axios.interceptors.request.use(config => {
+axios.interceptors.request.use((config) => {
   const backendUrl =
     process.env.NODE_ENV === 'development' ? 'http://localhost:4000/' : ''
   const token = localStorage.getItem('token')
@@ -56,10 +56,10 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     return response
   },
-  async err => {
+  async (err) => {
     if (err.message === 'Network Error') {
       M.toast({ html: 'Uh-oh... it looks like you are offline. 📶❌' })
     } else if (err.response.status === 401) {
@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     ...mapState({
-      isLoggedIn: state => !!state.token,
+      isLoggedIn: (state) => !!state.token,
     }),
   },
 }

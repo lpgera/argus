@@ -130,8 +130,8 @@ export default {
           }
           return null
         })
-        .filter(i => i !== null)
-      indicesToRemove.reverse().forEach(index => {
+        .filter((i) => i !== null)
+      indicesToRemove.reverse().forEach((index) => {
         this.selectedItems.splice(index, 1)
       })
     },

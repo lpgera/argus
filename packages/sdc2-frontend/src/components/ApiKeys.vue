@@ -32,9 +32,7 @@
           </td>
         </tr>
         <tr v-if="apiKeys !== null && apiKeys.length === 0">
-          <td colspan="4" class="center-align">
-            No api keys found
-          </td>
+          <td colspan="4" class="center-align">No api keys found</td>
         </tr>
         <tr v-for="apiKey in apiKeys" :key="apiKey.id">
           <td>
@@ -85,9 +83,7 @@
 
     <div id="remove-confirm-modal" class="modal">
       <div class="modal-content">
-        <h4>
-          Are you sure?
-        </h4>
+        <h4>Are you sure?</h4>
         <p>
           The API key with this token will be removed:
           {{ apiKeyToDelete.token }}
@@ -158,7 +154,7 @@ export default {
       this.apiKeys = response.data
       M.toast({ html: 'Api key write access updated' })
     },
-    updateComment: _.debounce(async apiKey => {
+    updateComment: _.debounce(async (apiKey) => {
       const response = await axios.patch(`/api-key/${apiKey.id}`, {
         comment: apiKey.comment,
       })

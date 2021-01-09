@@ -11,7 +11,7 @@ const bme280 = new BME280({
 
 const measurementJob = new cron.CronJob({
   cronTime: config.get('measurementCron'),
-  onTick: async function() {
+  onTick: async function () {
     try {
       const {
         temperature_C: temperature,

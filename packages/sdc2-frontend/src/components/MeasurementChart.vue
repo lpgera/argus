@@ -62,7 +62,7 @@ export default {
     },
   },
   watch: {
-    aggregationType: function() {
+    aggregationType: function () {
       this.afterSetExtremes()
     },
   },
@@ -195,7 +195,7 @@ export default {
           useUTC: true,
           timezoneOffset: new Date().getTimezoneOffset(),
         },
-        yAxis: this.uniqueTypes.map(t => {
+        yAxis: this.uniqueTypes.map((t) => {
           return {
             id: t,
             type: 'linear',

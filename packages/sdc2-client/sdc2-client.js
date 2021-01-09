@@ -3,10 +3,10 @@ const log = require('sdc2-logger')({ name: 'sdc2-client' })
 
 module.exports = ({ url, apiKey, location }) => {
   axios.interceptors.response.use(
-    response => {
+    (response) => {
       return response
     },
-    err => {
+    (err) => {
       log.error(
         `sdc2-client request error - status: ${err.response.status} body:`,
         err.response.data

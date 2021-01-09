@@ -5,10 +5,10 @@ const sdc2Client = require('sdc2-client')(config.get('sdc2'))
 const log = require('sdc2-logger')({ name: 'sdc2-client-weather' })
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     return response
   },
-  err => {
+  (err) => {
     log.error(
       `axios request error - status: ${err.response.status} body:`,
       err.response.data

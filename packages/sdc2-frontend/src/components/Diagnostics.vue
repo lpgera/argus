@@ -20,9 +20,7 @@
           </td>
         </tr>
         <tr v-if="diagnostics !== null && diagnostics.length === 0">
-          <td colspan="5" class="center-align">
-            No data found
-          </td>
+          <td colspan="5" class="center-align">No data found</td>
         </tr>
         <tr
           v-for="record in diagnostics"
@@ -74,7 +72,7 @@ export default {
     this.diagnostics = response.data
   },
   updated() {
-    document.querySelectorAll('.tooltipped').forEach(element => {
+    document.querySelectorAll('.tooltipped').forEach((element) => {
       M.Tooltip.init(element, { enterDelay: 400 })
     })
   },

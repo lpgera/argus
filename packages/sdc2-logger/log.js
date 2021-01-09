@@ -15,7 +15,7 @@ const destination =
       ])
     : pino.destination(2)
 
-const log = options =>
+const log = (options) =>
   pino(
     {
       name: 'sdc2',
