@@ -96,7 +96,7 @@ const run = async () => {
   })
 
   const allowDuplicates = true
-  await noble.startScanningAsync(['180f', '180a'], allowDuplicates)
+  await noble.startScanningAsync(['fe95'], allowDuplicates)
 
   measurementJob.start()
 }
