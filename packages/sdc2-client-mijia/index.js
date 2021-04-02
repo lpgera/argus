@@ -16,6 +16,7 @@ const locations = Object.fromEntries(
       }),
       humidity: null,
       temperature: null,
+      battery: null,
       lastUpdatedAt: null,
     },
   ])
@@ -29,10 +30,14 @@ const onTick = async () => {
   try {
     await Promise.all(
       knownAddresses.map(async (address) => {
-        const { client, temperature, humidity, lastUpdatedAt } = locations[
-          address
-        ]
-        log.debug({ address, temperature, humidity, lastUpdatedAt })
+        const {
+          client,
+          temperature,
+          humidity,
+          battery,
+          lastUpdatedAt,
+        } = locations[address]
+        log.debug({ address, temperature, humidity, battery, lastUpdatedAt })
         if (now - lastUpdatedAt > 10 * minute) {
           log.warn('Measurement is too old, skipping...')
           return
@@ -47,6 +52,14 @@ const onTick = async () => {
               type: 'humidity',
               value: humidity,
             },
+            ...(battery
+              ? [
+                  {
+                    type: 'battery',
+                    value: battery,
+                  },
+                ]
+              : []),
           ],
         })
       })
@@ -69,6 +82,9 @@ function decodeAndStoreServiceData(address, data) {
     case 0x0a: // battery
       const battery = data[3]
       log.debug({ address, battery })
+      if (knownAddresses.includes(address)) {
+        locations[address].battery = battery
+      }
       break
     case 0x0d: // temperature + humidity
       const temperature = ((data[4] << 8) | data[3]) / 10.0
