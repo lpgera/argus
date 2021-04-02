@@ -6,8 +6,8 @@
     "prod": "cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {
-    "config": "^3.2.2",
-    "cross-env": "^5.2.0",
+    "config": "^3.3.6",
+    "cross-env": "^7.0.3",
     "onoff": "^6.0.1",
     "sdc2-logger": "file:../sdc2-logger"
   }

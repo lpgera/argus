@@ -5,10 +5,10 @@
     "dev": "cross-env NODE_ENV=development node index.js"
   },
   "dependencies": {
-    "@abandonware/noble": "^1.9.2-10",
-    "config": "^3.2.2",
-    "cron": "^1.7.1",
-    "cross-env": "^5.2.0",
+    "@abandonware/noble": "^1.9.2-13",
+    "config": "^3.3.6",
+    "cron": "^1.8.2",
+    "cross-env": "^7.0.3",
     "node-pre-gyp": "^0.14.0",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger"

@@ -16,11 +16,11 @@
     "local:build": "lerna run build --stream --scope=sdc2-frontend"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.10",
-    "@vue/cli-plugin-pwa": "~4.5.10",
-    "@vue/cli-plugin-router": "~4.5.10",
-    "@vue/cli-plugin-vuex": "~4.5.10",
-    "@vue/cli-service": "~4.5.10",
+    "@vue/cli-plugin-babel": "~4.5.12",
+    "@vue/cli-plugin-pwa": "~4.5.12",
+    "@vue/cli-plugin-router": "~4.5.12",
+    "@vue/cli-plugin-vuex": "~4.5.12",
+    "@vue/cli-service": "~4.5.12",
     "husky": "^4.3.7",
     "lerna": "^3.22.1",
     "node-sass": "^5.0.0",

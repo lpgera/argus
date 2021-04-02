@@ -6,10 +6,10 @@
     "prod": "cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {
-    "config": "^3.2.2",
-    "cron": "^1.7.1",
-    "cross-env": "^5.2.0",
-    "lodash": "^4.17.4",
+    "config": "^3.3.6",
+    "cron": "^1.8.2",
+    "cross-env": "^7.0.3",
+    "lodash": "^4.17.21",
     "node-dht-sensor": "^0.4.3",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger"

@@ -9,20 +9,20 @@
   },
   "dependencies": {
     "@hapi/joi": "^16.1.8",
-    "@koa/cors": "^3.0.0",
-    "@koa/router": "^8.0.5",
-    "config": "^3.2.2",
-    "cross-env": "^5.2.0",
+    "@koa/cors": "^3.1.0",
+    "@koa/router": "^10.0.0",
+    "config": "^3.3.6",
+    "cross-env": "^7.0.3",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.20.10",
-    "koa": "^2.11.0",
-    "koa-bodyparser": "^4.2.1",
+    "knex": "^0.95.4",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
     "koa-static": "^5.0.0",
-    "lodash": "^4.17.15",
-    "moment": "^2.22.1",
-    "mysql": "^2.15.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
     "pushbullet": "^2.4.0",
     "sdc2-logger": "file:../sdc2-logger",
-    "uuid": "^3.2.1"
+    "uuid": "^8.3.2"
   }
 }
