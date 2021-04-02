@@ -5,7 +5,6 @@
     "dev": "cross-env NODE_ENV=development node index.js"
   },
   "dependencies": {
-    "@abandonware/bluetooth-hci-socket": "^0.5.3-6",
     "@abandonware/noble": "^1.9.2-10",
     "config": "^3.2.2",
     "cron": "^1.7.1",

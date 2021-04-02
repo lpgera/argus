@@ -9,8 +9,8 @@
     "config": "^3.2.2",
     "cron": "^1.7.1",
     "cross-env": "^5.2.0",
-    "node-dht-sensor": "^0.4.3",
     "lodash": "^4.17.4",
+    "node-dht-sensor": "^0.4.3",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger"
   }
