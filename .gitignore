@@ -1,4 +1,5 @@
 **/config/local*
 **/dist
+**/build
 **/node_modules
 .idea
