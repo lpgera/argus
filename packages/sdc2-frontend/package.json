@@ -2,23 +2,15 @@
   "name": "sdc2-frontend",
   "description": "A Vue.js based frontend for Sensor Data Collection 2",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "inspect": "vue-cli-service inspect",
-    "build": "vue-cli-service build"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.10.0",
     "highcharts": "^9.0.1",
     "lodash": "^4.17.21",
-    "materialize-css": "^1.0.0",
-    "register-service-worker": "^1.7.2",
-    "vue": "^2.6.12",
-    "vue-router": "^3.5.1",
-    "vuex": "^3.6.2"
+    "materialize-css": "^1.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-pwa": "^4.5.12"
   },
   "browserslist": [
     "> 1%",
