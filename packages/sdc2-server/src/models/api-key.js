@@ -1,5 +1,5 @@
 const db = require('../db')
-const uuid = require('uuid/v4')
+const uuid = require('uuid').v4
 
 function list() {
   return db.select('*').from('apiKey')
