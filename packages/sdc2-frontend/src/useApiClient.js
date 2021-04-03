@@ -16,7 +16,7 @@ axios.interceptors.request.use((config) => {
   }
 })
 
-const useApiClient = (...args) => {
+const useApiClient = (config, options) => {
   const { dispatch: authDispatch } = useContext(AuthContext)
   const { enqueueSnackbar } = useSnackbar()
 
@@ -43,7 +43,10 @@ const useApiClient = (...args) => {
     return () => axios.interceptors.response.eject(responseInterceptor)
   }, [authDispatch, enqueueSnackbar])
 
-  return useAxios(...args)
+  return useAxios(config, {
+    useCache: false,
+    ...options,
+  })
 }
 
 export default useApiClient
