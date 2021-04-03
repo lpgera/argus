@@ -22,12 +22,12 @@ const getTooltipDate = (isoDateString) => {
 }
 
 export default function Diagnostics() {
-  const [{ loading, data = [] }] = useApiClient('/diagnostics')
+  const [{ loading, data }] = useApiClient('/diagnostics')
 
   const classes = useStyles()
 
   const table = () => {
-    if (loading) {
+    if (loading && !data) {
       return <Spinner />
     }
 
