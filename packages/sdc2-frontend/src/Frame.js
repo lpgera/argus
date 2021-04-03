@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -19,8 +20,11 @@ import IconButton from '@material-ui/core/IconButton'
 import Container from '@material-ui/core/Container'
 import MenuIcon from '@material-ui/icons/Menu'
 import { ReactComponent as Logo } from './logo.svg'
-import useApiClient from './useApiClient'
 import { AuthContext } from './AuthContext'
+import Login from './Login'
+import Dashboard from './Dashboard'
+import ApiKeys from './ApiKeys'
+import Diagnostics from './Diagnostics'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,28 +81,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Dashboard() {
-  const { dispatch: authDispatch } = useContext(AuthContext)
-  const [{ data }] = useApiClient('/location')
+export default function Frame() {
+  const { state: authState, dispatch: authDispatch } = useContext(AuthContext)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
 
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
+
+  if (!authState.token) {
+    return <Login />
+  }
 
   const drawer = () => (
     <List>
-      <ListItem button>
+      <ListItem
+        button
+        component={Link}
+        to="/"
+        onClick={() => setMobileDrawerOpen(false)}
+      >
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
-      <ListItem button>
+      <ListItem
+        button
+        component={Link}
+        to="/api-keys"
+        onClick={() => setMobileDrawerOpen(false)}
+      >
         <ListItemIcon>
           <KeyIcon />
         </ListItemIcon>
         <ListItemText primary="Api keys" />
       </ListItem>
-      <ListItem button>
+      <ListItem
+        button
+        component={Link}
+        to="/diagnostics"
+        onClick={() => setMobileDrawerOpen(false)}
+      >
         <ListItemIcon>
           <DiagnosticsIcon />
         </ListItemIcon>
@@ -107,6 +130,7 @@ export default function Dashboard() {
       <ListItem
         button
         onClick={() => {
+          setMobileDrawerOpen(false)
           authDispatch({ type: 'logout' })
         }}
       >
@@ -119,60 +143,78 @@ export default function Dashboard() {
   )
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="absolute" className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={() => setOpen(!open)}
-            className={classes.menuButton}
+    <Router>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="absolute" className={classes.appBar}>
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => {
+                setDrawerOpen(!drawerOpen)
+                setMobileDrawerOpen(!mobileDrawerOpen)
+              }}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Logo className={classes.logo} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Sensor data collection
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Hidden xsDown>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: clsx(
+                classes.drawerPaper,
+                !drawerOpen && classes.drawerPaperClose
+              ),
+            }}
+            open={drawerOpen}
           >
-            <MenuIcon />
-          </IconButton>
-          <Logo className={classes.logo} />
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
+            <div className={classes.appBarSpacer} />
+            {drawer()}
+          </Drawer>
+        </Hidden>
+        <Hidden smUp>
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            onClose={() => setMobileDrawerOpen(false)}
+            open={mobileDrawerOpen}
           >
-            Sensor data collection
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Hidden xsDown>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
-        >
+            {drawer()}
+          </Drawer>
+        </Hidden>
+        <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          {drawer()}
-        </Drawer>
-      </Hidden>
-      <Hidden smUp>
-        <Drawer
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          onClose={() => setOpen(false)}
-          open={open}
-        >
-          {drawer()}
-        </Drawer>
-      </Hidden>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <>{JSON.stringify(data, null, 2)}</>
-        </Container>
-      </main>
-    </div>
+          <Container maxWidth="lg" className={classes.container}>
+            <Switch>
+              <Route path="/api-keys">
+                <ApiKeys />
+              </Route>
+              <Route path="/diagnostics">
+                <Diagnostics />
+              </Route>
+              <Route path="/">
+                <Dashboard />
+              </Route>
+            </Switch>
+          </Container>
+        </main>
+      </div>
+    </Router>
   )
 }
