@@ -1,4 +1,3 @@
-import './App.css'
 import { AuthProvider } from './AuthContext'
 import Frame from './Frame'
 
