@@ -1,6 +1,8 @@
 import { useContext, useEffect } from 'react'
 import axios from 'axios'
 import useAxios from 'axios-hooks'
+import { useSnackbar } from 'notistack'
+
 import { AuthContext, LOCAL_STORAGE_KEY } from './AuthContext'
 
 axios.interceptors.request.use((config) => {
@@ -16,22 +18,30 @@ axios.interceptors.request.use((config) => {
 
 const useApiClient = (...args) => {
   const { dispatch: authDispatch } = useContext(AuthContext)
+  const { enqueueSnackbar } = useSnackbar()
 
   useEffect(() => {
     const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
-        if (error.response.status === 403) {
+        console.log(error.message)
+        if (error.message === 'Network Error') {
+          enqueueSnackbar('Uh-oh... it looks like you are offline.', {
+            variant: 'error',
+          })
+        } else if (error.response.status === 401) {
+          enqueueSnackbar('Your session has expired, please login again.', {
+            variant: 'error',
+          })
           authDispatch({ type: 'logout' })
-          return Promise.reject(error)
-        } else {
-          return Promise.reject(error)
         }
+
+        return Promise.reject(error)
       }
     )
 
     return () => axios.interceptors.response.eject(responseInterceptor)
-  }, [authDispatch])
+  }, [authDispatch, enqueueSnackbar])
 
   return useAxios(...args)
 }
