@@ -65,7 +65,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 export default function ApiKeys() {
-  const [{ loading, data }, refetch] = useApiClient('/api-key')
+  const [{ data = [] }, refetch] = useApiClient('/api-key')
   const { enqueueSnackbar } = useSnackbar()
   const [, execute] = useApiClient({}, { manual: true })
   const updateApiKey = async ({ id, data }) => {
@@ -91,7 +91,7 @@ export default function ApiKeys() {
   const classes = useStyles()
 
   const table = () => {
-    if (loading && !data) {
+    if (!data.length) {
       return <Spinner />
     }
 

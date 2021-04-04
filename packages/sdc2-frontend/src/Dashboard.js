@@ -16,7 +16,7 @@ import useApiClient from './useApiClient'
 import Spinner from './Spinner'
 
 export default function Dashboard() {
-  const [{ loading, data = [] }] = useApiClient('/location')
+  const [{ data = [] }] = useApiClient('/location')
   const [showStale, setShowStale] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
   const history = useHistory()
@@ -68,7 +68,7 @@ export default function Dashboard() {
   }
 
   const table = () => {
-    if (loading && !data.length) {
+    if (!data.length) {
       return <Spinner />
     }
 

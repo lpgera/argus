@@ -25,7 +25,7 @@ const getTooltipDate = (isoDateString) => {
 }
 
 export default function Diagnostics() {
-  const [{ loading, data = [] }] = useApiClient('/diagnostics')
+  const [{ data = [] }] = useApiClient('/diagnostics')
   const [showStale, setShowStale] = useState(false)
 
   const visibleItems = showStale ? data : data.filter(({ isStale }) => !isStale)
@@ -33,7 +33,7 @@ export default function Diagnostics() {
   const classes = useStyles()
 
   const table = () => {
-    if (loading && !data.length) {
+    if (!data.length) {
       return <Spinner />
     }
 
