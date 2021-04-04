@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -22,46 +25,65 @@ const getTooltipDate = (isoDateString) => {
 }
 
 export default function Diagnostics() {
-  const [{ loading, data }] = useApiClient('/diagnostics')
+  const [{ loading, data = [] }] = useApiClient('/diagnostics')
+  const [showStale, setShowStale] = useState(false)
+
+  const visibleItems = showStale ? data : data.filter(({ isStale }) => !isStale)
 
   const classes = useStyles()
 
   const table = () => {
-    if (loading && !data) {
+    if (loading && !data.length) {
       return <Spinner />
     }
 
     return (
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.tableHeader}>Location</TableCell>
-              <TableCell className={classes.tableHeader}>Type</TableCell>
-              <TableCell className={classes.tableHeader}>Last seen</TableCell>
-              <TableCell className={classes.tableHeader}>Last value</TableCell>
-              <TableCell className={classes.tableHeader}>
-                Last 24h count
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row) => (
-              <TableRow key={`${row.location}-${row.type}`}>
-                <TableCell>{row.location}</TableCell>
-                <TableCell>{row.type}</TableCell>
-                <TableCell>
-                  <Tooltip title={getTooltipDate(row.latestCreatedAt)}>
-                    <span>{row.latestFromNow}</span>
-                  </Tooltip>
+      <>
+        <div style={{ textAlign: 'right', marginBottom: 8 }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="showStale"
+                checked={showStale}
+                onChange={(e) => setShowStale(e.target.checked)}
+              />
+            }
+            label="Show stale locations"
+          />
+        </div>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.tableHeader}>Location</TableCell>
+                <TableCell className={classes.tableHeader}>Type</TableCell>
+                <TableCell className={classes.tableHeader}>Last seen</TableCell>
+                <TableCell className={classes.tableHeader}>
+                  Last value
                 </TableCell>
-                <TableCell>{row.latestvalue}</TableCell>
-                <TableCell>{row.lastDayCount}</TableCell>
+                <TableCell className={classes.tableHeader}>
+                  Last 24h count
+                </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {visibleItems.map((row) => (
+                <TableRow key={`${row.location}-${row.type}`}>
+                  <TableCell>{row.location}</TableCell>
+                  <TableCell>{row.type}</TableCell>
+                  <TableCell>
+                    <Tooltip title={getTooltipDate(row.latestCreatedAt)}>
+                      <span>{row.latestFromNow}</span>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell>{row.latestvalue}</TableCell>
+                  <TableCell>{row.lastDayCount}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </>
     )
   }
 

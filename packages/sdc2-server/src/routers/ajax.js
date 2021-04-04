@@ -171,7 +171,16 @@ router.delete(
 )
 
 router.get('/diagnostics', async context => {
-  context.body = await diagnostics.get()
+  const locations = await diagnostics.get()
+  const staleThreshold = config.get('location.staleThreshold')
+  context.body = locations.map(l => {
+    return {
+      ...l,
+      isStale: moment(l.latestCreatedAt).isBefore(
+        moment().subtract(staleThreshold)
+      ),
+    }
+  })
 })
 
 router.post('/check-locations', async context => {
