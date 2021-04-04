@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -25,6 +25,7 @@ import Login from './Login'
 import Dashboard from './Dashboard'
 import ApiKeys from './ApiKeys'
 import Diagnostics from './Diagnostics'
+import MeasurementChart from './MeasurementChart'
 import useLocalStorage from './useLocalStorage'
 
 const useStyles = makeStyles((theme) => ({
@@ -212,6 +213,9 @@ export default function Frame() {
               </Route>
               <Route path="/diagnostics">
                 <Diagnostics />
+              </Route>
+              <Route path="/measurements">
+                <MeasurementChart />
               </Route>
               <Route path="/">
                 <Dashboard />

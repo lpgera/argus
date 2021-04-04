@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import uniq from 'lodash/uniq'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -18,6 +19,7 @@ export default function Dashboard() {
   const [{ loading, data = [] }] = useApiClient('/location')
   const [showStale, setShowStale] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
+  const history = useHistory()
 
   const visibleItems = showStale ? data : data.filter(({ isStale }) => !isStale)
   const visibleLocations = uniq(visibleItems.map(({ location }) => location))
@@ -176,6 +178,17 @@ export default function Dashboard() {
             variant="contained"
             color="secondary"
             disabled={!selectedItems.length}
+            onClick={() => {
+              const urlSearchParams = new URLSearchParams()
+              for (const item of selectedItems) {
+                urlSearchParams.append('location', item.location)
+                urlSearchParams.append('type', item.type)
+              }
+              history.push({
+                pathname: './measurements',
+                search: urlSearchParams.toString(),
+              })
+            }}
           >
             Show selected measurements
           </Button>
