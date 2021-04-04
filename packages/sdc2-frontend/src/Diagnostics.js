@@ -33,7 +33,7 @@ export default function Diagnostics() {
 
     return (
       <TableContainer component={Paper}>
-        <Table stickyHeader aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeader}>Location</TableCell>

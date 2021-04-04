@@ -201,7 +201,11 @@ export default function Frame() {
         </Hidden>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
+          <Container
+            maxWidth="lg"
+            className={classes.container}
+            style={{ maxWidth: 1000, margin: '0 auto' }}
+          >
             <Switch>
               <Route path="/api-keys">
                 <ApiKeys />
