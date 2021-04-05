@@ -24,12 +24,11 @@ const useApiClient = (config, options) => {
     const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
-        console.log(error.message)
         if (error.message === 'Network Error') {
           enqueueSnackbar('Uh-oh... it looks like you are offline.', {
             variant: 'error',
           })
-        } else if (error.response.status === 401) {
+        } else if (error.response && error.response.status === 401) {
           enqueueSnackbar('Your session has expired, please login again.', {
             variant: 'error',
           })
