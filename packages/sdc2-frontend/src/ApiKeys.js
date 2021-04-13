@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useSnackbar } from 'notistack'
 import debounce from 'lodash/debounce'
 import Table from '@material-ui/core/Table'
@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
+import { AxiosContext } from './AxiosContext'
 
 function DeleteConfirm({ id, onConfirm }) {
   const [anchor, setAnchor] = useState(null)
@@ -67,25 +68,15 @@ const useStyles = makeStyles(() => ({
 export default function ApiKeys() {
   const [{ data = [] }, refetch] = useApiClient('/api-key')
   const { enqueueSnackbar } = useSnackbar()
-  const [, execute] = useApiClient({}, { manual: true })
+  const { axios } = useContext(AxiosContext)
   const updateApiKey = async ({ id, data }) => {
-    await execute({
-      method: 'patch',
-      url: `/api-key/${id}`,
-      data,
-    })
+    await axios.patch(`/api-key/${id}`, data)
   }
   const deleteApiKey = async ({ id }) => {
-    await execute({
-      method: 'delete',
-      url: `/api-key/${id}`,
-    })
+    await axios.delete(`/api-key/${id}`)
   }
   const createApiKey = async () => {
-    await execute({
-      method: 'post',
-      url: `/api-key`,
-    })
+    await axios.post(`/api-key`)
   }
 
   const classes = useStyles()

@@ -6,12 +6,12 @@ const initialState = {
   token: window.localStorage.getItem(LOCAL_STORAGE_KEY),
 }
 
-const AuthContext = createContext({
+export const AuthContext = createContext({
   state: initialState,
   dispatch: () => {},
 })
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
       case 'login':
@@ -37,5 +37,3 @@ const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   )
 }
-
-export { AuthContext, AuthProvider }

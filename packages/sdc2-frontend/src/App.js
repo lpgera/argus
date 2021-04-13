@@ -3,6 +3,7 @@ import { SnackbarProvider } from 'notistack'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { AuthProvider } from './AuthContext'
 import Frame from './Frame'
+import { AxiosProvider } from './AxiosContext'
 
 const theme = createMuiTheme({
   palette: {
@@ -18,11 +19,13 @@ const theme = createMuiTheme({
 export default function App() {
   return (
     <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <SnackbarProvider>
-          <Frame />
-        </SnackbarProvider>
-      </ThemeProvider>
+      <SnackbarProvider>
+        <AxiosProvider>
+          <ThemeProvider theme={theme}>
+            <Frame />
+          </ThemeProvider>
+        </AxiosProvider>
+      </SnackbarProvider>
     </AuthProvider>
   )
 }
