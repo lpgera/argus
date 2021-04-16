@@ -8,8 +8,10 @@ import { AxiosContext } from './AxiosContext'
 const Plot = createPlotlyComponent(Plotly)
 
 export default function MeasurementChart() {
-  const [start, setStart] = useState(new Date().setHours(0, 0, 0, 0))
-  const [end, setEnd] = useState(new Date().setHours(23, 59, 59, 999))
+  const [bounds, setBounds] = useState({
+    start: new Date().setHours(0, 0, 0, 0),
+    end: new Date().setHours(23, 59, 59, 999),
+  })
 
   const { search } = useLocation()
   const [types, setTypes] = useState([])
@@ -62,8 +64,8 @@ export default function MeasurementChart() {
     const getData = async () => {
       const newSeries = await Promise.all(
         locationsAndTypes.map(async ({ location, type }) => {
-          const startIso = new Date(start).toISOString()
-          const endIso = new Date(end).toISOString()
+          const startIso = new Date(bounds.start).toISOString()
+          const endIso = new Date(bounds.end).toISOString()
           const response = await axios.get(
             `measurement/location/${location}/type/${type}/from/${startIso}/to/${endIso}/aggregation/average`
           )
@@ -81,10 +83,10 @@ export default function MeasurementChart() {
 
       setSeries(newSeries)
     }
-    if (start && end && locationsAndTypes.length) {
-      getData()
+    if (locationsAndTypes.length) {
+      getData().catch(console.error)
     }
-  }, [axios, locationsAndTypes, start, end, types])
+  }, [axios, locationsAndTypes, bounds, types])
 
   return (
     <>
@@ -103,6 +105,9 @@ export default function MeasurementChart() {
               b: 30,
             },
             hovermode: 'x unified',
+            hoverlabel: {
+              namelength: -1,
+            },
             xaxis: {
               type: 'date',
               rangeselector: {
@@ -168,8 +173,14 @@ export default function MeasurementChart() {
           }}
           useResizeHandler
           onRelayout={(e) => {
-            setStart(e['xaxis.range[0]'])
-            setEnd(e['xaxis.range[1]'])
+            const start = e['xaxis.range[0]']
+            const end = e['xaxis.range[1]']
+            if (start && end) {
+              setBounds({
+                start,
+                end,
+              })
+            }
           }}
         />
       </Paper>
