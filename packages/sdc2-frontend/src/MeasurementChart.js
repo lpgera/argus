@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
-import Plot from 'react-plotly.js'
+import Plotly from 'plotly.js/dist/plotly-basic'
+import createPlotlyComponent from 'react-plotly.js/factory'
 import { AxiosContext } from './AxiosContext'
+
+const Plot = createPlotlyComponent(Plotly)
 
 export default function MeasurementChart() {
   const [start, setStart] = useState(new Date().setHours(0, 0, 0, 0))
