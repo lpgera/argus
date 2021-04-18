@@ -35,12 +35,19 @@ export default function MeasurementChart() {
     setYAxes(
       Object.fromEntries(
         uniqueTypes.map((type, i) => {
+          const commonProps = {
+            fixedrange: true,
+            zeroline: false,
+            titlefont: {
+              size: 10,
+            },
+          }
           if (i === 0) {
             return [
               'yaxis',
               {
                 title: type,
-                fixedrange: true,
+                ...commonProps,
               },
             ]
           }
@@ -48,8 +55,9 @@ export default function MeasurementChart() {
             `yaxis${i + 1}`,
             {
               title: type,
-              fixedrange: true,
               overlaying: 'y',
+              position: 0.05 * i,
+              ...commonProps,
             },
           ]
         })
@@ -123,13 +131,16 @@ export default function MeasurementChart() {
 
       <Paper style={{ padding: 16 }}>
         <Plot
-          style={{ width: '100%', height: 550 }}
+          style={{ width: '100%', height: 500 }}
           data={series}
           layout={{
             autosize: true,
+            font: {
+              size: 10,
+            },
             margin: {
-              l: 40,
-              r: 20,
+              l: 10,
+              r: 10,
               t: 10,
               b: 10,
             },
@@ -139,6 +150,7 @@ export default function MeasurementChart() {
             },
             xaxis: {
               type: 'date',
+              domain: [types.length * 0.05, 1],
               autorange: false,
               range: [new Date(range.start), new Date(range.end)],
               rangeslider: {
@@ -189,7 +201,12 @@ export default function MeasurementChart() {
                     step: 'month',
                     stepmode: 'backward',
                   },
-                  { step: 'all' },
+                  {
+                    count: 1,
+                    label: '1y',
+                    step: 'year',
+                    stepmode: 'backward',
+                  },
                 ],
               },
             },
@@ -197,9 +214,8 @@ export default function MeasurementChart() {
             legend: {
               orientation: 'h',
               xanchor: 'center',
-              yanchor: 'top',
               x: 0.5,
-              y: -0.1,
+              y: -0.45,
             },
           }}
           config={{
