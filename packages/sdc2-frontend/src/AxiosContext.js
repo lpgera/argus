@@ -5,7 +5,9 @@ import { AuthContext, LOCAL_STORAGE_KEY } from './AuthContext'
 
 axios.interceptors.request.use((config) => {
   const backendUrl =
-    process.env.NODE_ENV === 'development' ? 'http://localhost:4000/' : ''
+    process.env.NODE_ENV === 'development'
+      ? `http://${window.location.hostname}:4000/`
+      : ''
   const token = localStorage.getItem(LOCAL_STORAGE_KEY)
   return {
     ...config,
