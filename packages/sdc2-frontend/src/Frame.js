@@ -163,15 +163,18 @@ export default function Frame() {
               <MenuIcon />
             </IconButton>
             <Logo className={classes.logo} />
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Sensor data collection
-            </Typography>
+
+            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.title}
+              >
+                Sensor data collection
+              </Typography>
+            </Link>
           </Toolbar>
         </AppBar>
         <Hidden xsDown>

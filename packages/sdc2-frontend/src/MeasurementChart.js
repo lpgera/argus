@@ -1,6 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@material-ui/core/Button'
 import Plotly from 'plotly.js/dist/plotly-basic'
 import createPlotlyComponent from 'react-plotly.js/factory'
 import debounce from 'lodash/debounce'
@@ -17,6 +23,7 @@ export default function MeasurementChart() {
     start: new Date().setHours(0, 0, 0, 0),
     end: new Date().setHours(23, 59, 59, 999),
   })
+  const [aggregation, setAggregation] = useState('average')
   const { search } = useLocation()
   const [types, setTypes] = useState([])
   const [yAxes, setYAxes] = useState({})
@@ -104,7 +111,7 @@ export default function MeasurementChart() {
           const startIso = new Date(range.start).toISOString()
           const endIso = new Date(range.end).toISOString()
           const { data } = await axios.get(
-            `measurement/location/${location}/type/${type}/from/${startIso}/to/${endIso}/aggregation/average`
+            `measurement/location/${location}/type/${type}/from/${startIso}/to/${endIso}/aggregation/${aggregation}`
           )
           const typeIndex = types.indexOf(type)
           return {
@@ -123,7 +130,7 @@ export default function MeasurementChart() {
     if (locationsAndTypes.length) {
       getData().catch(console.error)
     }
-  }, [axios, locationsAndTypes, range, types])
+  }, [axios, locationsAndTypes, range, aggregation, types])
 
   return (
     <>
@@ -155,6 +162,7 @@ export default function MeasurementChart() {
               range: [new Date(range.start), new Date(range.end)],
               rangeslider: {
                 autorange: false,
+                thickness: 0.05,
                 range: [new Date(maxRange.start), new Date(maxRange.end)],
               },
               rangeselector: {
@@ -215,11 +223,12 @@ export default function MeasurementChart() {
               orientation: 'h',
               xanchor: 'center',
               x: 0.5,
-              y: -0.45,
+              y: -0.2,
             },
           }}
           config={{
             displayModeBar: false,
+            showTips: false,
           }}
           useResizeHandler
           onRelayout={debounce((e) => {
@@ -236,6 +245,35 @@ export default function MeasurementChart() {
             })
           }, 200)}
         />
+        <Grid container>
+          <Grid item xs={6}>
+            <FormControl variant="outlined" size="small">
+              <InputLabel>Aggregation</InputLabel>
+              <Select
+                value={aggregation}
+                onChange={(e) => setAggregation(e.target.value)}
+                label="Aggregation"
+              >
+                <MenuItem value="average">Average</MenuItem>
+                <MenuItem value="minimum">Minimum</MenuItem>
+                <MenuItem value="maximum">Maximum</MenuItem>
+                <MenuItem value="count">Count</MenuItem>
+                <MenuItem value="sum">Sum</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6} style={{ textAlign: 'right' }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                setRange({ ...range })
+              }}
+            >
+              Refresh
+            </Button>
+          </Grid>
+        </Grid>
       </Paper>
     </>
   )
