@@ -138,7 +138,7 @@ export default function MeasurementChart() {
 
       <Paper style={{ padding: 16 }}>
         <Plot
-          style={{ width: '100%', height: 500 }}
+          style={{ width: '100%', height: 480, marginBottom: 8 }}
           data={series}
           layout={{
             autosize: true,
