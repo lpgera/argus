@@ -45,6 +45,7 @@ export default function MeasurementChart() {
           const commonProps = {
             fixedrange: true,
             zeroline: false,
+            showgrid: false,
             titlefont: {
               size: 10,
             },
@@ -158,6 +159,7 @@ export default function MeasurementChart() {
             xaxis: {
               type: 'date',
               domain: [types.length * 0.05, 1],
+              showgrid: false,
               autorange: false,
               range: [new Date(range.start), new Date(range.end)],
               rangeslider: {
