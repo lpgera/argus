@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
@@ -11,6 +11,7 @@ import Plotly from 'plotly.js/dist/plotly-basic'
 import createPlotlyComponent from 'react-plotly.js/factory'
 import debounce from 'lodash/debounce'
 import { AxiosContext } from './AxiosContext'
+import useSize from './useSize'
 
 const Plot = createPlotlyComponent(Plotly)
 
@@ -30,6 +31,9 @@ export default function MeasurementChart() {
   const [locationsAndTypes, setLocationsAndTypes] = useState([])
   const [series, setSeries] = useState([])
   const { axios } = useContext(AxiosContext)
+  const chartRef = useRef(null)
+  const { width: chartWidth = 800 } = useSize(chartRef) ?? {}
+  const yAxisWidth = 44.0 / chartWidth
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(search)
@@ -64,7 +68,7 @@ export default function MeasurementChart() {
             {
               title: type,
               overlaying: 'y',
-              position: 0.05 * i,
+              position: yAxisWidth * i,
               ...commonProps,
             },
           ]
@@ -103,7 +107,7 @@ export default function MeasurementChart() {
     }
 
     getData().catch(console.error)
-  }, [axios, search])
+  }, [axios, search, yAxisWidth])
 
   useEffect(() => {
     const getData = async () => {
@@ -122,6 +126,7 @@ export default function MeasurementChart() {
             x: data.map(([x]) => x),
             y: data.map(([, y]) => y),
             yaxis: `y${typeIndex + 1}`,
+            hovertemplate: '%{y:.2f}',
           }
         })
       )
@@ -137,17 +142,18 @@ export default function MeasurementChart() {
     <>
       <h1>Measurements</h1>
 
-      <Paper style={{ padding: 16 }}>
+      <Paper style={{ padding: 16 }} ref={chartRef}>
         <Plot
-          style={{ width: '100%', height: 480, marginBottom: 8 }}
+          style={{ width: '100%', height: 400, marginBottom: 8 }}
           data={series}
           layout={{
             autosize: true,
+            dragmode: 'pan',
             font: {
               size: 10,
             },
             margin: {
-              l: 10,
+              l: 0,
               r: 10,
               t: 10,
               b: 10,
@@ -158,7 +164,7 @@ export default function MeasurementChart() {
             },
             xaxis: {
               type: 'date',
-              domain: [types.length * 0.05, 1],
+              domain: [types.length * yAxisWidth, 1],
               showgrid: false,
               autorange: false,
               range: [new Date(range.start), new Date(range.end)],
@@ -168,6 +174,8 @@ export default function MeasurementChart() {
                 range: [new Date(maxRange.start), new Date(maxRange.end)],
               },
               rangeselector: {
+                x: 0,
+                y: 1.05,
                 buttons: [
                   {
                     count: 6,
@@ -225,7 +233,7 @@ export default function MeasurementChart() {
               orientation: 'h',
               xanchor: 'center',
               x: 0.5,
-              y: -0.2,
+              y: -0.3,
             },
           }}
           config={{
