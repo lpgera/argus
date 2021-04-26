@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
@@ -16,6 +16,76 @@ import useSize from './useSize'
 import './plotly-overrides.css'
 
 const Plot = createPlotlyComponent(Plotly)
+
+const StyledPlot = styled(Plot)(({ theme }) => ({
+  width: '100%',
+  height: 360,
+  marginBottom: theme.spacing(1),
+}))
+
+const colors = [
+  '#40c4ff',
+  '#37474f',
+  '#69f0ae',
+  '#ffab40',
+  '#7c4dff',
+  '#ff4081',
+  '#eeff41',
+  '#00695c',
+  '#ff3d00',
+  '#558b2f',
+]
+
+const rangeSelectorButtons = [
+  {
+    count: 6,
+    label: '6h',
+    step: 'hour',
+    stepmode: 'backward',
+  },
+  {
+    count: 12,
+    label: '12h',
+    step: 'hour',
+    stepmode: 'backward',
+  },
+  {
+    count: 1,
+    label: '1d',
+    step: 'day',
+    stepmode: 'backward',
+  },
+  {
+    count: 7,
+    label: '1w',
+    step: 'day',
+    stepmode: 'backward',
+  },
+  {
+    count: 1,
+    label: '1m',
+    step: 'month',
+    stepmode: 'backward',
+  },
+  {
+    count: 3,
+    label: '3m',
+    step: 'month',
+    stepmode: 'backward',
+  },
+  {
+    count: 6,
+    label: '6m',
+    step: 'month',
+    stepmode: 'backward',
+  },
+  {
+    count: 1,
+    label: '1y',
+    step: 'year',
+    stepmode: 'backward',
+  },
+]
 
 export default function MeasurementChart() {
   const theme = useTheme()
@@ -147,8 +217,7 @@ export default function MeasurementChart() {
       <h1>Measurements</h1>
 
       <Paper style={{ padding: theme.spacing(2) }} ref={chartRef}>
-        <Plot
-          style={{ width: '100%', height: 360, marginBottom: theme.spacing(1) }}
+        <StyledPlot
           data={series}
           layout={{
             autosize: true,
@@ -180,71 +249,11 @@ export default function MeasurementChart() {
               rangeselector: {
                 x: 0,
                 y: 1.05,
-                buttons: [
-                  {
-                    count: 6,
-                    label: '6h',
-                    step: 'hour',
-                    stepmode: 'backward',
-                  },
-                  {
-                    count: 12,
-                    label: '12h',
-                    step: 'hour',
-                    stepmode: 'backward',
-                  },
-                  {
-                    count: 1,
-                    label: '1d',
-                    step: 'day',
-                    stepmode: 'backward',
-                  },
-                  {
-                    count: 7,
-                    label: '1w',
-                    step: 'day',
-                    stepmode: 'backward',
-                  },
-                  {
-                    count: 1,
-                    label: '1m',
-                    step: 'month',
-                    stepmode: 'backward',
-                  },
-                  {
-                    count: 3,
-                    label: '3m',
-                    step: 'month',
-                    stepmode: 'backward',
-                  },
-                  {
-                    count: 6,
-                    label: '6m',
-                    step: 'month',
-                    stepmode: 'backward',
-                  },
-                  {
-                    count: 1,
-                    label: '1y',
-                    step: 'year',
-                    stepmode: 'backward',
-                  },
-                ],
+                buttons: rangeSelectorButtons,
               },
             },
             ...yAxes,
-            colorway: [
-              '#40c4ff',
-              '#37474f',
-              '#69f0ae',
-              '#ffab40',
-              '#7c4dff',
-              '#ff4081',
-              '#eeff41',
-              '#00695c',
-              '#ff3d00',
-              '#558b2f',
-            ],
+            colorway: colors,
             legend: {
               orientation: 'h',
               xanchor: 'center',
