@@ -6,6 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
+import Slide from '@material-ui/core/Slide'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -74,13 +76,22 @@ const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: '100vh',
+    minHeight: '100vh',
     overflow: 'auto',
   },
   container: {
     paddingBottom: theme.spacing(2),
   },
 }))
+
+function HideOnScroll({ children }) {
+  const scrollTrigger = useScrollTrigger()
+  return (
+    <Slide appear={false} direction="down" in={!scrollTrigger}>
+      {children}
+    </Slide>
+  )
+}
 
 export default function Frame() {
   const { state: authState, dispatch: authDispatch } = useContext(AuthContext)
@@ -147,35 +158,38 @@ export default function Frame() {
     <Router>
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="absolute" className={classes.appBar}>
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => {
-                setDrawerOpen(!drawerOpen)
-                setMobileDrawerOpen(!mobileDrawerOpen)
-              }}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Logo className={classes.logo} />
-
-            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-              <Typography
-                component="h1"
-                variant="h6"
+        <HideOnScroll>
+          <AppBar className={classes.appBar}>
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
                 color="inherit"
-                noWrap
-                className={classes.title}
+                aria-label="open drawer"
+                onClick={() => {
+                  setDrawerOpen(!drawerOpen)
+                  setMobileDrawerOpen(!mobileDrawerOpen)
+                }}
+                className={classes.menuButton}
               >
-                Sensor data collection
-              </Typography>
-            </Link>
-          </Toolbar>
-        </AppBar>
+                <MenuIcon />
+              </IconButton>
+              <Logo className={classes.logo} />
+
+              <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+                <Typography
+                  component="h1"
+                  variant="h6"
+                  color="inherit"
+                  noWrap
+                  className={classes.title}
+                >
+                  Sensor data collection
+                </Typography>
+              </Link>
+            </Toolbar>
+          </AppBar>
+        </HideOnScroll>
+
         <Hidden xsDown>
           <Drawer
             variant="permanent"
