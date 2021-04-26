@@ -14,13 +14,15 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Popover from '@material-ui/core/Popover'
 import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
+import styled, { useTheme } from 'styled-components'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
 import { AxiosContext } from './AxiosContext'
 
 function DeleteConfirm({ id, onConfirm }) {
+  const theme = useTheme()
   const [anchor, setAnchor] = useState(null)
+
   return (
     <>
       <IconButton onClick={(e) => setAnchor(e.currentTarget)}>
@@ -41,9 +43,9 @@ function DeleteConfirm({ id, onConfirm }) {
           horizontal: 'right',
         }}
       >
-        <div style={{ padding: 16 }}>
+        <div style={{ padding: theme.spacing(2) }}>
           <div>Are you sure you want to delete this API key?</div>
-          <div style={{ marginTop: 16, textAlign: 'right' }}>
+          <div style={{ marginTop: theme.spacing(2), textAlign: 'right' }}>
             <Button
               variant="contained"
               size="small"
@@ -59,13 +61,12 @@ function DeleteConfirm({ id, onConfirm }) {
   )
 }
 
-const useStyles = makeStyles(() => ({
-  tableHeader: {
-    fontWeight: 'bold',
-  },
-}))
+const StyledTableHeaderCell = styled(TableCell)({
+  fontWeight: 'bold',
+})
 
 export default function ApiKeys() {
+  const theme = useTheme()
   const [{ data = [] }, refetch] = useApiClient('/api-key')
   const { enqueueSnackbar } = useSnackbar()
   const { axios } = useContext(AxiosContext)
@@ -79,8 +80,6 @@ export default function ApiKeys() {
     await axios.post(`/api-key`)
   }
 
-  const classes = useStyles()
-
   const table = () => {
     if (!data.length) {
       return <Spinner />
@@ -92,14 +91,10 @@ export default function ApiKeys() {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className={classes.tableHeader}>Token</TableCell>
-                <TableCell className={classes.tableHeader}>
-                  Read access
-                </TableCell>
-                <TableCell className={classes.tableHeader}>
-                  Write access
-                </TableCell>
-                <TableCell className={classes.tableHeader}>Comment</TableCell>
+                <StyledTableHeaderCell>Token</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Read access</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Write access</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Comment</StyledTableHeaderCell>
                 <TableCell />
               </TableRow>
             </TableHead>
@@ -175,7 +170,7 @@ export default function ApiKeys() {
             </TableBody>
           </Table>
         </TableContainer>
-        <div style={{ marginTop: 16, textAlign: 'right' }}>
+        <div style={{ marginTop: theme.spacing(2), textAlign: 'right' }}>
           <Button
             variant="contained"
             color="secondary"

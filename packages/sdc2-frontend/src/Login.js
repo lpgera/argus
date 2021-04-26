@@ -4,31 +4,22 @@ import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import { useTheme } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
+import styled from 'styled-components'
 import logo from './logo.svg'
 import useApiClient from './useApiClient'
 import { AuthContext } from './AuthContext'
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 64,
-  },
-  form: {
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+const StyledDiv = styled.div(({ theme }) => ({
+  marginTop: theme.spacing(8),
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 }))
 
 export default function Login() {
+  const theme = useTheme()
   const { dispatch: authDispatch } = useContext(AuthContext)
 
   const [username, setUsername] = useState('')
@@ -46,8 +37,6 @@ export default function Login() {
     { manual: true }
   )
 
-  const classes = useStyles()
-
   const onSubmit = async (e) => {
     e.preventDefault()
     const {
@@ -59,12 +48,24 @@ export default function Login() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <img src={logo} className={classes.logo} alt={'Logo'} />
+      <StyledDiv>
+        <img
+          src={logo}
+          style={{
+            width: 64,
+          }}
+          alt={'Logo'}
+        />
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} onSubmit={onSubmit} noValidate>
+        <form
+          style={{
+            marginTop: theme.spacing(1),
+          }}
+          onSubmit={onSubmit}
+          noValidate
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -95,12 +96,14 @@ export default function Login() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            style={{
+              margin: theme.spacing(3, 0, 2),
+            }}
           >
             Login
           </Button>
         </form>
-      </div>
+      </StyledDiv>
     </Container>
   )
 }

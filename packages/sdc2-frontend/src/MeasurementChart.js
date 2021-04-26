@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
@@ -17,6 +18,7 @@ import './plotly-overrides.css'
 const Plot = createPlotlyComponent(Plotly)
 
 export default function MeasurementChart() {
+  const theme = useTheme()
   const [range, setRange] = useState({
     start: new Date().setHours(0, 0, 0, 0),
     end: new Date().setHours(23, 59, 59, 999),
@@ -144,9 +146,9 @@ export default function MeasurementChart() {
     <>
       <h1>Measurements</h1>
 
-      <Paper style={{ padding: 16 }} ref={chartRef}>
+      <Paper style={{ padding: theme.spacing(2) }} ref={chartRef}>
         <Plot
-          style={{ width: '100%', height: 360, marginBottom: 8 }}
+          style={{ width: '100%', height: 360, marginBottom: theme.spacing(1) }}
           data={series}
           layout={{
             autosize: true,

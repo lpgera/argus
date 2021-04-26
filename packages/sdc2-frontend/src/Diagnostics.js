@@ -9,15 +9,13 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import Tooltip from '@material-ui/core/Tooltip'
-import { makeStyles } from '@material-ui/core/styles'
+import styled, { useTheme } from 'styled-components'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
 
-const useStyles = makeStyles(() => ({
-  tableHeader: {
-    fontWeight: 'bold',
-  },
-}))
+const StyledTableHeaderCell = styled(TableCell)({
+  fontWeight: 'bold',
+})
 
 const getTooltipDate = (isoDateString) => {
   const date = new Date(isoDateString)
@@ -25,12 +23,11 @@ const getTooltipDate = (isoDateString) => {
 }
 
 export default function Diagnostics() {
+  const theme = useTheme()
   const [{ data = [] }] = useApiClient('/diagnostics')
   const [showStale, setShowStale] = useState(false)
 
   const visibleItems = showStale ? data : data.filter(({ isStale }) => !isStale)
-
-  const classes = useStyles()
 
   const table = () => {
     if (!data.length) {
@@ -39,7 +36,7 @@ export default function Diagnostics() {
 
     return (
       <>
-        <div style={{ textAlign: 'right', marginBottom: 8 }}>
+        <div style={{ textAlign: 'right', marginBottom: theme.spacing(1) }}>
           <FormControlLabel
             control={
               <Checkbox
@@ -55,15 +52,11 @@ export default function Diagnostics() {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className={classes.tableHeader}>Location</TableCell>
-                <TableCell className={classes.tableHeader}>Type</TableCell>
-                <TableCell className={classes.tableHeader}>Last seen</TableCell>
-                <TableCell className={classes.tableHeader}>
-                  Last value
-                </TableCell>
-                <TableCell className={classes.tableHeader}>
-                  Last 24h count
-                </TableCell>
+                <StyledTableHeaderCell>Location</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Type</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Last seen</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Last value</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Last 24h count</StyledTableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>

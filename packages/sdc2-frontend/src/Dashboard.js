@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 import uniq from 'lodash/uniq'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -16,6 +17,7 @@ import useApiClient from './useApiClient'
 import Spinner from './Spinner'
 
 export default function Dashboard() {
+  const theme = useTheme()
   const [{ data = [] }] = useApiClient('/location')
   const [showStale, setShowStale] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
@@ -74,7 +76,7 @@ export default function Dashboard() {
 
     return (
       <>
-        <div style={{ textAlign: 'right', marginBottom: 8 }}>
+        <div style={{ textAlign: 'right', marginBottom: theme.spacing(1) }}>
           <FormControlLabel
             control={
               <Checkbox
@@ -98,7 +100,10 @@ export default function Dashboard() {
                 {visibleTypes.map((type) => (
                   <TableCell
                     key={type}
-                    style={{ textAlign: 'center', padding: '8px 0' }}
+                    style={{
+                      textAlign: 'center',
+                      padding: theme.spacing(1, 0),
+                    }}
                   >
                     <Link
                       href={'#'}
@@ -173,7 +178,7 @@ export default function Dashboard() {
           </Table>
         </TableContainer>
 
-        <div style={{ textAlign: 'right', marginTop: 16 }}>
+        <div style={{ textAlign: 'right', marginTop: theme.spacing(2) }}>
           <Button
             variant="contained"
             color="secondary"

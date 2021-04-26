@@ -1,6 +1,10 @@
 import 'fontsource-roboto'
 import { SnackbarProvider } from 'notistack'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import {
+  createMuiTheme,
+  ThemeProvider as MuiThemeProvider,
+} from '@material-ui/core/styles'
+import { ThemeProvider } from 'styled-components'
 import { AuthProvider } from './AuthContext'
 import Frame from './Frame'
 import { AxiosProvider } from './AxiosContext'
@@ -21,9 +25,11 @@ export default function App() {
     <AuthProvider>
       <SnackbarProvider>
         <AxiosProvider>
-          <ThemeProvider theme={theme}>
-            <Frame />
-          </ThemeProvider>
+          <MuiThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+              <Frame />
+            </ThemeProvider>
+          </MuiThemeProvider>
         </AxiosProvider>
       </SnackbarProvider>
     </AuthProvider>

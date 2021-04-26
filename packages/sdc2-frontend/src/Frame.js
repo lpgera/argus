@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
+import styled, { useTheme } from 'styled-components'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
 import Drawer from '@material-ui/core/Drawer'
@@ -30,58 +29,49 @@ import Diagnostics from './Diagnostics'
 import MeasurementChart from './MeasurementChart'
 import useLocalStorage from './useLocalStorage'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  toolbar: {
-    paddingRight: 24,
-  },
-  logo: {
-    width: 24,
-    height: 24,
-    fill: 'white',
-    marginRight: 8,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 16,
-  },
-  title: {
-    flexGrow: 1,
-  },
-  drawerPaper: {
+const StyledLogo = styled(Logo)(({ theme }) => ({
+  width: theme.spacing(3),
+  height: theme.spacing(3),
+  fill: 'white',
+  marginRight: theme.spacing(1),
+}))
+
+const StyledToolbarSpacer = styled.div(({ theme }) => theme.mixins.toolbar)
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+}))
+
+const StyledDrawer = styled(Drawer)(({ theme, variant, open }) => ({
+  '> .MuiPaper-root': {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: 180,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
     overflowX: 'hidden',
-    width: 60,
+    width: variant === 'permanent' && !open ? 60 : 180,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration:
+        variant === 'permanent' && !open
+          ? theme.transitions.duration.leavingScreen
+          : theme.transitions.duration.enteringScreen,
     }),
   },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    minHeight: '100vh',
-    overflow: 'auto',
-  },
-  container: {
-    paddingBottom: theme.spacing(2),
-  },
+}))
+
+const StyledMain = styled.main({
+  flexGrow: 1,
+  minHeight: '100vh',
+  overflow: 'auto',
+})
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+  maxWidth: 1000,
+  margin: '0 auto',
+  paddingBottom: theme.spacing(2),
 }))
 
 function HideOnScroll({ children }) {
@@ -94,11 +84,10 @@ function HideOnScroll({ children }) {
 }
 
 export default function Frame() {
+  const theme = useTheme()
   const { state: authState, dispatch: authDispatch } = useContext(AuthContext)
   const [drawerOpen, setDrawerOpen] = useLocalStorage('sdc2-drawer-open', false)
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
-
-  const classes = useStyles()
 
   if (!authState.token) {
     return <Login />
@@ -156,11 +145,19 @@ export default function Frame() {
 
   return (
     <Router>
-      <div className={classes.root}>
+      <div
+        style={{
+          display: 'flex',
+        }}
+      >
         <CssBaseline />
         <HideOnScroll>
-          <AppBar className={classes.appBar}>
-            <Toolbar className={classes.toolbar}>
+          <StyledAppBar>
+            <Toolbar
+              style={{
+                paddingRight: theme.spacing(3),
+              }}
+            >
               <IconButton
                 edge="start"
                 color="inherit"
@@ -169,11 +166,13 @@ export default function Frame() {
                   setDrawerOpen(!drawerOpen)
                   setMobileDrawerOpen(!mobileDrawerOpen)
                 }}
-                className={classes.menuButton}
+                style={{
+                  marginRight: theme.spacing(2),
+                }}
               >
                 <MenuIcon />
               </IconButton>
-              <Logo className={classes.logo} />
+              <StyledLogo />
 
               <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
                 <Typography
@@ -181,48 +180,34 @@ export default function Frame() {
                   variant="h6"
                   color="inherit"
                   noWrap
-                  className={classes.title}
+                  style={{
+                    flexGrow: 1,
+                  }}
                 >
                   Sensor Data Collection
                 </Typography>
               </Link>
             </Toolbar>
-          </AppBar>
+          </StyledAppBar>
         </HideOnScroll>
 
         <Hidden xsDown>
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: clsx(
-                classes.drawerPaper,
-                !drawerOpen && classes.drawerPaperClose
-              ),
-            }}
-            open={drawerOpen}
-          >
-            <div className={classes.appBarSpacer} />
+          <StyledDrawer variant="permanent" open={drawerOpen}>
+            <StyledToolbarSpacer />
             {drawer()}
-          </Drawer>
+          </StyledDrawer>
         </Hidden>
         <Hidden smUp>
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
+          <StyledDrawer
             onClose={() => setMobileDrawerOpen(false)}
             open={mobileDrawerOpen}
           >
             {drawer()}
-          </Drawer>
+          </StyledDrawer>
         </Hidden>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Container
-            maxWidth="lg"
-            className={classes.container}
-            style={{ maxWidth: 1000, margin: '0 auto' }}
-          >
+        <StyledMain>
+          <StyledToolbarSpacer />
+          <StyledContainer>
             <Switch>
               <Route path="/api-keys">
                 <ApiKeys />
@@ -237,8 +222,8 @@ export default function Frame() {
                 <Dashboard />
               </Route>
             </Switch>
-          </Container>
-        </main>
+          </StyledContainer>
+        </StyledMain>
       </div>
     </Router>
   )
