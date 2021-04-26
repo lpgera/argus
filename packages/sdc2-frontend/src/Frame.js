@@ -183,7 +183,7 @@ export default function Frame() {
                   noWrap
                   className={classes.title}
                 >
-                  Sensor data collection
+                  Sensor Data Collection
                 </Typography>
               </Link>
             </Toolbar>

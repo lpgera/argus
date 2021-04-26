@@ -12,6 +12,7 @@ import createPlotlyComponent from 'react-plotly.js/factory'
 import debounce from 'lodash/debounce'
 import { AxiosContext } from './AxiosContext'
 import useSize from './useSize'
+import './plotly-overrides.css'
 
 const Plot = createPlotlyComponent(Plotly)
 
@@ -60,6 +61,7 @@ export default function MeasurementChart() {
               {
                 title: type,
                 ...commonProps,
+                showgrid: true,
               },
             ]
           }
@@ -144,7 +146,7 @@ export default function MeasurementChart() {
 
       <Paper style={{ padding: 16 }} ref={chartRef}>
         <Plot
-          style={{ width: '100%', height: 400, marginBottom: 8 }}
+          style={{ width: '100%', height: 360, marginBottom: 8 }}
           data={series}
           layout={{
             autosize: true,
@@ -229,6 +231,18 @@ export default function MeasurementChart() {
               },
             },
             ...yAxes,
+            colorway: [
+              '#40c4ff',
+              '#37474f',
+              '#69f0ae',
+              '#ffab40',
+              '#7c4dff',
+              '#ff4081',
+              '#eeff41',
+              '#00695c',
+              '#ff3d00',
+              '#558b2f',
+            ],
             legend: {
               orientation: 'h',
               xanchor: 'center',
