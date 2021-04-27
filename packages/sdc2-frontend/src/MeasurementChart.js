@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useReducer, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 import Paper from '@material-ui/core/Paper'
@@ -89,25 +89,27 @@ const rangeSelectorButtons = [
 
 export default function MeasurementChart() {
   const theme = useTheme()
-  const [range, setRange] = useState({
-    start: new Date().setHours(0, 0, 0, 0),
-    end: new Date().setHours(23, 59, 59, 999),
-  })
+  const { axios } = useContext(AxiosContext)
+  const [aggregation, setAggregation] = useState('average')
+  const { search } = useLocation()
+  const [types, setTypes] = useState([])
+  const [locationsAndTypes, setLocationsAndTypes] = useState([])
   const [maxRange, setMaxRange] = useState({
     start: new Date().setHours(0, 0, 0, 0),
     end: new Date().setHours(23, 59, 59, 999),
   })
-  const [aggregation, setAggregation] = useState('average')
-  const { search } = useLocation()
-  const [types, setTypes] = useState([])
   const [yAxes, setYAxes] = useState({})
-  const [locationsAndTypes, setLocationsAndTypes] = useState([])
+  const [start, setStart] = useState(new Date().setHours(0, 0, 0, 0))
+  const [end, setEnd] = useState(new Date().setHours(23, 59, 59, 999))
   const [series, setSeries] = useState([])
-  const { axios } = useContext(AxiosContext)
+  const [refetchState, refetchSeries] = useReducer(() => ({}), {})
+
   const chartRef = useRef(null)
+
   const { width: chartWidth = 800 } = useSize(chartRef) ?? {}
   const yAxisWidth = 44.0 / chartWidth
 
+  // calculate locations and types from search
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(search)
     const locations = urlSearchParams.getAll('location')
@@ -115,10 +117,19 @@ export default function MeasurementChart() {
     const uniqueTypes = [...new Set(types)]
 
     setTypes(uniqueTypes)
+    setLocationsAndTypes(
+      locations.map((location, i) => ({
+        location,
+        type: types[i],
+      }))
+    )
+  }, [search])
 
+  // calculate yAxes from types and window size
+  useEffect(() => {
     setYAxes(
       Object.fromEntries(
-        uniqueTypes.map((type, i) => {
+        types.map((type, i) => {
           const commonProps = {
             fixedrange: true,
             zeroline: false,
@@ -149,46 +160,47 @@ export default function MeasurementChart() {
         })
       )
     )
-    const locationAndTypes = locations.map((location, i) => ({
-      location,
-      type: types[i],
-    }))
-    setLocationsAndTypes(locationAndTypes)
+  }, [types, yAxisWidth])
 
-    const getData = async () => {
-      const newMaxRange = {
-        start: Number.MAX_VALUE,
-        end: 0,
+  // fetch max range based on locations and types
+  useEffect(() => {
+    const fetchMaxRange = async () => {
+      if (locationsAndTypes.length) {
+        const newMaxRange = {
+          start: Number.MAX_VALUE,
+          end: 0,
+        }
+        await Promise.all(
+          locationsAndTypes.map(async ({ location, type }) => {
+            const { data } = await axios.get(
+              `measurement/location/${location}/type/${type}`
+            )
+            for (const [x] of data) {
+              const start = new Date(x).setHours(0, 0, 0, 0)
+              const end = new Date(x).setHours(23, 59, 59, 999)
+              if (start < newMaxRange.start) {
+                newMaxRange.start = start
+              }
+              if (end > newMaxRange.end) {
+                newMaxRange.end = end
+              }
+            }
+          })
+        )
+        setMaxRange(newMaxRange)
       }
-      await Promise.all(
-        locationAndTypes.map(async ({ location, type }) => {
-          const { data } = await axios.get(
-            `measurement/location/${location}/type/${type}`
-          )
-          for (const [x] of data) {
-            const start = new Date(x).setHours(0, 0, 0, 0)
-            const end = new Date(x).setHours(23, 59, 59, 999)
-            if (start < newMaxRange.start) {
-              newMaxRange.start = start
-            }
-            if (end > newMaxRange.end) {
-              newMaxRange.end = end
-            }
-          }
-        })
-      )
-      setMaxRange(newMaxRange)
     }
 
-    getData().catch(console.error)
-  }, [axios, search, yAxisWidth])
+    fetchMaxRange().catch(console.error)
+  }, [axios, locationsAndTypes])
 
+  // fetch data series
   useEffect(() => {
-    const getData = async () => {
+    const fetchSeries = async () => {
       const newSeries = await Promise.all(
         locationsAndTypes.map(async ({ location, type }) => {
-          const startIso = new Date(range.start).toISOString()
-          const endIso = new Date(range.end).toISOString()
+          const startIso = new Date(start).toISOString()
+          const endIso = new Date(end).toISOString()
           const { data } = await axios.get(
             `measurement/location/${location}/type/${type}/from/${startIso}/to/${endIso}/aggregation/${aggregation}`
           )
@@ -208,9 +220,9 @@ export default function MeasurementChart() {
       setSeries(newSeries)
     }
     if (locationsAndTypes.length) {
-      getData().catch(console.error)
+      fetchSeries().catch(console.error)
     }
-  }, [axios, locationsAndTypes, range, aggregation, types])
+  }, [axios, locationsAndTypes, start, end, aggregation, types, refetchState])
 
   return (
     <>
@@ -240,7 +252,7 @@ export default function MeasurementChart() {
               domain: [types.length * yAxisWidth, 1],
               showgrid: false,
               autorange: false,
-              range: [new Date(range.start), new Date(range.end)],
+              range: [new Date(start), new Date(end)],
               rangeslider: {
                 autorange: false,
                 thickness: 0.05,
@@ -267,17 +279,17 @@ export default function MeasurementChart() {
           }}
           useResizeHandler
           onRelayout={debounce((e) => {
-            const start = e['xaxis.range[0]'] ?? e['xaxis.range']?.[0]
-            const end = e['xaxis.range[1]'] ?? e['xaxis.range']?.[1]
+            const newStart = e['xaxis.range[0]'] ?? e['xaxis.range']?.[0]
+            const newEnd = e['xaxis.range[1]'] ?? e['xaxis.range']?.[1]
 
-            setRange({
-              start: start
-                ? Math.max(new Date(start).getTime(), maxRange.start)
-                : range.start,
-              end: end
-                ? Math.min(new Date(end).getTime(), maxRange.end)
-                : range.end,
-            })
+            setStart(
+              newStart
+                ? Math.max(new Date(newStart).getTime(), maxRange.start)
+                : start
+            )
+            setEnd(
+              newEnd ? Math.min(new Date(newEnd).getTime(), maxRange.end) : end
+            )
           }, 200)}
         />
         <Grid container>
@@ -302,7 +314,7 @@ export default function MeasurementChart() {
               variant="contained"
               color="secondary"
               onClick={() => {
-                setRange({ ...range })
+                refetchSeries()
               }}
             >
               Refresh
