@@ -115,6 +115,7 @@ export default function Dashboard() {
                         writingMode: 'vertical-rl',
                         transform: 'rotate(180deg)',
                         textDecoration: 'none',
+                        color: theme.palette.secondary.light,
                       }}
                     >
                       {type}
@@ -135,6 +136,7 @@ export default function Dashboard() {
                       href={'#'}
                       style={{
                         textDecoration: 'none',
+                        color: theme.palette.secondary.light,
                       }}
                       onClick={(e) => {
                         toggle(({ location: l }) => l === location)

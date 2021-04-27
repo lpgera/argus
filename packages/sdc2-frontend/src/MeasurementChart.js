@@ -24,16 +24,17 @@ const StyledPlot = styled(Plot)(({ theme }) => ({
 }))
 
 const colors = [
-  '#40c4ff',
-  '#37474f',
-  '#69f0ae',
-  '#ffab40',
-  '#7c4dff',
-  '#ff4081',
-  '#eeff41',
-  '#00695c',
-  '#ff3d00',
-  '#558b2f',
+  '#2196f3',
+  '#e91e63',
+  '#4caf50',
+  '#607d8b',
+  '#ff9800',
+  '#673ab7',
+  '#cddc39',
+  '#009688',
+  '#3f51b5',
+  '#9c27b0',
+  '#795548',
 ]
 
 const rangeSelectorButtons = [
@@ -134,6 +135,7 @@ export default function MeasurementChart() {
             fixedrange: true,
             zeroline: false,
             showgrid: false,
+            color: theme.palette.text.secondary,
             titlefont: {
               size: 10,
             },
@@ -160,7 +162,7 @@ export default function MeasurementChart() {
         })
       )
     )
-  }, [types, yAxisWidth])
+  }, [types, yAxisWidth, theme])
 
   // fetch max range based on locations and types
   useEffect(() => {
@@ -232,10 +234,13 @@ export default function MeasurementChart() {
         <StyledPlot
           data={series}
           layout={{
+            plot_bgcolor: theme.palette.background.default,
+            paper_bgcolor: theme.palette.background.paper,
             autosize: true,
             dragmode: 'pan',
             font: {
               size: 10,
+              color: theme.palette.text.secondary,
             },
             margin: {
               l: 0,
@@ -261,6 +266,7 @@ export default function MeasurementChart() {
               rangeselector: {
                 x: 0,
                 y: 1.05,
+                bgcolor: theme.palette.background.default,
                 buttons: rangeSelectorButtons,
               },
             },
