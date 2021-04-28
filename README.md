@@ -1,6 +1,6 @@
 # Sensor data collection
 
-Sensor data collection (codenamed SDC2) is a sensor monitoring solution built with MariaDB, NodeJS and VueJS.
+Sensor data collection (codenamed SDC2) is a sensor monitoring solution built with MariaDB, NodeJS and React.
 
 ## Screenshots
 
