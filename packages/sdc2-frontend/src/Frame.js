@@ -193,6 +193,7 @@ export default function Frame() {
               </Link>
 
               <IconButton
+                aria-label={'Toggle dark mode'}
                 onClick={() => toggleDarkMode()}
                 style={{ marginLeft: 'auto', marginRight: 0 }}
                 color={'inherit'}

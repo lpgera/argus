@@ -25,7 +25,10 @@ function DeleteConfirm({ id, onConfirm }) {
 
   return (
     <>
-      <IconButton onClick={(e) => setAnchor(e.currentTarget)}>
+      <IconButton
+        onClick={(e) => setAnchor(e.currentTarget)}
+        aria-label={'Delete API key'}
+      >
         <DeleteIcon />
       </IconButton>
 

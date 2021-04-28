@@ -21,7 +21,7 @@ const CustomTheme = ({ render }) => {
         main: '#1a237e',
       },
       secondary: {
-        main: '#028090',
+        main: '#74B1D2',
       },
     },
   })

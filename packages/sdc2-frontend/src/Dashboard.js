@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import uniq from 'lodash/uniq'
@@ -15,13 +15,17 @@ import Paper from '@material-ui/core/Paper'
 import Link from '@material-ui/core/Link'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
+import { DarkModeContext } from './DarkModeContext'
 
 export default function Dashboard() {
   const theme = useTheme()
+  const { darkMode } = useContext(DarkModeContext)
   const [{ data = [] }] = useApiClient('/location')
   const [showStale, setShowStale] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
   const history = useHistory()
+
+  const linkColor = theme.palette.secondary[darkMode ? 'light' : 'dark']
 
   const visibleItems = showStale ? data : data.filter(({ isStale }) => !isStale)
   const visibleLocations = uniq(visibleItems.map(({ location }) => location))
@@ -115,7 +119,7 @@ export default function Dashboard() {
                         writingMode: 'vertical-rl',
                         transform: 'rotate(180deg)',
                         textDecoration: 'none',
-                        color: theme.palette.secondary.light,
+                        color: linkColor,
                       }}
                     >
                       {type}
@@ -136,7 +140,7 @@ export default function Dashboard() {
                       href={'#'}
                       style={{
                         textDecoration: 'none',
-                        color: theme.palette.secondary.light,
+                        color: linkColor,
                       }}
                       onClick={(e) => {
                         toggle(({ location: l }) => l === location)
