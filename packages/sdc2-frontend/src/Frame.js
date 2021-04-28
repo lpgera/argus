@@ -20,8 +20,11 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Container from '@material-ui/core/Container'
 import MenuIcon from '@material-ui/icons/Menu'
+import Brightness4 from '@material-ui/icons/Brightness4'
+import BrightnessHigh from '@material-ui/icons/BrightnessHigh'
 import { ReactComponent as Logo } from './logo.svg'
 import { AuthContext } from './AuthContext'
+import { DarkModeContext } from './DarkModeContext'
 import Login from './Login'
 import Dashboard from './Dashboard'
 import ApiKeys from './ApiKeys'
@@ -86,6 +89,7 @@ function HideOnScroll({ children }) {
 export default function Frame() {
   const theme = useTheme()
   const { state: authState, dispatch: authDispatch } = useContext(AuthContext)
+  const { darkMode, toggle: toggleDarkMode } = useContext(DarkModeContext)
   const [drawerOpen, setDrawerOpen] = useLocalStorage('sdc2-drawer-open', false)
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
 
@@ -155,7 +159,7 @@ export default function Frame() {
           <StyledAppBar>
             <Toolbar
               style={{
-                paddingRight: theme.spacing(3),
+                paddingRight: theme.spacing(1),
               }}
             >
               <IconButton
@@ -187,6 +191,14 @@ export default function Frame() {
                   Sensor Data Collection
                 </Typography>
               </Link>
+
+              <IconButton
+                onClick={() => toggleDarkMode()}
+                style={{ marginLeft: 'auto', marginRight: 0 }}
+                color={'inherit'}
+              >
+                {darkMode ? <BrightnessHigh /> : <Brightness4 />}
+              </IconButton>
             </Toolbar>
           </StyledAppBar>
         </HideOnScroll>

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import { createContext, useReducer } from 'react'
 
 export const LOCAL_STORAGE_KEY = 'sdc2-token'
 

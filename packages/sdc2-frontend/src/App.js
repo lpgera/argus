@@ -8,28 +8,43 @@ import { ThemeProvider } from 'styled-components'
 import { AuthProvider } from './AuthContext'
 import Frame from './Frame'
 import { AxiosProvider } from './AxiosContext'
+import { DarkModeContext, DarkModeProvider } from './DarkModeContext'
+import { useContext } from 'react'
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#1a237e',
+const CustomTheme = ({ render }) => {
+  const { darkMode } = useContext(DarkModeContext)
+
+  const theme = createMuiTheme({
+    palette: {
+      type: darkMode ? 'dark' : 'light',
+      primary: {
+        main: '#1a237e',
+      },
+      secondary: {
+        main: '#028090',
+      },
     },
-    secondary: {
-      main: '#028090',
-    },
-  },
-})
+  })
+
+  return render({ theme })
+}
 
 export default function App() {
   return (
     <AuthProvider>
       <SnackbarProvider>
         <AxiosProvider>
-          <MuiThemeProvider theme={theme}>
-            <ThemeProvider theme={theme}>
-              <Frame />
-            </ThemeProvider>
-          </MuiThemeProvider>
+          <DarkModeProvider>
+            <CustomTheme
+              render={({ theme }) => (
+                <MuiThemeProvider theme={theme}>
+                  <ThemeProvider theme={theme}>
+                    <Frame />
+                  </ThemeProvider>
+                </MuiThemeProvider>
+              )}
+            />
+          </DarkModeProvider>
         </AxiosProvider>
       </SnackbarProvider>
     </AuthProvider>
