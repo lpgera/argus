@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
 import { AuthContext, LOCAL_STORAGE_KEY } from './AuthContext'
@@ -19,6 +19,7 @@ axios.interceptors.request.use((config) => {
 export const AxiosContext = createContext({})
 
 export const AxiosProvider = ({ children }) => {
+  const [isReady, setIsReady] = useState(false)
   const { dispatch: authDispatch } = useContext(AuthContext)
   const { enqueueSnackbar } = useSnackbar()
 
@@ -41,10 +42,14 @@ export const AxiosProvider = ({ children }) => {
       }
     )
 
+    setIsReady(true)
+
     return () => axios.interceptors.response.eject(responseInterceptor)
   }, [authDispatch, enqueueSnackbar])
 
   return (
-    <AxiosContext.Provider value={{ axios }}>{children}</AxiosContext.Provider>
+    <AxiosContext.Provider value={{ axios }}>
+      {isReady ? children : null}
+    </AxiosContext.Provider>
   )
 }
