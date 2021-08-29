@@ -81,7 +81,7 @@ function decodeAndStoreServiceData(address, data) {
   switch (messageType) {
     case 0x0a: // battery
       const battery = data[3]
-      log.debug({ address, battery })
+      log.info({ address, battery })
       if (knownAddresses.includes(address)) {
         locations[address].battery = battery
       }
@@ -89,7 +89,7 @@ function decodeAndStoreServiceData(address, data) {
     case 0x0d: // temperature + humidity
       const temperature = ((data[4] << 8) | data[3]) / 10.0
       const humidity = ((data[6] << 8) | data[5]) / 10.0
-      log.debug({ address, temperature, humidity })
+      log.info({ address, temperature, humidity })
       if (knownAddresses.includes(address)) {
         locations[address].temperature = temperature
         locations[address].humidity = humidity
