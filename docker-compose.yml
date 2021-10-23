@@ -40,7 +40,7 @@ services:
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
-    command: npx lerna bootstrap
+    command: npm run local:bootstrap
   build:
     image: node:14
     volumes:

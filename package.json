@@ -12,7 +12,7 @@
     "restart": "npm run down && npm run up",
     "logs": "docker-compose logs -f",
     "build": "docker-compose run --rm build",
-    "local:bootstrap": "lerna bootstrap",
+    "local:bootstrap": "npx lerna bootstrap",
     "local:build": "lerna run build --stream --scope=sdc2-frontend"
   },
   "devDependencies": {
