@@ -12,9 +12,7 @@ const router = new KoaRouter()
 router.use(apiAuth.ensureValidApiKey)
 
 const measurementSchema = Joi.object({
-  type: Joi.string()
-    .max(64)
-    .required(),
+  type: Joi.string().max(64).required(),
   value: Joi.number().required(),
 })
 
@@ -22,28 +20,24 @@ router.post(
   '/measurement/location/:location',
   validateParams(
     Joi.object({
-      location: Joi.string()
-        .max(64)
-        .required(),
+      location: Joi.string().max(64).required(),
     })
   ),
   validateRequestBody(
     Joi.alternatives().try(
       measurementSchema,
-      Joi.array()
-        .items(measurementSchema)
-        .min(1)
+      Joi.array().items(measurementSchema).min(1)
     )
   ),
   apiAuth.ensureWritePermission,
-  async context => {
+  async (context) => {
     const { location } = context.params
     const measurements = _.castArray(context.request.body)
     const createdAt = moment().toDate()
     log.debug({ location, measurements }, 'Received new measurements.')
 
     await Promise.all(
-      measurements.map(m => {
+      measurements.map((m) => {
         return measurement.insert({
           createdAt,
           location,
@@ -60,16 +54,12 @@ router.get(
   '/measurement/latest/location/:location/type/:type',
   validateParams(
     Joi.object({
-      location: Joi.string()
-        .max(64)
-        .required(),
-      type: Joi.string()
-        .max(64)
-        .required(),
+      location: Joi.string().max(64).required(),
+      type: Joi.string().max(64).required(),
     })
   ),
   apiAuth.ensureReadPermission,
-  async context => {
+  async (context) => {
     const { location, type } = context.params
     log.debug({ location, type }, 'Getting latest measurements.')
 

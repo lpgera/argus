@@ -19,15 +19,10 @@ async function resetDB() {
 
 async function insertRandomMeasurements() {
   log.info(`Filling database with ${intervalLengthDays} days of random data...`)
-  const start = moment()
-    .startOf('minute')
-    .subtract(intervalLengthDays, 'day')
+  const start = moment().startOf('minute').subtract(intervalLengthDays, 'day')
   const range = _.range(0, intervalLengthDays * 24 * 60, stepMinutes)
-  const measurementArray = _.flatMap(range, d => {
-    const createdAt = start
-      .clone()
-      .add(d, 'minute')
-      .toDate()
+  const measurementArray = _.flatMap(range, (d) => {
+    const createdAt = start.clone().add(d, 'minute').toDate()
     return [
       {
         createdAt,

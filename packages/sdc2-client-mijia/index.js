@@ -30,13 +30,8 @@ const onTick = async () => {
   try {
     await Promise.all(
       knownAddresses.map(async (address) => {
-        const {
-          client,
-          temperature,
-          humidity,
-          battery,
-          lastUpdatedAt,
-        } = locations[address]
+        const { client, temperature, humidity, battery, lastUpdatedAt } =
+          locations[address]
         log.debug({ address, temperature, humidity, battery, lastUpdatedAt })
         if (now - lastUpdatedAt > 10 * minute) {
           log.warn('Measurement is too old, skipping...')

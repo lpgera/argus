@@ -14,25 +14,15 @@ function create() {
 }
 
 function update(id, { canRead, canWrite, comment }) {
-  return db
-    .table('apiKey')
-    .where({ id })
-    .update({ canRead, canWrite, comment })
+  return db.table('apiKey').where({ id }).update({ canRead, canWrite, comment })
 }
 
 function remove(id) {
-  return db
-    .table('apiKey')
-    .where({ id })
-    .delete()
+  return db.table('apiKey').where({ id }).delete()
 }
 
 function findByToken(token) {
-  return db
-    .select('*')
-    .from('apiKey')
-    .where({ token })
-    .first()
+  return db.select('*').from('apiKey').where({ token }).first()
 }
 
 module.exports = {

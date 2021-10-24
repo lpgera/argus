@@ -29,7 +29,7 @@ async function get() {
       'lastDayCount'
     )
     .from('measurement')
-    .leftJoin(lastDayQuery, function() {
+    .leftJoin(lastDayQuery, function () {
       this.on('lastDay.location', '=', 'measurement.location')
       this.andOn('lastDay.type', '=', 'measurement.type')
     })
@@ -37,7 +37,7 @@ async function get() {
     .orderBy('measurement.location')
     .orderBy('measurement.type')
 
-  return results.map(row => {
+  return results.map((row) => {
     return {
       location: row.location,
       type: row.type,

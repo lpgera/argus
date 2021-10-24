@@ -1,6 +1,6 @@
 const log = require('./log')
 
-const validateParams = schema => async (context, next) => {
+const validateParams = (schema) => async (context, next) => {
   try {
     await schema.validateAsync(context.params)
   } catch (error) {
@@ -10,7 +10,7 @@ const validateParams = schema => async (context, next) => {
   await next()
 }
 
-const validateRequestBody = schema => async (context, next) => {
+const validateRequestBody = (schema) => async (context, next) => {
   try {
     await schema.validateAsync(context.request.body)
   } catch (error) {

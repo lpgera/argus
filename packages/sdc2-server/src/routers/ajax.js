@@ -12,11 +12,13 @@ const pushBullet = require('../pushBullet')
 
 const router = new KoaRouter()
 
-router.post('/login', context => {
+router.post('/login', (context) => {
   const { username, password } = context.request.body
   const users = config.get('auth.users')
   if (
-    users.some(user => user.username === username && user.password === password)
+    users.some(
+      (user) => user.username === username && user.password === password
+    )
   ) {
     context.body = {
       token: jwt.sign({ username }, config.get('auth.tokenSecret'), {
@@ -39,10 +41,10 @@ router.use(async (context, next) => {
   await next()
 })
 
-router.get('/location', async context => {
+router.get('/location', async (context) => {
   const locations = await location.get()
   const staleThreshold = config.get('location.staleThreshold')
-  context.body = locations.map(l => {
+  context.body = locations.map((l) => {
     return {
       ...l,
       isStale: moment(l.latestCreatedAt).isBefore(
@@ -56,24 +58,16 @@ router.get(
   '/measurement/location/:location/type/:type/from/:from/to/:to/aggregation/:aggregation',
   validateParams(
     Joi.object({
-      location: Joi.string()
-        .max(64)
-        .required(),
-      type: Joi.string()
-        .max(64)
-        .required(),
-      from: Joi.string()
-        .isoDate()
-        .required(),
-      to: Joi.string()
-        .isoDate()
-        .required(),
+      location: Joi.string().max(64).required(),
+      type: Joi.string().max(64).required(),
+      from: Joi.string().isoDate().required(),
+      to: Joi.string().isoDate().required(),
       aggregation: Joi.string()
         .valid('average', 'minimum', 'maximum', 'count', 'sum')
         .required(),
     })
   ),
-  async context => {
+  async (context) => {
     const { location, type, from, to, aggregation } = context.params
     const measurements = await measurement.get({
       location,
@@ -82,13 +76,8 @@ router.get(
       to: moment.utc(to),
       aggregation,
     })
-    context.body = measurements.map(item => {
-      return [
-        moment(item.createdAt)
-          .startOf('minute')
-          .valueOf(),
-        item.value,
-      ]
+    context.body = measurements.map((item) => {
+      return [moment(item.createdAt).startOf('minute').valueOf(), item.value]
     })
   }
 )
@@ -97,15 +86,11 @@ router.get(
   '/measurement/location/:location/type/:type',
   validateParams(
     Joi.object({
-      location: Joi.string()
-        .max(64)
-        .required(),
-      type: Joi.string()
-        .max(64)
-        .required(),
+      location: Joi.string().max(64).required(),
+      type: Joi.string().max(64).required(),
     })
   ),
-  async context => {
+  async (context) => {
     const { location, type } = context.params
     const measurements = await measurement.get({
       location,
@@ -113,17 +98,17 @@ router.get(
       from: moment.unix(0),
       to: moment(),
     })
-    context.body = measurements.map(item => {
+    context.body = measurements.map((item) => {
       return [moment(item.createdAt).valueOf(), item.value]
     })
   }
 )
 
-router.get('/api-key', async context => {
+router.get('/api-key', async (context) => {
   context.body = await apiKey.list()
 })
 
-router.post('/api-key', async context => {
+router.post('/api-key', async (context) => {
   await apiKey.create()
   context.body = await apiKey.list()
 })
@@ -132,21 +117,17 @@ router.patch(
   '/api-key/:id',
   validateParams(
     Joi.object({
-      id: Joi.string()
-        .max(64)
-        .required(),
+      id: Joi.string().max(64).required(),
     })
   ),
   validateRequestBody(
     Joi.object({
       canRead: Joi.boolean(),
       canWrite: Joi.boolean(),
-      comment: Joi.string()
-        .allow('')
-        .max(255),
+      comment: Joi.string().allow('').max(255),
     })
   ),
-  async context => {
+  async (context) => {
     const { id } = context.params
     const { canRead, canWrite, comment } = context.request.body
     await apiKey.update(id, { canRead, canWrite, comment })
@@ -158,22 +139,20 @@ router.delete(
   '/api-key/:id',
   validateParams(
     Joi.object({
-      id: Joi.string()
-        .max(64)
-        .required(),
+      id: Joi.string().max(64).required(),
     })
   ),
-  async context => {
+  async (context) => {
     const { id } = context.params
     await apiKey.remove(id)
     context.body = await apiKey.list()
   }
 )
 
-router.get('/diagnostics', async context => {
+router.get('/diagnostics', async (context) => {
   const locations = await diagnostics.get()
   const staleThreshold = config.get('location.staleThreshold')
-  context.body = locations.map(l => {
+  context.body = locations.map((l) => {
     return {
       ...l,
       isStale: moment(l.latestCreatedAt).isBefore(
@@ -183,14 +162,14 @@ router.get('/diagnostics', async context => {
   })
 })
 
-router.post('/check-locations', async context => {
+router.post('/check-locations', async (context) => {
   const locations = await location.get()
   const staleThreshold = config.get('location.staleThreshold')
   const warningThreshold = config.get('location.warningThreshold')
-  const nonStaleLocations = locations.filter(l =>
+  const nonStaleLocations = locations.filter((l) =>
     moment(l.latestCreatedAt).isAfter(moment().subtract(staleThreshold))
   )
-  const warnings = nonStaleLocations.filter(l =>
+  const warnings = nonStaleLocations.filter((l) =>
     moment(l.latestCreatedAt).isBefore(moment().subtract(warningThreshold))
   )
   await pushBullet.sendWarnings(warnings)
