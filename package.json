@@ -13,19 +13,15 @@
     "logs": "docker-compose logs -f",
     "build": "docker-compose run --rm build",
     "local:bootstrap": "npx lerna bootstrap",
-    "local:build": "lerna run build --stream --scope=sdc2-frontend"
+    "local:build": "lerna run build --stream --scope=sdc2-frontend",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "husky": "^4.3.7",
+    "husky": "^7.0.0",
     "lerna": "^4.0.0",
-    "nodemon": "^2.0.7",
-    "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+    "nodemon": "^2.0.14",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.1"
   },
   "dependencies": {
     "sdc2-client": "file:packages/sdc2-client",
