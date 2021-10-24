@@ -1,9 +1,8 @@
 const pino = require('pino')
-const multistream = require('pino-multi-stream').multistream
 
 const destination =
   process.env.NODE_ENV === 'production'
-    ? multistream([
+    ? pino.multistream([
         {
           stream: process.stdout,
           level: 'info',
@@ -15,18 +14,25 @@ const destination =
       ])
     : pino.destination(2)
 
+const prettyOptions =
+  process.env.NODE_ENV !== 'production'
+    ? {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true,
+            translateTime: 'yyyy-mm-dd HH:MM:ss.l',
+          },
+        },
+      }
+    : {}
+
 const log = (options) =>
   pino(
     {
       name: 'sdc2',
-      prettyPrint:
-        process.env.NODE_ENV !== 'production'
-          ? {
-              colorize: true,
-              translateTime: 'yyyy-mm-dd HH:MM:ss.l',
-            }
-          : false,
       level: 'trace',
+      ...prettyOptions,
       ...options,
     },
     destination
