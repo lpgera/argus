@@ -6,7 +6,7 @@
     "prod": "cross-env NODE_ENV=production node index.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.23.0",
     "config": "^3.3.6",
     "cron": "^1.8.2",
     "cross-env": "^7.0.3",
