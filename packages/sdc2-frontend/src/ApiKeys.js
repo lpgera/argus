@@ -70,7 +70,7 @@ const StyledTableHeaderCell = styled(TableCell)({
 
 export default function ApiKeys() {
   const theme = useTheme()
-  const [{ data = [] }, refetch] = useApiClient('/api-key')
+  const [{ data = [], loading }, refetch] = useApiClient('/api-key')
   const { enqueueSnackbar } = useSnackbar()
   const { axios } = useContext(AxiosContext)
   const updateApiKey = async ({ id, data }) => {
@@ -84,7 +84,7 @@ export default function ApiKeys() {
   }
 
   const table = () => {
-    if (!data.length) {
+    if (loading && !data.length) {
       return <Spinner />
     }
 
