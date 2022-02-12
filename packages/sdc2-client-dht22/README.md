@@ -4,7 +4,7 @@ Client application for DHT22 humidity and temperature sensor.
 
 ## Environment variables
 
-Create a file named `.env.dht22` in the root of the repository based on this template:
+Create a file named `.env` (development) or `.env.dht22` (production with docker-compose) based on this template:
 
 ```dotenv
 SDC2_URL=http://server:4000

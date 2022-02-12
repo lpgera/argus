@@ -28,20 +28,20 @@ Developed and tested on a Raspberry Pi.
 
 ## Usage with Docker and docker-compose
 
-Consult the documentation of the backend server and the modules you want to use, and create the `.env` files for each of
-them with the appropriate variables.
+Consult the documentation of the backend server and the modules you want to use, and create the `.env*` files for each
+of them with the appropriate variables.
 
 Configure the `COMPOSE_FILE` variable in the main `.env` file to use the desired packages' `docker-compose.yml` file
 automatically, e.g.:
 
 ```dotenv
 # run server and weather module
-COMPOSE_FILE=docker-compose.yml:./packages/sdc2-client-weather/docker-compose.yml
+COMPOSE_FILE=docker-compose.yml:docker-compose.weather.yml
 ```
 
 ```dotenv
 # run only bme280 sensor module
-COMPOSE_FILE=./packages/sdc2-client-bme280/docker-compose.yml
+COMPOSE_FILE=docker-compose.bme280.yml
 ```
 
 Run the selected services with: `docker-compose up -d`.

@@ -4,7 +4,7 @@ Client application for Xiaomi Mijia BLE temperature and humidity sensors. It can
 
 ## Environment variables
 
-Create a file named `.env.mijia` in the root of the repository based on this template:
+Create a file named `.env` (development) or `.env.mijia` (production with docker-compose) based on this template:
 
 ```dotenv
 SDC2_URL=http://localhost:4000

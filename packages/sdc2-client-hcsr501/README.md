@@ -4,7 +4,7 @@ Client application for HC-SR501 PIR motion sensor.
 
 ## Environment variables
 
-Create a file named `.env.hcsr501` in the root of the repository based on this template:
+Create a file named `.env` (development) or `.env.hcsr501` (production with docker-compose) based on this template:
 
 ```dotenv
 SDC2_URL=http://server:4000

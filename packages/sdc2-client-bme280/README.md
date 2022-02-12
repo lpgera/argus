@@ -4,7 +4,7 @@ Client application for BME280 humidity, temperature and barometric pressure sens
 
 ## Environment variables
 
-Create a file named `.env.bme280` in the root of the repository based on this template:
+Create a file named `.env` (development) or `.env.bme280` (production with docker-compose) based on this template:
 
 ```dotenv
 SDC2_URL=http://server:4000
