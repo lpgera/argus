@@ -12,9 +12,8 @@ services:
       - MYSQL_DATABASE=sensor_data_collection
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
     restart: unless-stopped
-  # TODO replace image name with url once it's published
   server:
-    image: sdc2
+    image: ghcr.io/lpgera/sensor-data-collection:latest
     ports:
       - ${PORT}:${PORT}
     env_file: .env

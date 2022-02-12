@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   bme280:
-    image: sdc2
+    image: ghcr.io/lpgera/sensor-data-collection:latest
     devices:
       - /dev/i2c-${BME280_I2C_BUS_NUMBER:-1}:/dev/i2c-${BME280_I2C_BUS_NUMBER:-1}
     env_file: .env.bme280
