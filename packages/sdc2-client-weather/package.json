@@ -1,15 +1,12 @@
 {
   "name": "sdc2-client-weather",
-  "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node --trace-warnings index.js",
-    "prod": "cross-env NODE_ENV=production node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "axios": "^0.23.0",
-    "config": "^3.3.6",
     "cron": "^1.8.2",
-    "cross-env": "^7.0.3",
+    "dotenv": "^14.3.2",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger"
   }

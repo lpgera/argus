@@ -1,16 +1,20 @@
+require('dotenv').config()
 const BME280 = require('bme280-sensor')
-const config = require('config')
 const cron = require('cron')
 const log = require('sdc2-logger')({ name: 'sdc2-client-bme280' })
-const sdc2Client = require('sdc2-client')(config.get('sdc2'))
+const sdc2Client = require('sdc2-client')({
+  url: process.env.SDC2_URL,
+  apiKey: process.env.SDC2_API_KEY,
+  location: process.env.SDC2_LOCATION,
+})
 
 const bme280 = new BME280({
-  i2cBusNo: config.get('i2c.busNumber'),
-  i2cAddress: config.get('i2c.address'),
+  i2cBusNo: parseInt(process.env.BME280_I2C_BUS_NUMBER ?? 1),
+  i2cAddress: parseInt(process.env.BME280_I2C_ADDRESS ?? 0x76),
 })
 
 const measurementJob = new cron.CronJob({
-  cronTime: config.get('measurementCron'),
+  cronTime: process.env.BME280_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick: async function () {
     try {
       const {

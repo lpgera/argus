@@ -1,4 +1,4 @@
-const config = require('config')
+require('dotenv').config()
 const path = require('path')
 const Koa = require('koa')
 const koaStatic = require('koa-static')
@@ -25,8 +25,10 @@ app.use(
   })
 )
 
-const server = app.listen(config.get('port'), () => {
-  log.info(`Server is listening on port: ${config.get('port')}`)
+const port = parseInt(process.env.PORT ?? 4000)
+
+const server = app.listen(port, () => {
+  log.info(`Server is listening on port: ${port}`)
   if (process.send) {
     process.send('ready')
   }

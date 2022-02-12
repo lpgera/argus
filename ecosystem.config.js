@@ -5,7 +5,6 @@ module.exports = {
       script: './packages/sdc2-server/src/index.js',
       env: {
         NODE_ENV: 'production',
-        NODE_CONFIG_DIR: './packages/sdc2-server/config',
       },
       wait_ready: true,
       instances: 2,
@@ -16,7 +15,6 @@ module.exports = {
       script: './packages/sdc2-client-bme280/index.js',
       env: {
         NODE_ENV: 'production',
-        NODE_CONFIG_DIR: './packages/sdc2-client-bme280/config',
       },
     },
     {
@@ -24,7 +22,6 @@ module.exports = {
       script: './packages/sdc2-client-dht22/index.js',
       env: {
         NODE_ENV: 'production',
-        NODE_CONFIG_DIR: './packages/sdc2-client-dht22/config',
       },
     },
     {
@@ -32,7 +29,6 @@ module.exports = {
       script: './packages/sdc2-client-hcsr501/index.js',
       env: {
         NODE_ENV: 'production',
-        NODE_CONFIG_DIR: './packages/sdc2-client-hcsr501/config',
       },
     },
     {
@@ -40,7 +36,6 @@ module.exports = {
       script: './packages/sdc2-client-mijia/index.js',
       env: {
         NODE_ENV: 'production',
-        NODE_CONFIG_DIR: './packages/sdc2-client-mijia/config',
       },
     },
     {
@@ -48,7 +43,6 @@ module.exports = {
       script: './packages/sdc2-client-weather/index.js',
       env: {
         NODE_ENV: 'production',
-        NODE_CONFIG_DIR: './packages/sdc2-client-weather/config',
       },
     },
   ],

@@ -1,7 +1,11 @@
-const config = require('config')
+require('dotenv').config()
 const axios = require('axios')
 const cron = require('cron')
-const sdc2Client = require('sdc2-client')(config.get('sdc2'))
+const sdc2Client = require('sdc2-client')({
+  url: process.env.SDC2_URL,
+  apiKey: process.env.SDC2_API_KEY,
+  location: process.env.SDC2_LOCATION,
+})
 const log = require('sdc2-logger')({ name: 'sdc2-client-weather' })
 
 axios.interceptors.response.use(
@@ -9,10 +13,7 @@ axios.interceptors.response.use(
     return response
   },
   (err) => {
-    log.error(
-      `axios request error - status: ${err.response.status} body:`,
-      err.response.data
-    )
+    log.error(err, 'axios request error')
     return Promise.reject(err)
   }
 )
@@ -20,11 +21,21 @@ axios.interceptors.response.use(
 const onTick = async () => {
   try {
     const [openWeatherMapResponse, airVisualResponse] = await Promise.all([
-      axios.get('http://api.openweathermap.org/data/2.5/weather', {
-        params: config.get('openWeatherMap'),
+      axios.get('https://api.openweathermap.org/data/2.5/weather', {
+        params: {
+          appid: process.env.WEATHER_OPENWEATHERMAP_API_KEY,
+          lat: process.env.WEATHER_OPENWEATHERMAP_LATITUDE,
+          lon: process.env.WEATHER_OPENWEATHERMAP_LONGITUDE,
+          units: process.env.WEATHER_OPENWEATHERMAP_UNITS,
+        },
       }),
-      axios.get('http://api.airvisual.com/v2/city', {
-        params: config.get('airVisual'),
+      axios.get('https://api.airvisual.com/v2/city', {
+        params: {
+          key: process.env.WEATHER_AIRVISUAL_API_KEY,
+          country: process.env.WEATHER_AIRVISUAL_COUNTRY,
+          state: process.env.WEATHER_AIRVISUAL_STATE,
+          city: process.env.WEATHER_AIRVISUAL_CITY,
+        },
       }),
     ])
     const measurements = [
@@ -44,7 +55,7 @@ const onTick = async () => {
 }
 
 const measurementJob = new cron.CronJob({
-  cronTime: config.get('measurementCron'),
+  cronTime: process.env.WEATHER_MEASUREMENT_CRON ?? '*/10 * * * *',
   onTick,
 })
 

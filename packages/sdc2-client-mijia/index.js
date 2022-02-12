@@ -1,18 +1,35 @@
+require('dotenv').config()
 const cron = require('cron')
-const config = require('config')
 const noble = require('@abandonware/noble')
 const Sdc2Client = require('sdc2-client')
 const log = require('sdc2-logger')({ name: 'sdc2-client-mijia' })
 
-const knownAddresses = Object.keys(config.get('locations'))
+const locationsConfig = (process.env.MIJIA_LOCATIONS ?? '')
+  .split(',')
+  .reduce((acc, current, index, array) => {
+    if (index % 2 === 0) {
+      return acc
+    }
+    return [...acc, { [array[index - 1]]: current }]
+  }, [])
+  .reduce(
+    (acc, current) => ({
+      ...acc,
+      ...current,
+    }),
+    {}
+  )
+
+const knownAddresses = Object.keys(locationsConfig)
 
 const locations = Object.fromEntries(
   knownAddresses.map((address) => [
     address,
     {
       client: Sdc2Client({
-        ...config.get('sdc2'),
-        location: config.get('locations')[address],
+        url: process.env.SDC2_URL,
+        apiKey: process.env.SDC2_API_KEY,
+        location: locationsConfig[address],
       }),
       humidity: null,
       temperature: null,
@@ -65,7 +82,7 @@ const onTick = async () => {
 }
 
 const measurementJob = new cron.CronJob({
-  cronTime: config.get('measurementCron'),
+  cronTime: process.env.MIJIA_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick,
 })
 

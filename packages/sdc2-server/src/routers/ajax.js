@@ -1,6 +1,5 @@
 const KoaRouter = require('@koa/router')
 const moment = require('moment')
-const config = require('config')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const location = require('../models/location')
@@ -10,19 +9,29 @@ const diagnostics = require('../models/diagnostics')
 const { validateParams, validateRequestBody } = require('../validator')
 const pushBullet = require('../pushBullet')
 
+const staleThreshold = moment.duration(7, 'days')
+const warningThreshold = moment.duration(1, 'hour')
+
+const users = process.env.USERS.split(',').reduce((acc, current) => {
+  if (!current) {
+    return acc
+  }
+  const [username, password] = current.split(':')
+  return [...acc, { username, password }]
+}, [])
+
 const router = new KoaRouter()
 
 router.post('/login', (context) => {
   const { username, password } = context.request.body
-  const users = config.get('auth.users')
   if (
     users.some(
       (user) => user.username === username && user.password === password
     )
   ) {
     context.body = {
-      token: jwt.sign({ username }, config.get('auth.tokenSecret'), {
-        expiresIn: config.get('auth.sessionTimeoutSeconds'),
+      token: jwt.sign({ username }, process.env.TOKEN_SECRET, {
+        expiresIn: process.env.SESSION_TIMEOUT ?? '7 days',
       }),
     }
     return
@@ -33,7 +42,7 @@ router.post('/login', (context) => {
 router.use(async (context, next) => {
   const token = context.headers['x-authorization-token']
   try {
-    jwt.verify(token, config.get('auth.tokenSecret'))
+    jwt.verify(token, process.env.TOKEN_SECRET)
   } catch (err) {
     context.status = 401
     return
@@ -43,7 +52,6 @@ router.use(async (context, next) => {
 
 router.get('/location', async (context) => {
   const locations = await location.get()
-  const staleThreshold = config.get('location.staleThreshold')
   context.body = locations.map((l) => {
     return {
       ...l,
@@ -151,7 +159,6 @@ router.delete(
 
 router.get('/diagnostics', async (context) => {
   const locations = await diagnostics.get()
-  const staleThreshold = config.get('location.staleThreshold')
   context.body = locations.map((l) => {
     return {
       ...l,
@@ -164,8 +171,6 @@ router.get('/diagnostics', async (context) => {
 
 router.post('/check-locations', async (context) => {
   const locations = await location.get()
-  const staleThreshold = config.get('location.staleThreshold')
-  const warningThreshold = config.get('location.warningThreshold')
   const nonStaleLocations = locations.filter((l) =>
     moment(l.latestCreatedAt).isAfter(moment().subtract(staleThreshold))
   )
