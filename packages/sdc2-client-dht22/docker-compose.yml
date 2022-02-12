@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  dht22:
+    image: sdc2
+    privileged: true
+    devices:
+      - /dev/mem:/dev/mem
+    env_file: .env.dht22
+    command: npx lerna run start --stream --scope=sdc2-client-dht22
+    restart: unless-stopped

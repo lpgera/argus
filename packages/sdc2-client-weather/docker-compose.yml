@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  weather:
+    image: sdc2
+    env_file: .env.weather
+    command: npx lerna run start --stream --scope=sdc2-client-weather
+    restart: unless-stopped

@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  bme280:
+    image: sdc2
+    devices:
+      - /dev/i2c-${BME280_I2C_BUS_NUMBER:-1}:/dev/i2c-${BME280_I2C_BUS_NUMBER:-1}
+    env_file: .env.bme280
+    command: npx lerna run start --stream --scope=sdc2-client-bme280
+    restart: unless-stopped

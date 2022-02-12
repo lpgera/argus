@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb:10.5
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./packages/sdc2-server/db/init:/docker-entrypoint-initdb.d
+    command: >-
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=sensor_data_collection
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+  backend:
+    image: node:14
+    volumes:
+      - .:/opt/app:delegated
+    working_dir: /opt/app
+    command: npx lerna run dev --stream --scope=sdc2-server
+    ports:
+      - 4000:4000
+    depends_on:
+      - mariadb
+  frontend:
+    image: node:14
+    volumes:
+      - .:/opt/app:delegated
+    working_dir: /opt/app
+    command: npx lerna run start --stream --scope=sdc2-frontend
+    ports:
+      - 8080:3000
+    depends_on:
+      - backend
+  bootstrap:
+    image: node:14
+    volumes:
+      - .:/opt/app:delegated
+    working_dir: /opt/app
+    command: npm run local:bootstrap
+  build:
+    image: node:14
+    volumes:
+      - .:/opt/app:delegated
+    working_dir: /opt/app
+    command: npx lerna run build --stream --scope=sdc2-frontend
+volumes:
+  mysql_data:

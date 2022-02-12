@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  hcsr501:
+    image: sdc2
+    volumes:
+      - /sys:/sys
+    env_file: .env.hcsr501
+    command: npx lerna run start --stream --scope=sdc2-client-hcsr501
+    restart: unless-stopped

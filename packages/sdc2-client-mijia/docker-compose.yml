@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  mijia:
+    image: sdc2
+    network_mode: host
+    env_file: .env.mijia
+    command: npx lerna run start --stream --scope=sdc2-client-mijia
+    restart: unless-stopped
