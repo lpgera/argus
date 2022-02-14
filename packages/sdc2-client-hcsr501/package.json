@@ -6,6 +6,6 @@
   "dependencies": {
     "dotenv": "^14.3.2",
     "onoff": "^6.0.3",
-    "sdc2-logger": "file:../sdc2-logger"
+    "sdc2-logger": "^1.0.0"
   }
 }

@@ -1,6 +1,7 @@
 {
   "name": "sdc2-logger",
   "main": "log.js",
+  "version": "1.0.0",
   "dependencies": {
     "pino": "^7.0.3",
     "pino-pretty": "^7.1.0"
