@@ -2,15 +2,22 @@
 
 Client application for DHT22 humidity and temperature sensor.
 
-## Environment variables
+## docker-compose
 
-Create a file named `.env` (development) or `.env.dht22` (production with docker-compose) based on this template:
-
-```dotenv
-SDC2_URL=http://server:4000
-SDC2_API_KEY=API_KEY_WITH_WRITE_ACCESS
-SDC2_LOCATION=MEASUREMENT_LOCATION_NAME
-
-DHT22_GPIO_PIN= # optional, defaults to 4
-DHT22_MEASUREMENT_CRON= # optional, defaults to '*/5 * * * *'
+```yaml
+version: '3.8'
+services:
+  dht22:
+    image: ghcr.io/lpgera/sensor-data-collection:latest
+    privileged: true
+    devices:
+      - /dev/mem:/dev/mem
+    environment:
+      - SDC2_URL=http://server:4000
+      - SDC2_API_KEY=<api key with write access>
+      - SDC2_LOCATION=<measurement location name>
+      - DHT22_GPIO_PIN= # optional, defaults to 4
+      - DHT22_MEASUREMENT_CRON= # optional, defaults to '*/5 * * * *'
+    command: npx lerna run start --stream --scope=sdc2-client-dht22
+    restart: unless-stopped
 ```

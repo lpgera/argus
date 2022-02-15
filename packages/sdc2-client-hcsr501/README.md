@@ -2,14 +2,20 @@
 
 Client application for HC-SR501 PIR motion sensor.
 
-## Environment variables
+## docker-compose
 
-Create a file named `.env` (development) or `.env.hcsr501` (production with docker-compose) based on this template:
-
-```dotenv
-SDC2_URL=http://server:4000
-SDC2_API_KEY=API_KEY_WITH_WRITE_ACCESS
-SDC2_LOCATION=MEASUREMENT_LOCATION_NAME
-
-HCSR501_GPIO_PIN= # optional, defaults to 18
+```yaml
+version: '3.8'
+services:
+  hcsr501:
+    image: ghcr.io/lpgera/sensor-data-collection:latest
+    volumes:
+      - /sys:/sys
+    environment:
+      - SDC2_URL=http://server:4000
+      - SDC2_API_KEY=<api key with write access>
+      - SDC2_LOCATION=<measurement location name>
+      - HCSR501_GPIO_PIN= # optional, defaults to 18
+    command: npx lerna run start --stream --scope=sdc2-client-hcsr501
+    restart: unless-stopped
 ```
