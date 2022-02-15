@@ -8,4 +8,7 @@ module.exports = {
     min: 8,
     max: 16,
   },
+  migrations: {
+    directory: './db/migrations/',
+  },
 }

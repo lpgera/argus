@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./src/index.js",
-    "start": "node ./src/index.js"
+    "start": "knex migrate:latest && node ./src/index.js"
   },
   "dependencies": {
     "@jef/pushbullet": "^2.4.3",
