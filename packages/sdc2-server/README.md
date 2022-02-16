@@ -16,14 +16,14 @@ services:
       --collation-server=utf8mb4_unicode_ci
     environment:
       - MYSQL_DATABASE=sensor_data_collection
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_ROOT_PASSWORD=your_strong_password
     restart: unless-stopped
   server:
     image: ghcr.io/lpgera/sensor-data-collection:latest
     ports:
       - 4000:4000
     environment:
-      - DATABASE_URL=mysql://root@mariadb/sensor_data_collection
+      - DATABASE_URL=mysql://root:your_strong_password@mariadb/sensor_data_collection
       - USERS=username_1:password_1,username_2:password_2
       - TOKEN_SECRET=RANDOM_JWT_TOKEN_SECRET
       - PUSHBULLET_API_KEY=YOUR_PUSHBULLET_API_KEY
