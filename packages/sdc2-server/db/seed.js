@@ -10,11 +10,8 @@ const stepMinutes = 5
 
 async function resetDB() {
   log.info('Erasing database...')
-  await Promise.all([
-    db('measurement').delete(),
-    db('hourlyAggregation').delete(),
-    db('dailyAggregation').delete(),
-  ])
+  await db.migrate.rollback({}, true)
+  await db.migrate.latest()
 }
 
 async function insertRandomMeasurements() {

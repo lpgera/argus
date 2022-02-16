@@ -1,14 +1,11 @@
 {
   "name": "sdc2-client-hcsr501",
-  "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node index.js",
-    "prod": "cross-env NODE_ENV=production node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
-    "config": "^3.3.6",
-    "cross-env": "^7.0.3",
+    "dotenv": "^14.3.2",
     "onoff": "^6.0.3",
-    "sdc2-logger": "file:../sdc2-logger"
+    "sdc2-logger": "^1.0.0"
   }
 }

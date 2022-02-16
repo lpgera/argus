@@ -1,5 +1,7 @@
-**/build
 **/node_modules
+**/build
 mysql-data
+.husky
 .idea
+.git
 .env*

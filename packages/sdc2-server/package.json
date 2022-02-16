@@ -1,18 +1,16 @@
 {
   "name": "sdc2-server",
   "description": "A complete rewrite of the old PHP based Sensor Data Collection project.",
-  "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
-    "start": "cross-env NODE_ENV=production node ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "start": "knex migrate:latest && node ./src/index.js"
   },
   "dependencies": {
     "@jef/pushbullet": "^2.4.3",
     "@koa/cors": "^3.1.0",
     "@koa/router": "^10.1.1",
-    "config": "^3.3.6",
-    "cross-env": "^7.0.3",
+    "dotenv": "^14.3.2",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.11",
@@ -22,7 +20,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "mysql": "^2.18.1",
-    "sdc2-logger": "file:../sdc2-logger",
+    "sdc2-logger": "^1.0.0",
     "uuid": "^8.3.2"
   }
 }

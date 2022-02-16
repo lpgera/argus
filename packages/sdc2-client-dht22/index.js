@@ -1,9 +1,13 @@
+require('dotenv').config()
 const dht = require('node-dht-sensor')
 const cron = require('cron')
-const config = require('config')
 const _ = require('lodash')
 const log = require('sdc2-logger')({ name: 'sdc2-client-dht22' })
-const sdc2Client = require('sdc2-client')(config.get('sdc2'))
+const sdc2Client = require('sdc2-client')({
+  url: process.env.SDC2_URL,
+  apiKey: process.env.SDC2_API_KEY,
+  location: process.env.SDC2_LOCATION,
+})
 
 function isValidHumidity(humidity) {
   return humidity > 0 && humidity <= 100
@@ -16,7 +20,7 @@ function isValidTemperature(temperature) {
 function getValidMeasurement() {
   let measurement = {}
   do {
-    measurement = dht.read(22, 4)
+    measurement = dht.read(22, parseInt(process.env.DHT22_GPIO_PIN ?? 4))
     measurement.humidity = +measurement.humidity.toFixed(1)
     measurement.temperature = +measurement.temperature.toFixed(1)
   } while (
@@ -50,7 +54,7 @@ function measure() {
 }
 
 const measurementJob = new cron.CronJob({
-  cronTime: config.get('measurementCron'),
+  cronTime: process.env.DHT22_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick: measure,
 })
 

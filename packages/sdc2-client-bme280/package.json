@@ -1,16 +1,13 @@
 {
   "name": "sdc2-client-bme280",
-  "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node index.js",
-    "prod": "cross-env NODE_ENV=production node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "bme280-sensor": "^0.1.7",
-    "config": "^3.3.6",
     "cron": "^1.8.2",
-    "cross-env": "^7.0.3",
-    "sdc2-client": "file:../sdc2-client",
-    "sdc2-logger": "file:../sdc2-logger"
+    "dotenv": "^14.3.2",
+    "sdc2-client": "^1.0.0",
+    "sdc2-logger": "^1.0.0"
   }
 }

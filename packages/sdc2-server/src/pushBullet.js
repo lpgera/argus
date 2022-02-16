@@ -1,8 +1,7 @@
-const config = require('config')
 const moment = require('moment')
 const PushBullet = require('@jef/pushbullet')
 
-const pusher = new PushBullet(config.get('pushBullet.apiKey'))
+const pusher = new PushBullet(process.env.PUSHBULLET_API_KEY)
 
 async function sendWarnings(locations) {
   if (!locations.length) {

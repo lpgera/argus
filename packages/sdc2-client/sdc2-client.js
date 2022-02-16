@@ -8,8 +8,8 @@ module.exports = ({ url, apiKey, location }) => {
     },
     (err) => {
       log.error(
-        `sdc2-client request error - status: ${err.response.status} body:`,
-        err.response.data
+        `sdc2-client request error - status: ${err.response?.status} body:`,
+        err.response?.data
       )
       return Promise.reject(err)
     }

@@ -1,4 +1,3 @@
-const config = require('config')
 const db = require('../db')
 const log = require('../log')
 const { sqlDateWithoutMillisecondsFormat } = require('../utils')
@@ -119,7 +118,10 @@ function _getMeasurements({ location, type, from, to }) {
 }
 
 function get({ location, type, from, to, aggregation }) {
-  if (to.diff(from, 'days') >= config.get('query.threshold.daily')) {
+  if (
+    to.diff(from, 'days') >=
+    parseInt(process.env.DAILY_QUERY_THRESHOLD_IN_DAYS ?? 30)
+  ) {
     log.debug(
       {
         location,
@@ -131,7 +133,10 @@ function get({ location, type, from, to, aggregation }) {
     )
     return _getDailyAggregations({ location, type, from, to, aggregation })
   }
-  if (to.diff(from, 'days') >= config.get('query.threshold.hourly')) {
+  if (
+    to.diff(from, 'days') >=
+    parseInt(process.env.HOURLY_QUERY_THRESHOLD_IN_DAYS ?? 7)
+  ) {
     log.debug(
       {
         location,

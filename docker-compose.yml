@@ -1,7 +1,8 @@
-version: '3.7'
+# for development purposes
+version: '3.8'
 services:
   mariadb:
-    image: mariadb:latest
+    image: mariadb:10.5
     volumes:
       - mysql_data:/var/lib/mysql
       - ./packages/sdc2-server/db/init:/docker-entrypoint-initdb.d
@@ -12,9 +13,7 @@ services:
       - 3306:3306
     environment:
       - MYSQL_DATABASE=sensor_data_collection
-      - MYSQL_USER=sensor_data_collection
-      - MYSQL_PASSWORD=mysql-password
-      - MYSQL_ROOT_PASSWORD=mysql-root-password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
   backend:
     image: node:14
     volumes:

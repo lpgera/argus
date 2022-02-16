@@ -7,12 +7,12 @@
     "link": "lerna link convert",
     "bootstrap": "docker-compose run --rm bootstrap",
     "up": "docker-compose up -d frontend && docker-compose logs -f",
-    "seed": "docker-compose exec backend bash -c 'cd packages/sdc2-server && node db/seed.js'",
+    "seed": "docker-compose run --rm backend bash -c 'cd packages/sdc2-server && node db/seed.js'",
     "down": "docker-compose down --remove-orphans",
     "restart": "npm run down && npm run up",
     "logs": "docker-compose logs -f",
     "build": "docker-compose run --rm build",
-    "local:bootstrap": "npx lerna bootstrap",
+    "local:bootstrap": "npx lerna bootstrap --hoist",
     "local:build": "lerna run build --stream --scope=sdc2-frontend",
     "prepare": "husky install"
   },
@@ -22,16 +22,5 @@
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1"
-  },
-  "dependencies": {
-    "sdc2-client": "file:packages/sdc2-client",
-    "sdc2-client-bme280": "file:packages/sdc2-client-bme280",
-    "sdc2-client-dht22": "file:packages/sdc2-client-dht22",
-    "sdc2-client-hcsr501": "file:packages/sdc2-client-hcsr501",
-    "sdc2-client-mijia": "file:packages/sdc2-client-mijia",
-    "sdc2-client-weather": "file:packages/sdc2-client-weather",
-    "sdc2-frontend": "file:packages/sdc2-frontend",
-    "sdc2-logger": "file:packages/sdc2-logger",
-    "sdc2-server": "file:packages/sdc2-server"
   }
 }
