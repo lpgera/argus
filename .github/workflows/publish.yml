@@ -2,7 +2,7 @@ name: Create and publish a Docker image
 
 on:
   push:
-# TODO    branches: ['master']
+    branches: ['master']
 
 env:
   REGISTRY: ghcr.io
