@@ -28,7 +28,7 @@ services:
       - TOKEN_SECRET=RANDOM_JWT_TOKEN_SECRET
       - PUSHBULLET_API_KEY=YOUR_PUSHBULLET_API_KEY
       - PORT= # optional, defaults to 4000
-      - SESSION_TIMEOUT= # optional, defaults to '7 days'
+      - SESSION_TIMEOUT= # optional, defaults to 7 days
       - DAILY_QUERY_THRESHOLD_IN_DAYS= # optional, defaults to 30
       - HOURLY_QUERY_THRESHOLD_IN_DAYS= # optional, defaults to 7
     depends_on:

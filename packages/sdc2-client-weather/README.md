@@ -22,7 +22,7 @@ services:
       - WEATHER_AIRVISUAL_COUNTRY=
       - WEATHER_AIRVISUAL_STATE=
       - WEATHER_AIRVISUAL_CITY=
-      - WEATHER_MEASUREMENT_CRON= # optional, defaults to '*/10 * * * *'
+      - WEATHER_MEASUREMENT_CRON= # optional, defaults to */10 * * * *
     command: npx lerna run start --stream --scope=sdc2-client-weather
     restart: unless-stopped
 ```

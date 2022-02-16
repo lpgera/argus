@@ -18,6 +18,8 @@ RUN npx lerna bootstrap --hoist --ignore=sdc2-frontend && npm cache clean --forc
 
 FROM node:14-alpine as TARGET
 
+ENV NODE_ENV production
+
 WORKDIR /usr/src/app
 
 COPY --from=DEPENDENCIES /usr/src/app ./
