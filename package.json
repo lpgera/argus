@@ -5,13 +5,13 @@
   "license": "MIT",
   "scripts": {
     "link": "lerna link convert",
-    "bootstrap": "docker-compose run --rm bootstrap",
-    "up": "docker-compose up -d frontend && docker-compose logs -f",
+    "bootstrap": "docker-compose run --rm backend npm run local:bootstrap",
+    "up": "docker-compose up -d && docker-compose logs -f",
     "seed": "docker-compose run --rm backend bash -c 'cd packages/sdc2-server && node db/seed.js'",
     "down": "docker-compose down --remove-orphans",
     "restart": "npm run down && npm run up",
     "logs": "docker-compose logs -f",
-    "build": "docker-compose run --rm build",
+    "build": "docker-compose run --rm backend npm run local:build",
     "local:bootstrap": "npx lerna bootstrap --hoist",
     "local:build": "lerna run build --stream --scope=sdc2-frontend",
     "prepare": "husky install"

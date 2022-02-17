@@ -5,7 +5,6 @@ services:
     image: mariadb:10.5
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./packages/sdc2-server/db/init:/docker-entrypoint-initdb.d
     command: >-
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
@@ -34,17 +33,5 @@ services:
       - 8080:3000
     depends_on:
       - backend
-  bootstrap:
-    image: node:14
-    volumes:
-      - .:/opt/app:delegated
-    working_dir: /opt/app
-    command: npm run local:bootstrap
-  build:
-    image: node:14
-    volumes:
-      - .:/opt/app:delegated
-    working_dir: /opt/app
-    command: npx lerna run build --stream --scope=sdc2-frontend
 volumes:
   mysql_data:
