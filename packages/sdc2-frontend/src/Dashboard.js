@@ -20,7 +20,7 @@ import { DarkModeContext } from './DarkModeContext'
 export default function Dashboard() {
   const theme = useTheme()
   const { darkMode } = useContext(DarkModeContext)
-  const [{ data = [] }] = useApiClient('/location')
+  const [{ data = [], loading }] = useApiClient('/location')
   const [showStale, setShowStale] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
   const history = useHistory()
@@ -74,7 +74,7 @@ export default function Dashboard() {
   }
 
   const table = () => {
-    if (!data.length) {
+    if (!data.length && loading) {
       return <Spinner />
     }
 
