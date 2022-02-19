@@ -15,6 +15,7 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
   backend:
     image: node:14
+    env_file: .env
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app

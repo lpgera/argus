@@ -36,10 +36,16 @@ Run the selected services with: `docker-compose up -d`.
 ## How to setup the development environment
 
 1. This project requires NodeJS 14.x and Docker to be installed.
-2. Initialize the Docker environment: `npm run bootstrap`
-3. Start the dev servers: `npm run up`
-4. Seed the database: `npm run seed`
-5. View logs: `npm run logs`
+2. Create a `.env` file in the root of the repository with the following entries:
+   ```dotenv
+   DATABASE_URL=mysql://root@database/sensor_data_collection
+   TOKEN_SECRET=<generate_and_put_your_own_long_random_string_here>
+   USERS=username:password
+   ```
+3. Initialize the Docker environment: `npm run bootstrap`
+4. Start the dev servers: `npm run up`
+5. Seed the database: `npm run seed`
+6. View logs: `npm run logs`
 
 That's it! Now you can visit http://localhost:8080 and login with `username` and `password`.
 
