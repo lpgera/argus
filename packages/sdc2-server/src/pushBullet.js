@@ -1,7 +1,9 @@
 const moment = require('moment')
 const PushBullet = require('@jef/pushbullet')
 
-const pusher = new PushBullet(process.env.PUSHBULLET_API_KEY)
+const pusher = process.env.PUSHBULLET_API_KEY
+  ? new PushBullet(process.env.PUSHBULLET_API_KEY)
+  : null
 
 async function sendWarnings(locations) {
   if (!locations.length) {
@@ -13,7 +15,7 @@ async function sendWarnings(locations) {
         `${l.location} ${l.type} ${moment(l.latestCreatedAt).toISOString()}`
     )
     .join('\n')
-  await pusher.note('', 'SDC warning', message)
+  await pusher?.note('', 'SDC warning', message)
 }
 
 module.exports = {

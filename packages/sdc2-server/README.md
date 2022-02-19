@@ -26,7 +26,7 @@ services:
       - DATABASE_URL=mysql://root:your_strong_password@mariadb/sensor_data_collection
       - USERS=username_1:password_1,username_2:password_2
       - TOKEN_SECRET=RANDOM_JWT_TOKEN_SECRET
-      - PUSHBULLET_API_KEY=YOUR_PUSHBULLET_API_KEY
+      - PUSHBULLET_API_KEY= # optional
       - PORT= # optional, defaults to 4000
       - SESSION_TIMEOUT= # optional, defaults to 7 days
       - DAILY_QUERY_THRESHOLD_IN_DAYS= # optional, defaults to 30
