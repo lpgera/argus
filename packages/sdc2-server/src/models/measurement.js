@@ -41,30 +41,32 @@ const _upsertHourlyAggregationQuery = `
       type = ?;`
 
 async function insert(measurement) {
-  log.debug(measurement, 'Inserting measurement.')
-  await db.insert(measurement).into('measurement')
+  await db.transaction(async (trx) => {
+    log.debug(measurement, 'Inserting measurement.')
+    await trx.insert(measurement).into('measurement')
 
-  log.debug(measurement, 'Updating hourly aggregation with measurement.')
-  await db.raw(_upsertHourlyAggregationQuery, [
-    measurement.createdAt,
-    measurement.location,
-    measurement.type,
-    measurement.createdAt,
-    measurement.createdAt,
-    measurement.location,
-    measurement.type,
-  ])
+    log.debug(measurement, 'Updating hourly aggregation with measurement.')
+    await trx.raw(_upsertHourlyAggregationQuery, [
+      measurement.createdAt,
+      measurement.location,
+      measurement.type,
+      measurement.createdAt,
+      measurement.createdAt,
+      measurement.location,
+      measurement.type,
+    ])
 
-  log.debug(measurement, 'Updating daily aggregation with measurement.')
-  return db.raw(_upsertDailyAggregationQuery, [
-    measurement.createdAt,
-    measurement.location,
-    measurement.type,
-    measurement.createdAt,
-    measurement.createdAt,
-    measurement.location,
-    measurement.type,
-  ])
+    log.debug(measurement, 'Updating daily aggregation with measurement.')
+    return trx.raw(_upsertDailyAggregationQuery, [
+      measurement.createdAt,
+      measurement.location,
+      measurement.type,
+      measurement.createdAt,
+      measurement.createdAt,
+      measurement.location,
+      measurement.type,
+    ])
+  })
 }
 
 function _getDailyAggregations({
