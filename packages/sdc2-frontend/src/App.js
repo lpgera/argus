@@ -1,7 +1,7 @@
 import 'fontsource-roboto'
 import { SnackbarProvider } from 'notistack'
 import {
-  createMuiTheme,
+  createTheme,
   ThemeProvider as MuiThemeProvider,
 } from '@material-ui/core/styles'
 import { ThemeProvider } from 'styled-components'
@@ -14,7 +14,7 @@ import { useContext } from 'react'
 const CustomTheme = ({ render }) => {
   const { darkMode } = useContext(DarkModeContext)
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: darkMode ? 'dark' : 'light',
       primary: {
