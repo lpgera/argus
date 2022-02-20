@@ -3,7 +3,7 @@
   "main": "log.js",
   "version": "1.0.0",
   "dependencies": {
-    "pino": "^7.0.3",
-    "pino-pretty": "^7.1.0"
+    "pino": "^7.8.0",
+    "pino-pretty": "^7.5.1"
   }
 }

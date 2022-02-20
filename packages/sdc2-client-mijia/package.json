@@ -4,9 +4,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@abandonware/noble": "^1.9.2-14",
+    "@abandonware/noble": "^1.9.2-15",
     "cron": "^1.8.2",
-    "dotenv": "^14.3.2",
+    "dotenv": "^16.0.0",
     "node-pre-gyp": "^0.14.0",
     "sdc2-client": "^1.0.0",
     "sdc2-logger": "^1.0.0"

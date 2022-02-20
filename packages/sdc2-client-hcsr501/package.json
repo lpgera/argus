@@ -4,7 +4,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "dotenv": "^14.3.2",
+    "dotenv": "^16.0.0",
     "onoff": "^6.0.3",
     "sdc2-logger": "^1.0.0"
   }

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
@@ -221,20 +221,12 @@ export default function Frame() {
         <StyledMain>
           <StyledToolbarSpacer />
           <StyledContainer>
-            <Switch>
-              <Route path="/api-keys">
-                <ApiKeys />
-              </Route>
-              <Route path="/diagnostics">
-                <Diagnostics />
-              </Route>
-              <Route path="/measurements">
-                <MeasurementChart />
-              </Route>
-              <Route path="/">
-                <Dashboard />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="api-keys" element={<ApiKeys />} />
+              <Route path="diagnostics" element={<Diagnostics />} />
+              <Route path="measurements" element={<MeasurementChart />} />
+            </Routes>
           </StyledContainer>
         </StyledMain>
       </div>

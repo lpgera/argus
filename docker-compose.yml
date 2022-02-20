@@ -31,7 +31,7 @@ services:
     working_dir: /opt/app
     command: npx lerna run start --stream --scope=sdc2-frontend
     ports:
-      - 8080:3000
+      - 3000:3000
     depends_on:
       - backend
 volumes:

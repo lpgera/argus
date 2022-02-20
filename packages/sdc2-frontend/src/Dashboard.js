@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import uniq from 'lodash/uniq'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -23,7 +23,7 @@ export default function Dashboard() {
   const [{ data = [], loading }] = useApiClient('/location')
   const [showStale, setShowStale] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const linkColor = theme.palette.secondary[darkMode ? 'light' : 'dark']
 
@@ -195,7 +195,7 @@ export default function Dashboard() {
                 urlSearchParams.append('location', item.location)
                 urlSearchParams.append('type', item.type)
               }
-              history.push({
+              navigate({
                 pathname: './measurements',
                 search: urlSearchParams.toString(),
               })
