@@ -1,20 +1,21 @@
 import { useContext, useState } from 'react'
 import { useSnackbar } from 'notistack'
 import debounce from 'lodash/debounce'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-import Checkbox from '@material-ui/core/Checkbox'
-import TextField from '@material-ui/core/TextField'
-import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
-import Popover from '@material-ui/core/Popover'
-import Button from '@material-ui/core/Button'
-import styled, { useTheme } from 'styled-components'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import Checkbox from '@mui/material/Checkbox'
+import TextField from '@mui/material/TextField'
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Delete'
+import Popover from '@mui/material/Popover'
+import Button from '@mui/material/Button'
+import { useTheme } from '@mui/material/styles'
+import styled from '@emotion/styled'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
 import { AxiosContext } from './AxiosContext'
@@ -28,6 +29,7 @@ function DeleteConfirm({ id, onConfirm }) {
       <IconButton
         onClick={(e) => setAnchor(e.currentTarget)}
         aria-label={'Delete API key'}
+        size="large"
       >
         <DeleteIcon />
       </IconButton>
@@ -107,6 +109,7 @@ export default function ApiKeys() {
                   <TableCell>{row.token}</TableCell>
                   <TableCell>
                     <Checkbox
+                      color="secondary"
                       checked={!!row.canRead}
                       onChange={async (e) => {
                         await updateApiKey({
@@ -124,6 +127,7 @@ export default function ApiKeys() {
                   </TableCell>
                   <TableCell>
                     <Checkbox
+                      color="secondary"
                       checked={!!row.canWrite}
                       onChange={async (e) => {
                         await updateApiKey({
@@ -141,6 +145,8 @@ export default function ApiKeys() {
                   </TableCell>
                   <TableCell>
                     <TextField
+                      color="secondary"
+                      variant="standard"
                       defaultValue={row.comment}
                       onChange={debounce(async (e) => {
                         await updateApiKey({

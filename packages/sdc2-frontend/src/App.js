@@ -2,9 +2,10 @@ import 'fontsource-roboto'
 import { SnackbarProvider } from 'notistack'
 import {
   createTheme,
+  StyledEngineProvider,
   ThemeProvider as MuiThemeProvider,
-} from '@material-ui/core/styles'
-import { ThemeProvider } from 'styled-components'
+} from '@mui/material/styles'
+import { ThemeProvider } from '@emotion/react'
 import { AuthProvider } from './AuthContext'
 import Frame from './Frame'
 import { AxiosProvider } from './AxiosContext'
@@ -16,12 +17,36 @@ const CustomTheme = ({ render }) => {
 
   const theme = createTheme({
     palette: {
-      type: darkMode ? 'dark' : 'light',
+      mode: darkMode ? 'dark' : 'light',
       primary: {
         main: '#1a237e',
       },
       secondary: {
         main: '#74B1D2',
+      },
+      ...(darkMode
+        ? {
+            background: {
+              default: '#303030',
+              paper: '#424242',
+            },
+          }
+        : {}),
+    },
+    components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundImage: 'none',
+          },
+        },
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            backgroundImage: 'none',
+          },
+        },
       },
     },
   })

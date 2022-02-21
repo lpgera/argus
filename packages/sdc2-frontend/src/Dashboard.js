@@ -1,18 +1,18 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useTheme } from 'styled-components'
+import { useTheme } from '@mui/material/styles'
 import uniq from 'lodash/uniq'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import Button from '@material-ui/core/Button'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-import Link from '@material-ui/core/Link'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import Button from '@mui/material/Button'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import Link from '@mui/material/Link'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
 import { DarkModeContext } from './DarkModeContext'
@@ -85,6 +85,7 @@ export default function Dashboard() {
             control={
               <Checkbox
                 name="showStale"
+                color="secondary"
                 checked={showStale}
                 onChange={(e) => {
                   deselectStale()
@@ -157,6 +158,7 @@ export default function Dashboard() {
                     >
                       {isValidItem({ location, type }) ? (
                         <Checkbox
+                          color="secondary"
                           size="small"
                           checked={isSelected({ location, type })}
                           onChange={(e) => {

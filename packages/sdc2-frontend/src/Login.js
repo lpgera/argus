@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
-import { useTheme } from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container'
-import styled from 'styled-components'
+import Button from '@mui/material/Button'
+import CssBaseline from '@mui/material/CssBaseline'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
+import styled from '@emotion/styled'
+import Container from '@mui/material/Container'
 import logo from './logo.svg'
 import useApiClient from './useApiClient'
 import { AuthContext } from './AuthContext'
@@ -66,7 +66,7 @@ export default function Login() {
           noValidate
         >
           <TextField
-            variant="outlined"
+            color="secondary"
             margin="normal"
             required
             fullWidth
@@ -79,7 +79,7 @@ export default function Login() {
             onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
-            variant="outlined"
+            color="secondary"
             margin="normal"
             required
             fullWidth

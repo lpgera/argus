@@ -1,27 +1,28 @@
 import { useContext, useState } from 'react'
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import styled, { useTheme } from 'styled-components'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Hidden from '@material-ui/core/Hidden'
-import Drawer from '@material-ui/core/Drawer'
-import AppBar from '@material-ui/core/AppBar'
-import Slide from '@material-ui/core/Slide'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import DashboardIcon from '@material-ui/icons/Dashboard'
-import KeyIcon from '@material-ui/icons/VpnKey'
-import DiagnosticsIcon from '@material-ui/icons/LocalHospital'
-import LogoutIcon from '@material-ui/icons/ExitToApp'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import Container from '@material-ui/core/Container'
-import MenuIcon from '@material-ui/icons/Menu'
-import Brightness4 from '@material-ui/icons/Brightness4'
-import BrightnessHigh from '@material-ui/icons/BrightnessHigh'
+import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
+import styled from '@emotion/styled'
+import CssBaseline from '@mui/material/CssBaseline'
+import Hidden from '@mui/material/Hidden'
+import Drawer from '@mui/material/Drawer'
+import AppBar from '@mui/material/AppBar'
+import Slide from '@mui/material/Slide'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
+import Toolbar from '@mui/material/Toolbar'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import KeyIcon from '@mui/icons-material/VpnKey'
+import DiagnosticsIcon from '@mui/icons-material/LocalHospital'
+import LogoutIcon from '@mui/icons-material/ExitToApp'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import Container from '@mui/material/Container'
+import MenuIcon from '@mui/icons-material/Menu'
+import Brightness4 from '@mui/icons-material/Brightness4'
+import BrightnessHigh from '@mui/icons-material/BrightnessHigh'
 import { ReactComponent as Logo } from './logo.svg'
 import { AuthContext } from './AuthContext'
 import { DarkModeContext } from './DarkModeContext'
@@ -34,6 +35,7 @@ import useLocalStorage from './useLocalStorage'
 
 const StyledLogo = styled(Logo)(({ theme }) => ({
   width: theme.spacing(3),
+  minWidth: theme.spacing(3),
   height: theme.spacing(3),
   fill: 'white',
   marginRight: theme.spacing(1),
@@ -156,10 +158,11 @@ export default function Frame() {
       >
         <CssBaseline />
         <HideOnScroll>
-          <StyledAppBar>
+          <StyledAppBar enableColorOnDark>
             <Toolbar
               style={{
-                paddingRight: theme.spacing(1),
+                display: 'flex',
+                paddingRight: theme.spacing(2),
               }}
             >
               <IconButton
@@ -173,21 +176,23 @@ export default function Frame() {
                 style={{
                   marginRight: theme.spacing(2),
                 }}
+                size="large"
               >
                 <MenuIcon />
               </IconButton>
               <StyledLogo />
 
-              <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                <Typography
-                  component="h1"
-                  variant="h6"
-                  color="inherit"
-                  noWrap
-                  style={{
-                    flexGrow: 1,
-                  }}
-                >
+              <Link
+                to="/"
+                style={{
+                  color: 'white',
+                  textDecoration: 'none',
+                  flexGrow: 1,
+                  flexShrink: 1,
+                  minWidth: 0,
+                }}
+              >
+                <Typography component="h1" variant="h6" color="inherit" noWrap>
                   Sensor Data Collection
                 </Typography>
               </Link>
@@ -195,8 +200,8 @@ export default function Frame() {
               <IconButton
                 aria-label={'Toggle dark mode'}
                 onClick={() => toggleDarkMode()}
-                style={{ marginLeft: 'auto', marginRight: 0 }}
                 color={'inherit'}
+                size="large"
               >
                 {darkMode ? <BrightnessHigh /> : <Brightness4 />}
               </IconButton>
@@ -204,7 +209,7 @@ export default function Frame() {
           </StyledAppBar>
         </HideOnScroll>
 
-        <Hidden xsDown>
+        <Hidden smDown>
           <StyledDrawer variant="permanent" open={drawerOpen}>
             <StyledToolbarSpacer />
             {drawer()}
@@ -215,6 +220,7 @@ export default function Frame() {
             onClose={() => setMobileDrawerOpen(false)}
             open={mobileDrawerOpen}
           >
+            <StyledToolbarSpacer />
             {drawer()}
           </StyledDrawer>
         </Hidden>

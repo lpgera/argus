@@ -1,13 +1,14 @@
 import { useContext, useEffect, useReducer, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import styled, { useTheme } from 'styled-components'
-import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
-import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import Button from '@material-ui/core/Button'
+import { useTheme } from '@mui/material/styles'
+import styled from '@emotion/styled'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import Button from '@mui/material/Button'
 import Plotly from 'plotly.js-basic-dist'
 import createPlotlyComponent from 'react-plotly.js/factory'
 import debounce from 'lodash/debounce'
@@ -300,7 +301,7 @@ export default function MeasurementChart() {
         />
         <Grid container>
           <Grid item xs={6}>
-            <FormControl variant="outlined" size="small">
+            <FormControl size="small" color="secondary">
               <InputLabel>Aggregation</InputLabel>
               <Select
                 value={aggregation}

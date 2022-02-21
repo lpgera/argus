@@ -1,5 +1,5 @@
-import CircularProgress from '@material-ui/core/CircularProgress'
-import styled from 'styled-components'
+import CircularProgress from '@mui/material/CircularProgress'
+import styled from '@emotion/styled'
 
 const SpinnerContainer = styled.div({
   display: 'flex',

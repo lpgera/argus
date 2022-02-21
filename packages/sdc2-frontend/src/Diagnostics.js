@@ -1,20 +1,26 @@
 import { useState } from 'react'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-import Tooltip from '@material-ui/core/Tooltip'
-import styled, { useTheme } from 'styled-components'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import Tooltip from '@mui/material/Tooltip'
+import { useTheme } from '@mui/material/styles'
+import styled from '@emotion/styled'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
 
 const StyledTableHeaderCell = styled(TableCell)({
   fontWeight: 'bold',
+  whiteSpace: 'nowrap',
+})
+
+const StyledTableCell = styled(TableCell)({
+  whiteSpace: 'nowrap',
 })
 
 const getTooltipDate = (isoDateString) => {
@@ -40,6 +46,7 @@ export default function Diagnostics() {
           <FormControlLabel
             control={
               <Checkbox
+                color="secondary"
                 name="showStale"
                 checked={showStale}
                 onChange={(e) => setShowStale(e.target.checked)}
@@ -49,28 +56,28 @@ export default function Diagnostics() {
           />
         </div>
         <TableContainer component={Paper}>
-          <Table aria-label="simple table">
+          <Table>
             <TableHead>
               <TableRow>
                 <StyledTableHeaderCell>Location</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Type</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Last seen</StyledTableHeaderCell>
-                <StyledTableHeaderCell>Last value</StyledTableHeaderCell>
-                <StyledTableHeaderCell>Last 24h count</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Value</StyledTableHeaderCell>
+                <StyledTableHeaderCell>24h count</StyledTableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {visibleItems.map((row) => (
                 <TableRow key={`${row.location}-${row.type}`}>
-                  <TableCell>{row.location}</TableCell>
-                  <TableCell>{row.type}</TableCell>
-                  <TableCell>
+                  <StyledTableCell>{row.location}</StyledTableCell>
+                  <StyledTableCell>{row.type}</StyledTableCell>
+                  <StyledTableCell>
                     <Tooltip title={getTooltipDate(row.latestCreatedAt)}>
                       <span>{row.latestFromNow}</span>
                     </Tooltip>
-                  </TableCell>
-                  <TableCell>{row.latestvalue}</TableCell>
-                  <TableCell>{row.lastDayCount}</TableCell>
+                  </StyledTableCell>
+                  <StyledTableCell>{row.latestvalue}</StyledTableCell>
+                  <StyledTableCell>{row.lastDayCount}</StyledTableCell>
                 </TableRow>
               ))}
             </TableBody>
