@@ -2,7 +2,6 @@ import 'fontsource-roboto'
 import { SnackbarProvider } from 'notistack'
 import {
   createTheme,
-  StyledEngineProvider,
   ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react'
