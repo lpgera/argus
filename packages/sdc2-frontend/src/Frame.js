@@ -56,7 +56,7 @@ const StyledDrawer = styled(Drawer)(({ theme, variant, open }) => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     overflowX: 'hidden',
-    width: variant === 'permanent' && !open ? 60 : 180,
+    width: variant === 'permanent' && !open ? 57 : 180,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration:
