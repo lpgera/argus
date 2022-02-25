@@ -1,4 +1,4 @@
-FROM node:14 as FRONTEND
+FROM node:16 as FRONTEND
 
 WORKDIR /usr/src/app
 
@@ -12,7 +12,7 @@ COPY packages/sdc2-frontend packages/sdc2-frontend
 
 RUN npx lerna run build --stream --scope=sdc2-frontend
 
-FROM node:14 as DEPENDENCIES
+FROM node:16 as DEPENDENCIES
 
 WORKDIR /usr/src/app
 
@@ -31,7 +31,7 @@ RUN npx lerna bootstrap --hoist --ignore=sdc2-frontend && npm cache clean --forc
 
 COPY . .
 
-FROM node:14-alpine as TARGET
+FROM node:16-alpine as TARGET
 
 ENV NODE_ENV production
 
