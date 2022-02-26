@@ -7,10 +7,11 @@
     "start": "knex migrate:latest && node ./src/index.js"
   },
   "dependencies": {
-    "@jef/pushbullet": "^2.4.3",
     "@koa/cors": "^3.1.0",
     "@koa/router": "^10.1.1",
+    "cron": "^1.8.2",
     "dotenv": "^16.0.0",
+    "got-cjs": "^12.0.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^1.0.3",
@@ -20,7 +21,6 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "mysql": "^2.18.1",
-    "sdc2-logger": "^1.0.0",
-    "uuid": "^8.3.2"
+    "sdc2-logger": "^1.0.0"
   }
 }
