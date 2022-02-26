@@ -34,4 +34,15 @@ services:
     depends_on:
       - mariadb
     restart: unless-stopped
+  # optional cron service, provides Pushbullet alerts for missing sensors
+  cron:
+    image: ghcr.io/lpgera/sensor-data-collection:latest
+    environment:
+      - DATABASE_URL=mysql://root:your_strong_password@mariadb/sensor_data_collection
+      - PUSHBULLET_API_KEY=
+      - MONITORING_CRON= # optional, defaults to 0 */4 * * *
+    depends_on:
+      - mariadb
+    command: npx lerna run cron --stream --scope=sdc2-server
+    restart: unless-stopped
 ```
