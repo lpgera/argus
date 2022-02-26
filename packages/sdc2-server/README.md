@@ -19,7 +19,7 @@ services:
       - MYSQL_ROOT_PASSWORD=your_strong_password
     restart: unless-stopped
   server:
-    image: ghcr.io/lpgera/sensor-data-collection:latest
+    image: ghcr.io/lpgera/sensor-data-collection
     ports:
       - 4000:4000
     environment:
@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
   # optional cron service, provides Pushbullet alerts for missing sensors
   cron:
-    image: ghcr.io/lpgera/sensor-data-collection:latest
+    image: ghcr.io/lpgera/sensor-data-collection
     environment:
       - DATABASE_URL=mysql://root:your_strong_password@mariadb/sensor_data_collection
       - PUSHBULLET_API_KEY=

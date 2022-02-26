@@ -8,7 +8,7 @@ Client application for Xiaomi Mijia BLE temperature and humidity sensors. It can
 version: '3.8'
 services:
   mijia:
-    image: ghcr.io/lpgera/sensor-data-collection:latest
+    image: ghcr.io/lpgera/sensor-data-collection
     network_mode: host
     environment:
       - SDC2_URL=http://localhost:4000

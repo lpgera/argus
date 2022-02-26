@@ -8,7 +8,7 @@ Client application for BME280 humidity, temperature and barometric pressure sens
 version: '3.8'
 services:
   bme280:
-    image: ghcr.io/lpgera/sensor-data-collection:latest
+    image: ghcr.io/lpgera/sensor-data-collection
     devices:
       - /dev/i2c-1:/dev/i2c-1
     environment:

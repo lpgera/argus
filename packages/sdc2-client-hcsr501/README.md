@@ -8,7 +8,7 @@ Client application for HC-SR501 PIR motion sensor.
 version: '3.8'
 services:
   hcsr501:
-    image: ghcr.io/lpgera/sensor-data-collection:latest
+    image: ghcr.io/lpgera/sensor-data-collection
     volumes:
       - /sys:/sys
     environment:

@@ -9,7 +9,7 @@ Client application for reading weather data from [OpenWeather](https://openweath
 version: '3.8'
 services:
   weather:
-    image: ghcr.io/lpgera/sensor-data-collection:latest
+    image: ghcr.io/lpgera/sensor-data-collection
     environment:
       - SDC2_URL=http://server:4000
       - SDC2_API_KEY=<api key with write access>

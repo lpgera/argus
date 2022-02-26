@@ -8,7 +8,7 @@ Client application for DHT22 humidity and temperature sensor.
 version: '3.8'
 services:
   dht22:
-    image: ghcr.io/lpgera/sensor-data-collection:latest
+    image: ghcr.io/lpgera/sensor-data-collection
     privileged: true
     devices:
       - /dev/mem:/dev/mem
