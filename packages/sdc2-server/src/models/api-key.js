@@ -1,12 +1,12 @@
 const db = require('../db')
-const uuid = require('uuid').v4
+const { randomUUID } = require('crypto')
 
 function list() {
   return db.select('*').from('apiKey')
 }
 
 function create() {
-  const token = uuid()
+  const token = randomUUID()
   const canRead = false
   const canWrite = false
   const comment = ''

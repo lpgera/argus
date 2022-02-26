@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./src/index.js",
-    "start": "knex migrate:latest && node ./src/index.js"
+    "start": "knex migrate:latest && node ./src/index.js",
+    "cron": "node ./src/cron.js"
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",

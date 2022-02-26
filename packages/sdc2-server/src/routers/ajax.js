@@ -7,10 +7,7 @@ const measurement = require('../models/measurement')
 const apiKey = require('../models/api-key')
 const diagnostics = require('../models/diagnostics')
 const { validateParams, validateRequestBody } = require('../validator')
-const pushBullet = require('../pushBullet')
-
-const staleThreshold = moment.duration(7, 'days')
-const warningThreshold = moment.duration(1, 'hour')
+const { staleThreshold } = require('../config')
 
 const users = process.env.USERS.split(',').reduce((acc, current) => {
   if (!current) {
@@ -167,18 +164,6 @@ router.get('/diagnostics', async (context) => {
       ),
     }
   })
-})
-
-router.post('/check-locations', async (context) => {
-  const locations = await location.get()
-  const nonStaleLocations = locations.filter((l) =>
-    moment(l.latestCreatedAt).isAfter(moment().subtract(staleThreshold))
-  )
-  const warnings = nonStaleLocations.filter((l) =>
-    moment(l.latestCreatedAt).isBefore(moment().subtract(warningThreshold))
-  )
-  await pushBullet.sendWarnings(warnings)
-  context.body = null
 })
 
 module.exports = router
