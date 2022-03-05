@@ -15,7 +15,7 @@ const onTick = async () => {
     moment(l.latestCreatedAt).isBefore(moment().subtract(warningThreshold))
   )
   if (warnings.length) {
-    const message = locations
+    const message = warnings
       .map(
         (l) =>
           `${l.location} ${l.type} ${moment(l.latestCreatedAt).toISOString()}`
