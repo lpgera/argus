@@ -19,7 +19,7 @@ services:
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
-    command: npx lerna run dev --stream --scope=sdc2-server
+    command: npm run dev -w sdc2-server
     ports:
       - 4000:4000
     depends_on:
@@ -29,7 +29,7 @@ services:
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
-    command: npx lerna run start --stream --scope=sdc2-frontend
+    command: npm run start -w sdc2-frontend
     ports:
       - 3000:3000
     depends_on:
