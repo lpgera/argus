@@ -1,7 +1,7 @@
 {
   "name": "sdc2-client-weather",
   "scripts": {
-    "start": "node index.js"
+    "start": "node weather.js"
   },
   "dependencies": {
     "axios": "^0.26.1",

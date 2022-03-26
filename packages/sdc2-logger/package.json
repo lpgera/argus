@@ -1,6 +1,6 @@
 {
   "name": "sdc2-logger",
-  "main": "log.js",
+  "main": "logger.js",
   "version": "1.0.0",
   "dependencies": {
     "pino": "^7.9.1",

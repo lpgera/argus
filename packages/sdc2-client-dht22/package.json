@@ -1,7 +1,7 @@
 {
   "name": "sdc2-client-dht22",
   "scripts": {
-    "start": "node index.js"
+    "start": "node dht22.js"
   },
   "dependencies": {
     "cron": "^1.8.2",

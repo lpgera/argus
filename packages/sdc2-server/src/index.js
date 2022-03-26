@@ -29,9 +29,6 @@ const port = parseInt(process.env.PORT ?? 4000)
 
 const server = app.listen(port, () => {
   log.info(`Server is listening on port: ${port}`)
-  if (process.send) {
-    process.send('ready')
-  }
 })
 
 process.on('SIGINT', () => {

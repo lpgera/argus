@@ -63,4 +63,4 @@ async function start() {
   measurementJob.start()
 }
 
-start().catch(log.error)
+start().catch((error) => log.error(error))

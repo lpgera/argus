@@ -1,7 +1,7 @@
 {
   "name": "sdc2-client",
   "description": "An axios-based rest client for SDC2",
-  "main": "sdc2-client.js",
+  "main": "client.js",
   "version": "1.0.0",
   "dependencies": {
     "axios": "^0.26.1",

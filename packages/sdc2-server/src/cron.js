@@ -41,9 +41,9 @@ const monitoringJob = new cron.CronJob({
 
 async function start() {
   if (!process.env.PUSHBULLET_API_KEY) {
-    log.warn('process.env.PUSHBULLET_API_KEY not found')
+    throw new Error('process.env.PUSHBULLET_API_KEY not found')
   }
   monitoringJob.start()
 }
 
-start().catch(log.error)
+start().catch((err) => log.error(err))

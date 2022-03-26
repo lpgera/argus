@@ -1,7 +1,7 @@
 {
   "name": "sdc2-client-mijia",
   "scripts": {
-    "start": "node index.js"
+    "start": "node mijia.js"
   },
   "dependencies": {
     "@abandonware/noble": "^1.9.2-15",

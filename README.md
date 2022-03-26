@@ -1,15 +1,15 @@
 # Sensor data collection
 
-Sensor data collection (codenamed SDC2) is a sensor monitoring solution built with MariaDB, NodeJS and React.
+Sensor data collection (codenamed SDC2) is a sensor monitoring solution built with MariaDB, Node.js and React.
 Developed and tested on a Raspberry Pi.
 
 ## Screenshots
 
-![](./screenshots/login.png)
+![Screenshot of login page](./screenshots/login.png)
 
-![](./screenshots/dashboard.png)
+![Screenshot of application dashboard](./screenshots/dashboard.png)
 
-![](./screenshots/chart.png)
+![Screenshot of a measurement chart](./screenshots/chart.png)
 
 ## Modules
 
@@ -35,7 +35,7 @@ Run the selected services with: `docker-compose up -d`.
 
 ## How to setup the development environment
 
-1. This project requires NodeJS 16.x and Docker to be installed.
+1. This project requires Node.js 16.x and Docker to be installed.
 2. Create a `.env` file in the root of the repository with the following entries:
    ```dotenv
    DATABASE_URL=mysql://root@mariadb/sensor_data_collection
@@ -43,8 +43,7 @@ Run the selected services with: `docker-compose up -d`.
    USERS=username:password
    ```
 3. Initialize the Docker environment: `npm run bootstrap`
-4. Start the dev servers: `npm run up`
-5. Seed the database: `npm run seed`
-6. View logs: `npm run logs`
+4. Seed the database: `npm run seed`
+5. Start the dev servers: `npm run up`
 
 That's it! Now you can visit http://localhost:3000 and login with `username` and `password`.

@@ -112,7 +112,7 @@ function decodeAndStoreServiceData(address, data) {
   }
 }
 
-const run = async () => {
+const start = async () => {
   noble.on('discover', async (peripheral) => {
     const address = peripheral.address
     const data = [...peripheral.advertisement.serviceData[0].data].slice(11)
@@ -129,4 +129,4 @@ const run = async () => {
   measurementJob.start()
 }
 
-run().catch(log.error)
+start().catch((error) => log.error(error))

@@ -1,7 +1,7 @@
 {
   "name": "sdc2-client-hcsr501",
   "scripts": {
-    "start": "node index.js"
+    "start": "node hcsr501.js"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
