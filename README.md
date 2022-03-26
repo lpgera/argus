@@ -48,10 +48,3 @@ Run the selected services with: `docker-compose up -d`.
 6. View logs: `npm run logs`
 
 That's it! Now you can visit http://localhost:3000 and login with `username` and `password`.
-
-## How to add dependencies
-
-The repository is a monorepo managed with [lerna](https://lerna.js.org/), so dependencies must be added with the
-following command:
-
-`npx lerna add <new-package> --scope=<package-to-install-to>`

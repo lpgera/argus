@@ -16,6 +16,6 @@ services:
       - SDC2_API_KEY=<api key with write access>
       - SDC2_LOCATION=<measurement location name>
       - HCSR501_GPIO_PIN= # optional, defaults to 18
-    command: npx lerna run start --stream --scope=sdc2-client-hcsr501
+    command: npm run start -w sdc2-client-hcsr501
     restart: unless-stopped
 ```

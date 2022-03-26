@@ -18,6 +18,6 @@ services:
       - SDC2_LOCATION=<measurement location name>
       - DHT22_GPIO_PIN= # optional, defaults to 4
       - DHT22_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npx lerna run start --stream --scope=sdc2-client-dht22
+    command: npm run start -w sdc2-client-dht22
     restart: unless-stopped
 ```

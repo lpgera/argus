@@ -18,6 +18,6 @@ services:
       - BME280_I2C_BUS_NUMBER= # optional, defaults to 1
       - BME280_I2C_ADDRESS= # optional, defaults to 0x76
       - BME280_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npx lerna run start --stream --scope=sdc2-client-bme280
+    command: npm run start -w sdc2-client-bme280
     restart: unless-stopped
 ```

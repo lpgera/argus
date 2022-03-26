@@ -15,6 +15,6 @@ services:
       - SDC2_API_KEY=<api key with write access>
       - MIJIA_LOCATIONS=mac_address_1,location_name_1,mac_address_2,location_name_2
       - MIJIA_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npx lerna run start --stream --scope=sdc2-client-mijia
+    command: npm run start -w sdc2-client-mijia
     restart: unless-stopped
 ```

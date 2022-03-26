@@ -43,6 +43,6 @@ services:
       - MONITORING_CRON= # optional, defaults to 0 */4 * * *
     depends_on:
       - mariadb
-    command: npx lerna run cron --stream --scope=sdc2-server
+    command: npm run cron -w sdc2-server
     restart: unless-stopped
 ```
