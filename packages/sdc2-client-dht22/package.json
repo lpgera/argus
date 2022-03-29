@@ -8,7 +8,7 @@
     "dotenv": "^16.0.0",
     "lodash": "^4.17.21",
     "node-dht-sensor": "^0.4.3",
-    "sdc2-client": "^1.0.0",
-    "sdc2-logger": "^1.0.0"
+    "sdc2-client": "file:../sdc2-client",
+    "sdc2-logger": "file:../sdc2-logger"
   }
 }
