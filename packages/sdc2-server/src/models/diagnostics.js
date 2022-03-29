@@ -2,12 +2,12 @@ const moment = require('moment')
 const db = require('../db')
 
 async function get() {
-  const startMoment = moment().utc().subtract(1, 'day').toDate()
+  const start = moment().utc().subtract(1, 'day').toDate()
 
   const lastDayQuery = db
     .select(db.raw('location, type, count(*) as lastDayCount'))
     .from('measurement')
-    .where('createdAt', '>=', startMoment)
+    .where('createdAt', '>=', start)
     .groupBy('location', 'type')
     .as('lastDay')
 
