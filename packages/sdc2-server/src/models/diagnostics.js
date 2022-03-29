@@ -1,12 +1,8 @@
 const moment = require('moment')
 const db = require('../db')
-const { sqlDateWithoutMillisecondsFormat } = require('../utils')
 
 async function get() {
-  const startMoment = moment()
-    .utc()
-    .subtract(1, 'day')
-    .format(sqlDateWithoutMillisecondsFormat) // much faster without milliseconds
+  const startMoment = moment().utc().subtract(1, 'day').toDate()
 
   const lastDayQuery = db
     .select(db.raw('location, type, count(*) as lastDayCount'))

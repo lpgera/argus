@@ -1,6 +1,5 @@
 const db = require('../db')
 const log = require('../log')
-const { sqlDateWithoutMillisecondsFormat } = require('../utils')
 
 const _upsertDailyAggregationQuery = `
   REPLACE INTO dailyAggregation (measurementDay, location, type, count, sum, average, minimum, maximum)
@@ -78,12 +77,8 @@ function _getDailyAggregations({
     .select('measurementDay as createdAt', `${aggregation} as value`)
     .from('dailyAggregation')
     .where({ location, type })
-    .where(
-      'measurementDay',
-      '>=',
-      from.format(sqlDateWithoutMillisecondsFormat)
-    ) // much faster without milliseconds
-    .where('measurementDay', '<=', to.format(sqlDateWithoutMillisecondsFormat)) // much faster without milliseconds
+    .where('measurementDay', '>=', from.toDate())
+    .where('measurementDay', '<=', to.toDate())
     .orderBy('measurementDay')
 }
 
@@ -98,12 +93,8 @@ function _getHourlyAggregations({
     .select('measurementHour as createdAt', `${aggregation} as value`)
     .from('hourlyAggregation')
     .where({ location, type })
-    .where(
-      'measurementHour',
-      '>=',
-      from.format(sqlDateWithoutMillisecondsFormat)
-    ) // much faster without milliseconds
-    .where('measurementHour', '<=', to.format(sqlDateWithoutMillisecondsFormat)) // much faster without milliseconds
+    .where('measurementHour', '>=', from.toDate())
+    .where('measurementHour', '<=', to.toDate())
     .orderBy('measurementHour')
 }
 
@@ -112,8 +103,8 @@ function _getMeasurements({ location, type, from, to }) {
     .select('createdAt', 'value')
     .from('measurement')
     .where({ location, type })
-    .where('createdAt', '>=', from.format(sqlDateWithoutMillisecondsFormat)) // much faster without milliseconds
-    .where('createdAt', '<=', to.format(sqlDateWithoutMillisecondsFormat)) // much faster without milliseconds
+    .where('createdAt', '>=', from.toDate())
+    .where('createdAt', '<=', to.toDate())
     .orderBy('createdAt')
 }
 
