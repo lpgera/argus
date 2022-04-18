@@ -1,4 +1,4 @@
-FROM node:16 as FRONTEND
+FROM --platform=$BUILDPLATFORM node:16 as FRONTEND
 
 WORKDIR /usr/src/app
 
