@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "bme280-sensor": "^0.1.7",
-    "cron": "^1.8.2",
+    "cron": "^1.8.3",
     "dotenv": "^16.0.0",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger"
