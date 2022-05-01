@@ -21,7 +21,7 @@ router.use('/ajax', ajaxRouter.routes(), ajaxRouter.allowedMethods())
 app.use(router.routes(), router.allowedMethods())
 app.use(
   koaStatic(path.join(__dirname, '../frontend'), {
-    maxage: process.env.NODE_ENV === 'production' ? 30 * 24 * 3600 : 0,
+    maxage: process.env.NODE_ENV === 'production' ? 30 * 24 * 3600 * 1000 : 0,
   })
 )
 
