@@ -3,6 +3,10 @@
   "name": "sensor-data-collection",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "^18.0.0",
+    "npm": "^8.5.0"
+  },
   "scripts": {
     "bootstrap": "docker-compose run --rm backend npm i",
     "up": "docker-compose up -d && docker-compose logs -f",
