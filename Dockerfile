@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:16 as FRONTEND
+FROM --platform=$BUILDPLATFORM node:18 as FRONTEND
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY packages/sdc2-frontend packages/sdc2-frontend
 
 RUN npm run build -w sdc2-frontend
 
-FROM node:16 as DEPENDENCIES
+FROM node:18 as DEPENDENCIES
 
 WORKDIR /usr/src/app
 
@@ -29,7 +29,7 @@ RUN npm ci --only=production
 
 COPY . .
 
-FROM node:16-alpine as TARGET
+FROM node:18-alpine as TARGET
 
 ENV NODE_ENV production
 
