@@ -35,7 +35,7 @@ Run the selected services with: `docker-compose up -d`.
 
 ## How to setup the development environment
 
-1. This project requires Node.js 16.x and Docker to be installed.
+1. This project requires Node.js 18.x and Docker to be installed.
 2. Create a `.env` file in the root of the repository with the following entries:
    ```dotenv
    DATABASE_URL=mysql://root@mariadb/sensor_data_collection
