@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, lazy, Suspense } from 'react'
 import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
@@ -30,8 +30,9 @@ import Login from './Login'
 import Dashboard from './Dashboard'
 import ApiKeys from './ApiKeys'
 import Diagnostics from './Diagnostics'
-import MeasurementChart from './MeasurementChart'
 import useLocalStorage from './useLocalStorage'
+import Spinner from './Spinner'
+const MeasurementChart = lazy(() => import('./MeasurementChart'))
 
 const StyledLogo = styled(Logo)(({ theme }) => ({
   width: theme.spacing(3),
@@ -227,12 +228,14 @@ export default function Frame() {
         <StyledMain>
           <StyledToolbarSpacer />
           <StyledContainer>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="api-keys" element={<ApiKeys />} />
-              <Route path="diagnostics" element={<Diagnostics />} />
-              <Route path="measurements" element={<MeasurementChart />} />
-            </Routes>
+            <Suspense fallback={<Spinner />}>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="api-keys" element={<ApiKeys />} />
+                <Route path="diagnostics" element={<Diagnostics />} />
+                <Route path="measurements" element={<MeasurementChart />} />
+              </Routes>
+            </Suspense>
           </StyledContainer>
         </StyledMain>
       </div>
