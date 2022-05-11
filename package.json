@@ -19,8 +19,8 @@
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
   },
   "devDependencies": {
-    "husky": "^7.0.4",
-    "nodemon": "^2.0.15",
+    "husky": "^8.0.1",
+    "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
     "pretty-quick": "^3.1.3"
   },

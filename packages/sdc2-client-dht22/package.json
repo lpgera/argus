@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "cron": "^2.0.0",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "lodash": "^4.17.21",
     "node-dht-sensor": "^0.4.3",
     "sdc2-client": "file:../sdc2-client",

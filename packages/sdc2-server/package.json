@@ -11,7 +11,7 @@
     "@koa/cors": "^3.3.0",
     "@koa/router": "^10.1.1",
     "cron": "^2.0.0",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "got-cjs": "^12.0.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
