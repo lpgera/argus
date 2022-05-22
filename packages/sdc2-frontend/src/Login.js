@@ -48,13 +48,7 @@ export default function Login() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <StyledDiv>
-        <img
-          src={logo}
-          style={{
-            width: 64,
-          }}
-          alt={'Logo'}
-        />
+        <img src={logo} width="64" height="64" alt={'Logo'} />
         <Typography component="h1" variant="h5">
           Login
         </Typography>
