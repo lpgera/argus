@@ -16,11 +16,14 @@
     "logs": "docker-compose logs -f",
     "build": "docker-compose run --rm backend npm run local:build",
     "local:build": "npm run build -w sdc2-frontend",
-    "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\""
+    "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+    "check-updates": "npm exec --include-workspace-root -ws -- ncu",
+    "check-updates-interactive": "npm exec --include-workspace-root -ws -- ncu -i"
   },
   "devDependencies": {
     "husky": "^8.0.1",
     "nodemon": "^2.0.16",
+    "npm-check-updates": "^13.0.3",
     "prettier": "^2.6.2",
     "pretty-quick": "^3.1.3"
   },
