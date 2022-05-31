@@ -1,9 +1,9 @@
-const moment = require('moment')
-const _ = require('lodash')
-const log = require('../src/log')
-const db = require('../src/db')
-const upsertHourlyAggregations = require('./aggregation/upsertHourlyAggregations')
-const upsertDailyAggregations = require('./aggregation/upsertDailyAggregations')
+import moment from 'moment'
+import _ from 'lodash'
+import log from '../src/log.js'
+import db from '../src/db.js'
+import upsertHourlyAggregations from './aggregation/upsertHourlyAggregations.js'
+import upsertDailyAggregations from './aggregation/upsertDailyAggregations.js'
 
 const intervalLengthDays = 180
 const stepMinutes = 5

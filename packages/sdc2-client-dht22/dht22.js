@@ -1,9 +1,12 @@
-require('dotenv').config()
-const dht = require('node-dht-sensor')
-const cron = require('cron')
-const _ = require('lodash')
-const log = require('sdc2-logger')({ name: 'sdc2-client-dht22' })
-const sdc2Client = require('sdc2-client')({
+import 'dotenv/config'
+import dht from 'node-dht-sensor'
+import { CronJob } from 'cron'
+import _ from 'lodash'
+import Logger from 'sdc2-logger'
+import Client from 'sdc2-client'
+
+const log = Logger({ name: 'sdc2-client-dht22' })
+const client = Client({
   url: process.env.SDC2_URL,
   apiKey: process.env.SDC2_API_KEY,
   location: process.env.SDC2_LOCATION,
@@ -50,10 +53,10 @@ function measure() {
 
   log.debug('measurement:', measurementsToStore)
 
-  return sdc2Client.storeMeasurements({ measurements: measurementsToStore })
+  return client.storeMeasurements({ measurements: measurementsToStore })
 }
 
-const measurementJob = new cron.CronJob({
+const measurementJob = new CronJob({
   cronTime: process.env.DHT22_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick: measure,
 })

@@ -1,5 +1,6 @@
 {
   "name": "sdc2-client-mijia",
+  "type": "module",
   "scripts": {
     "start": "node mijia.js"
   },

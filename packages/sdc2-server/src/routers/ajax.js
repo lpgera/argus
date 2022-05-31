@@ -1,13 +1,13 @@
-const KoaRouter = require('@koa/router')
-const moment = require('moment')
-const jwt = require('jsonwebtoken')
-const Joi = require('joi')
-const location = require('../models/location')
-const measurement = require('../models/measurement')
-const apiKey = require('../models/api-key')
-const diagnostics = require('../models/diagnostics')
-const { validateParams, validateRequestBody } = require('../validator')
-const { staleThreshold } = require('../config')
+import KoaRouter from '@koa/router'
+import moment from 'moment'
+import jwt from 'jsonwebtoken'
+import Joi from 'joi'
+import * as location from '../models/location.js'
+import * as measurement from '../models/measurement.js'
+import * as apiKey from '../models/api-key.js'
+import * as diagnostics from '../models/diagnostics.js'
+import { validateParams, validateRequestBody } from '../validator.js'
+import config from '../config.js'
 
 const users = process.env.USERS.split(',').reduce((acc, current) => {
   if (!current) {
@@ -53,7 +53,7 @@ router.get('/location', async (context) => {
     return {
       ...l,
       isStale: moment(l.latestCreatedAt).isBefore(
-        moment().subtract(staleThreshold)
+        moment().subtract(config.staleThreshold)
       ),
     }
   })
@@ -160,10 +160,10 @@ router.get('/diagnostics', async (context) => {
     return {
       ...l,
       isStale: moment(l.latestCreatedAt).isBefore(
-        moment().subtract(staleThreshold)
+        moment().subtract(config.staleThreshold)
       ),
     }
   })
 })
 
-module.exports = router
+export default router

@@ -1,7 +1,9 @@
-const axios = require('axios')
-const log = require('sdc2-logger')({ name: 'sdc2-client' })
+import axios from 'axios'
+import Logger from 'sdc2-logger'
 
-module.exports = ({ url, apiKey, location }) => {
+const log = Logger({ name: 'sdc2-client' })
+
+export default ({ url, apiKey, location }) => {
   axios.interceptors.response.use(
     (response) => {
       return response

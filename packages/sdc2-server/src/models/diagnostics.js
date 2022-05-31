@@ -1,7 +1,7 @@
-const moment = require('moment')
-const db = require('../db')
+import moment from 'moment'
+import db from '../db.js'
 
-async function get() {
+export async function get() {
   const start = moment().utc().subtract(1, 'day').toDate()
 
   const lastDayQuery = db
@@ -43,8 +43,4 @@ async function get() {
       lastDayCount: row.lastDayCount || 0,
     }
   })
-}
-
-module.exports = {
-  get,
 }

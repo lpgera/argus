@@ -1,6 +1,6 @@
-const log = require('./log')
+import log from './log.js'
 
-const validateParams = (schema) => async (context, next) => {
+export const validateParams = (schema) => async (context, next) => {
   try {
     await schema.validateAsync(context.params)
   } catch (error) {
@@ -10,7 +10,7 @@ const validateParams = (schema) => async (context, next) => {
   await next()
 }
 
-const validateRequestBody = (schema) => async (context, next) => {
+export const validateRequestBody = (schema) => async (context, next) => {
   try {
     await schema.validateAsync(context.request.body)
   } catch (error) {
@@ -18,9 +18,4 @@ const validateRequestBody = (schema) => async (context, next) => {
     context.throw(400, error)
   }
   await next()
-}
-
-module.exports = {
-  validateParams,
-  validateRequestBody,
 }

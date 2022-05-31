@@ -1,11 +1,11 @@
-const KoaRouter = require('@koa/router')
-const moment = require('moment')
-const _ = require('lodash')
-const Joi = require('joi')
-const measurement = require('../models/measurement')
-const apiAuth = require('../api-auth')
-const log = require('../log')
-const { validateParams, validateRequestBody } = require('../validator')
+import KoaRouter from '@koa/router'
+import moment from 'moment'
+import _ from 'lodash'
+import Joi from 'joi'
+import * as measurement from '../models/measurement.js'
+import * as apiAuth from '../api-auth.js'
+import log from '../log.js'
+import { validateParams, validateRequestBody } from '../validator.js'
 
 const router = new KoaRouter()
 
@@ -67,4 +67,4 @@ router.get(
   }
 )
 
-module.exports = router
+export default router

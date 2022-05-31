@@ -1,4 +1,4 @@
-exports.up = async function (knex) {
+export async function up(knex) {
   await knex.schema.createTable('apiKey', (table) => {
     table.increments('id')
     table.string('token', 36).notNullable()
@@ -53,7 +53,7 @@ exports.up = async function (knex) {
   })
 }
 
-exports.down = async function (knex) {
+export async function down(knex) {
   if (process.env.NODE_ENV !== 'production') {
     await knex.schema.dropTable('apiKey')
     await knex.schema.dropTable('dailyAggregation')

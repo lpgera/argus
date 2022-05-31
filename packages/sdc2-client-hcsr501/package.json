@@ -1,5 +1,6 @@
 {
   "name": "sdc2-client-hcsr501",
+  "type": "module",
   "scripts": {
     "start": "node hcsr501.js"
   },

@@ -1,6 +1,6 @@
-const moment = require('moment')
+import moment from 'moment'
 
-module.exports = {
+export default {
   staleThreshold: moment.duration(7, 'days'),
   warningThreshold: moment.duration(1, 'hour'),
 }

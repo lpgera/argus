@@ -1,7 +1,6 @@
 {
   "name": "sdc2-server",
-  "description": "A complete rewrite of the old PHP based Sensor Data Collection project.",
-  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "start": "knex migrate:latest && node ./src/index.js",
@@ -12,7 +11,7 @@
     "@koa/router": "^10.1.1",
     "cron": "^2.0.0",
     "dotenv": "^16.0.1",
-    "got-cjs": "^12.0.1",
+    "got": "^12.1.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^2.1.0",

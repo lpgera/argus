@@ -1,5 +1,6 @@
 {
   "name": "sdc2-client-bme280",
+  "type": "module",
   "scripts": {
     "start": "node bme280.js"
   },

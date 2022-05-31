@@ -1,6 +1,6 @@
-const db = require('../../src/db')
+import db from '../../src/db.js'
 
-module.exports = async function upsertDailyAggregations() {
+export default async function upsertDailyAggregations() {
   await db.raw(`
     replace into dailyAggregation (measurementDay, location, type, count, sum, average, minimum, maximum)
     select

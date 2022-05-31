@@ -1,7 +1,7 @@
-const apiKey = require('./models/api-key')
-const log = require('./log')
+import * as apiKey from './models/api-key.js'
+import log from './log.js'
 
-async function ensureValidApiKey(context, next) {
+export async function ensureValidApiKey(context, next) {
   const token = context.headers['x-api-key'] || context.query['api_key']
   if (!token) {
     log.warn('API called without API key')
@@ -22,7 +22,7 @@ async function ensureValidApiKey(context, next) {
   await next()
 }
 
-async function ensureReadPermission(context, next) {
+export async function ensureReadPermission(context, next) {
   if (!context.state.apiKey || !context.state.apiKey.canRead) {
     log.warn('Read permission denied for apiKey:', context.state.apiKey)
     context.body = { error: 'Read permission required.' }
@@ -32,7 +32,7 @@ async function ensureReadPermission(context, next) {
   await next()
 }
 
-async function ensureWritePermission(context, next) {
+export async function ensureWritePermission(context, next) {
   if (!context.state.apiKey || !context.state.apiKey.canWrite) {
     log.warn('Write permission denied for apiKey:', context.state.apiKey)
     context.body = { error: 'Write permission required.' }
@@ -40,10 +40,4 @@ async function ensureWritePermission(context, next) {
     return
   }
   await next()
-}
-
-module.exports = {
-  ensureValidApiKey,
-  ensureReadPermission,
-  ensureWritePermission,
 }

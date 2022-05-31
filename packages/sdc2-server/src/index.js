@@ -1,13 +1,12 @@
-require('dotenv').config()
-const path = require('path')
-const Koa = require('koa')
-const koaStatic = require('koa-static')
-const koaBodyparser = require('koa-bodyparser')
-const KoaRouter = require('@koa/router')
-const koaCors = require('@koa/cors')
-const log = require('./log')
-const apiRouter = require('./routers/api')
-const ajaxRouter = require('./routers/ajax')
+import 'dotenv/config'
+import Koa from 'koa'
+import koaStatic from 'koa-static'
+import koaBodyparser from 'koa-bodyparser'
+import KoaRouter from '@koa/router'
+import koaCors from '@koa/cors'
+import log from './log.js'
+import apiRouter from './routers/api.js'
+import ajaxRouter from './routers/ajax.js'
 
 const app = new Koa()
 const router = new KoaRouter()
@@ -20,7 +19,7 @@ router.use('/ajax', ajaxRouter.routes(), ajaxRouter.allowedMethods())
 
 app.use(router.routes(), router.allowedMethods())
 app.use(
-  koaStatic(path.join(__dirname, '../frontend'), {
+  koaStatic('frontend', {
     maxage: process.env.NODE_ENV === 'production' ? 30 * 24 * 3600 * 1000 : 0,
   })
 )

@@ -1,11 +1,11 @@
-const db = require('../db')
-const { randomUUID } = require('crypto')
+import { randomUUID } from 'crypto'
+import db from '../db.js'
 
-function list() {
+export function list() {
   return db.select('*').from('apiKey')
 }
 
-function create() {
+export function create() {
   const token = randomUUID()
   const canRead = false
   const canWrite = false
@@ -13,22 +13,14 @@ function create() {
   return db.insert({ token, canRead, canWrite, comment }).into('apiKey')
 }
 
-function update(id, { canRead, canWrite, comment }) {
+export function update(id, { canRead, canWrite, comment }) {
   return db.table('apiKey').where({ id }).update({ canRead, canWrite, comment })
 }
 
-function remove(id) {
+export function remove(id) {
   return db.table('apiKey').where({ id }).delete()
 }
 
-function findByToken(token) {
+export function findByToken(token) {
   return db.select('*').from('apiKey').where({ token }).first()
-}
-
-module.exports = {
-  list,
-  create,
-  update,
-  remove,
-  findByToken,
 }

@@ -1,12 +1,15 @@
-require('dotenv').config()
-const axios = require('axios')
-const cron = require('cron')
-const sdc2Client = require('sdc2-client')({
+import 'dotenv/config'
+import axios from 'axios'
+import cron from 'cron'
+import Client from 'sdc2-client'
+import Logger from 'sdc2-logger'
+
+const client = Client({
   url: process.env.SDC2_URL,
   apiKey: process.env.SDC2_API_KEY,
   location: process.env.SDC2_LOCATION,
 })
-const log = require('sdc2-logger')({ name: 'sdc2-client-weather' })
+const log = Logger({ name: 'sdc2-client-weather' })
 
 axios.interceptors.response.use(
   (response) => {
@@ -48,7 +51,7 @@ const onTick = async () => {
         value: airVisualResponse.data.data.current.pollution.aqius,
       },
     ]
-    await sdc2Client.storeMeasurements({ measurements })
+    await client.storeMeasurements({ measurements })
   } catch (err) {
     log.error(err)
   }

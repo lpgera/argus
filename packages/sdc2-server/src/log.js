@@ -1,3 +1,3 @@
-const log = require('sdc2-logger')({ name: 'sdc2-server' })
+import Logger from 'sdc2-logger'
 
-module.exports = log
+export default Logger({ name: 'sdc2-server' })

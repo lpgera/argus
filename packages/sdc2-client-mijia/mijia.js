@@ -1,8 +1,10 @@
-require('dotenv').config()
-const cron = require('cron')
-const noble = require('@abandonware/noble')
-const Sdc2Client = require('sdc2-client')
-const log = require('sdc2-logger')({ name: 'sdc2-client-mijia' })
+import 'dotenv/config'
+import cron from 'cron'
+import noble from '@abandonware/noble'
+import Client from 'sdc2-client'
+import Logger from 'sdc2-logger'
+
+const log = Logger({ name: 'sdc2-client-mijia' })
 
 const locationsConfig = (process.env.MIJIA_LOCATIONS ?? '')
   .split(',')
@@ -26,7 +28,7 @@ const locations = Object.fromEntries(
   knownAddresses.map((address) => [
     address,
     {
-      client: Sdc2Client({
+      client: Client({
         url: process.env.SDC2_URL,
         apiKey: process.env.SDC2_API_KEY,
         location: locationsConfig[address],

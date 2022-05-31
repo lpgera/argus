@@ -1,6 +1,6 @@
-const db = require('../../src/db')
+import db from '../../src/db.js'
 
-module.exports = async function upsertHourlyAggregations() {
+export default async function upsertHourlyAggregations() {
   await db.raw(`
     replace into hourlyAggregation (measurementHour, location, type, count, sum, average, minimum, maximum)
     select

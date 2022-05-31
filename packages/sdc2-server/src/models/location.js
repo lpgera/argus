@@ -1,6 +1,6 @@
-const db = require('../db')
+import db from '../db.js'
 
-function get() {
+export function get() {
   const latestIdsQuery = db
     .select(db.raw('max(id)')) // using the assumption that ids are incremental, because querying by date is far slower
     .from('measurement')
@@ -12,8 +12,4 @@ function get() {
     .whereIn('id', latestIdsQuery)
     .orderBy('location')
     .orderBy('type')
-}
-
-module.exports = {
-  get,
 }

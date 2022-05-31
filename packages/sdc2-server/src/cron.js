@@ -1,18 +1,20 @@
-require('dotenv').config()
-const cron = require('cron')
-const moment = require('moment')
-const { got } = require('got-cjs')
-const log = require('./log')
-const { staleThreshold, warningThreshold } = require('./config')
-const location = require('./models/location')
+import 'dotenv/config'
+import { CronJob } from 'cron'
+import moment from 'moment'
+import got from 'got'
+import log from './log.js'
+import config from './config.js'
+import * as location from './models/location.js'
 
 const onTick = async () => {
   const locations = await location.get()
   const nonStaleLocations = locations.filter((l) =>
-    moment(l.latestCreatedAt).isAfter(moment().subtract(staleThreshold))
+    moment(l.latestCreatedAt).isAfter(moment().subtract(config.staleThreshold))
   )
   const warnings = nonStaleLocations.filter((l) =>
-    moment(l.latestCreatedAt).isBefore(moment().subtract(warningThreshold))
+    moment(l.latestCreatedAt).isBefore(
+      moment().subtract(config.warningThreshold)
+    )
   )
   if (warnings.length) {
     const message = warnings
@@ -34,7 +36,7 @@ const onTick = async () => {
   }
 }
 
-const monitoringJob = new cron.CronJob({
+const monitoringJob = new CronJob({
   cronTime: process.env.MONITORING_CRON ?? '0 */4 * * *',
   onTick,
 })

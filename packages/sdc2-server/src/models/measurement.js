@@ -1,5 +1,5 @@
-const db = require('../db')
-const log = require('../log')
+import db from '../db.js'
+import log from '../log.js'
 
 const _upsertDailyAggregationQuery = `
   REPLACE INTO dailyAggregation (measurementDay, location, type, count, sum, average, minimum, maximum)
@@ -39,7 +39,7 @@ const _upsertHourlyAggregationQuery = `
       location = ? AND
       type = ?;`
 
-async function insert(measurement) {
+export async function insert(measurement) {
   log.debug(measurement, 'Inserting measurement.')
   await db.insert(measurement).into('measurement')
 
@@ -108,7 +108,7 @@ function _getMeasurements({ location, type, from, to }) {
     .orderBy('createdAt')
 }
 
-function get({ location, type, from, to, aggregation }) {
+export function get({ location, type, from, to, aggregation }) {
   if (
     to.diff(from, 'days') >=
     parseInt(process.env.DAILY_QUERY_THRESHOLD_IN_DAYS ?? 30)
@@ -143,17 +143,11 @@ function get({ location, type, from, to, aggregation }) {
   return _getMeasurements({ location, type, from, to })
 }
 
-function getLatest({ location, type }) {
+export function getLatest({ location, type }) {
   return db
     .select('createdAt', 'value')
     .from('measurement')
     .where({ location, type })
     .orderBy('createdAt', 'desc')
     .first()
-}
-
-module.exports = {
-  insert,
-  get,
-  getLatest,
 }

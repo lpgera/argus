@@ -1,5 +1,6 @@
 {
   "name": "sdc2-client-weather",
+  "type": "module",
   "scripts": {
     "start": "node weather.js"
   },

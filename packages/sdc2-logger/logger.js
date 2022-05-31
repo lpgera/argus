@@ -1,4 +1,4 @@
-const pino = require('pino')
+import pino from 'pino'
 
 const destination =
   process.env.NODE_ENV === 'production'
@@ -27,7 +27,7 @@ const prettyOptions =
       }
     : {}
 
-const log = (options) =>
+export default (options) =>
   pino(
     {
       name: 'sdc2',
@@ -37,5 +37,3 @@ const log = (options) =>
     },
     destination
   )
-
-module.exports = log
