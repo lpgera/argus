@@ -1,6 +1,5 @@
 import KoaRouter from '@koa/router'
 import moment from 'moment'
-import _ from 'lodash'
 import Joi from 'joi'
 import * as measurement from '../models/measurement.js'
 import * as apiAuth from '../api-auth.js'
@@ -32,7 +31,9 @@ router.post(
   apiAuth.ensureWritePermission,
   async (context) => {
     const { location } = context.params
-    const measurements = _.castArray(context.request.body)
+    const measurements = Array.isArray(context.request.body)
+      ? context.request.body
+      : [context.request.body]
     const createdAt = moment().toDate()
     log.debug({ location, measurements }, 'Received new measurements.')
 

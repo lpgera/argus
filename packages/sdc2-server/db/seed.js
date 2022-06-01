@@ -1,5 +1,4 @@
 import moment from 'moment'
-import _ from 'lodash'
 import log from '../src/log.js'
 import db from '../src/db.js'
 import upsertHourlyAggregations from './aggregation/upsertHourlyAggregations.js'
@@ -17,8 +16,11 @@ async function resetDB() {
 async function insertRandomMeasurements() {
   log.info(`Filling database with ${intervalLengthDays} days of random data...`)
   const start = moment().startOf('minute').subtract(intervalLengthDays, 'day')
-  const range = _.range(0, intervalLengthDays * 24 * 60, stepMinutes)
-  const measurementArray = _.flatMap(range, (d) => {
+  const range = Array.from(
+    Array((intervalLengthDays * 24 * 60) / stepMinutes),
+    (_, i) => i * stepMinutes
+  )
+  const measurementArray = range.flatMap((d) => {
     const createdAt = start.clone().add(d, 'minute').toDate()
     return [
       {

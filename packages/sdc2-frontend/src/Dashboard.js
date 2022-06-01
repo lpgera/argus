@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
-import uniq from 'lodash/uniq'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Button from '@mui/material/Button'
@@ -28,8 +27,10 @@ export default function Dashboard() {
   const linkColor = theme.palette.secondary[darkMode ? 'light' : 'dark']
 
   const visibleItems = showStale ? data : data.filter(({ isStale }) => !isStale)
-  const visibleLocations = uniq(visibleItems.map(({ location }) => location))
-  const visibleTypes = uniq(visibleItems.map(({ type }) => type))
+  const visibleLocations = [
+    ...new Set(visibleItems.map(({ location }) => location)),
+  ]
+  const visibleTypes = [...new Set(visibleItems.map(({ type }) => type))]
 
   const isValidItem = ({ location, type }) =>
     visibleItems.some(

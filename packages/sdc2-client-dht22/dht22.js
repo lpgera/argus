@@ -1,7 +1,6 @@
 import 'dotenv/config'
 import dht from 'node-dht-sensor'
 import { CronJob } from 'cron'
-import _ from 'lodash'
 import Logger from 'sdc2-logger'
 import Client from 'sdc2-client'
 
@@ -43,11 +42,12 @@ function measure() {
   const measurementsToStore = [
     {
       type: 'humidity',
-      value: _.get(_.sortBy(measurements, 'humidity'), '2.humidity'),
+      value: measurements.sort((a, b) => a.humidity - b.humidity)[2].humidity,
     },
     {
       type: 'temperature',
-      value: _.get(_.sortBy(measurements, 'temperature'), '2.temperature'),
+      value: measurements.sort((a, b) => a.temperature - b.temperature)[2]
+        .temperature,
     },
   ]
 
