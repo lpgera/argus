@@ -1,7 +1,6 @@
 import 'dotenv/config'
 import { CronJob } from 'cron'
 import moment from 'moment'
-import got from 'got'
 import log from './log.js'
 import config from './config.js'
 import * as location from './models/location.js'
@@ -23,15 +22,17 @@ const onTick = async () => {
           `${l.location} ${l.type} ${moment(l.latestCreatedAt).toISOString()}`
       )
       .join('\n')
-    await got.post('https://api.pushbullet.com/v2/pushes', {
+    await fetch('https://api.pushbullet.com/v2/pushes', {
+      method: 'POST',
       headers: {
         'Access-Token': process.env.PUSHBULLET_API_KEY,
+        'Content-Type': 'application/json',
       },
-      json: {
+      body: JSON.stringify({
         type: 'note',
         title: 'SDC warning',
         body: message,
-      },
+      }),
     })
   }
 }
