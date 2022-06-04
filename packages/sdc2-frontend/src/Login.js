@@ -24,23 +24,18 @@ export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const [{ error }, login] = useApiClient(
-    {
-      method: 'post',
-      url: '/login',
-      data: {
-        username,
-        password,
-      },
+  const [{ error }, login] = useApiClient('/login', {
+    method: 'post',
+    data: {
+      username,
+      password,
     },
-    { manual: true }
-  )
+    isLazy: true,
+  })
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    const {
-      data: { token },
-    } = await login()
+    const { token } = await login()
     authDispatch({ type: 'login', token })
   }
 

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useRef, useState } from 'react'
+import { useEffect, useReducer, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
@@ -12,9 +12,9 @@ import Button from '@mui/material/Button'
 import Plotly from 'plotly.js-basic-dist'
 import createPlotlyComponent from 'react-plotly.js/factory'
 import debounce from './debounce'
-import { AxiosContext } from './AxiosContext'
 import useSize from './useSize'
 import './plotly-overrides.css'
+import useApiClient from './useApiClient'
 
 const Plot = createPlotlyComponent(Plotly)
 
@@ -91,7 +91,7 @@ const rangeSelectorButtons = [
 
 export default function MeasurementChart() {
   const theme = useTheme()
-  const { axios } = useContext(AxiosContext)
+  const [, apiClient] = useApiClient()
   const [aggregation, setAggregation] = useState('average')
   const { search } = useLocation()
   const [types, setTypes] = useState([])
@@ -175,8 +175,8 @@ export default function MeasurementChart() {
         }
         await Promise.all(
           locationsAndTypes.map(async ({ location, type }) => {
-            const { data } = await axios.get(
-              `measurement/location/${location}/type/${type}`
+            const data = await apiClient(
+              `/measurement/location/${location}/type/${type}`
             )
             for (const [x] of data) {
               const start = new Date(x).setHours(0, 0, 0, 0)
@@ -195,7 +195,7 @@ export default function MeasurementChart() {
     }
 
     fetchMaxRange().catch(console.error)
-  }, [axios, locationsAndTypes])
+  }, [apiClient, locationsAndTypes])
 
   // fetch data series
   useEffect(() => {
@@ -204,8 +204,8 @@ export default function MeasurementChart() {
         locationsAndTypes.map(async ({ location, type }) => {
           const startIso = new Date(start).toISOString()
           const endIso = new Date(end).toISOString()
-          const { data } = await axios.get(
-            `measurement/location/${location}/type/${type}/from/${startIso}/to/${endIso}/aggregation/${aggregation}`
+          const data = await apiClient(
+            `/measurement/location/${location}/type/${type}/from/${startIso}/to/${endIso}/aggregation/${aggregation}`
           )
           const typeIndex = types.indexOf(type)
           return {
@@ -225,7 +225,15 @@ export default function MeasurementChart() {
     if (locationsAndTypes.length) {
       fetchSeries().catch(console.error)
     }
-  }, [axios, locationsAndTypes, start, end, aggregation, types, refetchState])
+  }, [
+    apiClient,
+    locationsAndTypes,
+    start,
+    end,
+    aggregation,
+    types,
+    refetchState,
+  ])
 
   return (
     <>

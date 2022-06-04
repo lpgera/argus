@@ -7,7 +7,6 @@ import {
 import { ThemeProvider } from '@emotion/react'
 import { AuthProvider } from './AuthContext'
 import Frame from './Frame'
-import { AxiosProvider } from './AxiosContext'
 import { DarkModeContext, DarkModeProvider } from './DarkModeContext'
 import { useContext } from 'react'
 
@@ -57,19 +56,17 @@ export default function App() {
   return (
     <AuthProvider>
       <SnackbarProvider>
-        <AxiosProvider>
-          <DarkModeProvider>
-            <CustomTheme
-              render={({ theme }) => (
-                <MuiThemeProvider theme={theme}>
-                  <ThemeProvider theme={theme}>
-                    <Frame />
-                  </ThemeProvider>
-                </MuiThemeProvider>
-              )}
-            />
-          </DarkModeProvider>
-        </AxiosProvider>
+        <DarkModeProvider>
+          <CustomTheme
+            render={({ theme }) => (
+              <MuiThemeProvider theme={theme}>
+                <ThemeProvider theme={theme}>
+                  <Frame />
+                </ThemeProvider>
+              </MuiThemeProvider>
+            )}
+          />
+        </DarkModeProvider>
       </SnackbarProvider>
     </AuthProvider>
   )

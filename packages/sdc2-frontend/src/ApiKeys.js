@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useSnackbar } from 'notistack'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -18,7 +18,6 @@ import styled from '@emotion/styled'
 import debounce from './debounce'
 import useApiClient from './useApiClient'
 import Spinner from './Spinner'
-import { AxiosContext } from './AxiosContext'
 
 function DeleteConfirm({ id, onConfirm }) {
   const theme = useTheme()
@@ -73,16 +72,16 @@ const StyledTableHeaderCell = styled(TableCell)({
 export default function ApiKeys() {
   const theme = useTheme()
   const [{ data = [], loading }, refetch] = useApiClient('/api-key')
+  const [, apiClient] = useApiClient()
   const { enqueueSnackbar } = useSnackbar()
-  const { axios } = useContext(AxiosContext)
   const updateApiKey = async ({ id, data }) => {
-    await axios.patch(`/api-key/${id}`, data)
+    await apiClient(`/api-key/${id}`, { data, method: 'PATCH' })
   }
   const deleteApiKey = async ({ id }) => {
-    await axios.delete(`/api-key/${id}`)
+    await apiClient(`/api-key/${id}`, { method: 'DELETE' })
   }
   const createApiKey = async () => {
-    await axios.post(`/api-key`)
+    await apiClient(`/api-key`, { method: 'POST' })
   }
 
   const table = () => {
