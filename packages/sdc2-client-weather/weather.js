@@ -1,5 +1,4 @@
 import 'dotenv/config'
-import axios from 'axios'
 import cron from 'cron'
 import Client from 'sdc2-client'
 import Logger from 'sdc2-logger'
@@ -11,44 +10,46 @@ const client = Client({
 })
 const log = Logger({ name: 'sdc2-client-weather' })
 
-axios.interceptors.response.use(
-  (response) => {
-    return response
-  },
-  (err) => {
-    log.error(err, 'axios request error')
-    return Promise.reject(err)
-  }
-)
-
 const onTick = async () => {
   try {
     const [openWeatherMapResponse, airVisualResponse] = await Promise.all([
-      axios.get('https://api.openweathermap.org/data/2.5/weather', {
-        params: {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?${new URLSearchParams({
           appid: process.env.WEATHER_OPENWEATHERMAP_API_KEY,
           lat: process.env.WEATHER_OPENWEATHERMAP_LATITUDE,
           lon: process.env.WEATHER_OPENWEATHERMAP_LONGITUDE,
           units: process.env.WEATHER_OPENWEATHERMAP_UNITS,
-        },
-      }),
-      axios.get('https://api.airvisual.com/v2/city', {
-        params: {
+        })}`
+      ),
+      fetch(
+        `https://api.airvisual.com/v2/city?${new URLSearchParams({
           key: process.env.WEATHER_AIRVISUAL_API_KEY,
           country: process.env.WEATHER_AIRVISUAL_COUNTRY,
           state: process.env.WEATHER_AIRVISUAL_STATE,
           city: process.env.WEATHER_AIRVISUAL_CITY,
-        },
-      }),
+        })}`
+      ),
     ])
+    if (!openWeatherMapResponse.ok) {
+      throw new Error(
+        `OpenWeatherMap API error: ${await openWeatherMapResponse.text()}`
+      )
+    }
+    if (!airVisualResponse.ok) {
+      throw new Error(`AirVisual API error: ${await airVisualResponse.text()}`)
+    }
+
+    const openWeatherMapResponseData = await openWeatherMapResponse.json()
+    const airVisualResponseData = await airVisualResponse.json()
+
     const measurements = [
-      { type: 'humidity', value: openWeatherMapResponse.data.main.humidity },
-      { type: 'pressure', value: openWeatherMapResponse.data.main.pressure },
-      { type: 'temperature', value: openWeatherMapResponse.data.main.temp },
-      { type: 'wind', value: openWeatherMapResponse.data.wind.speed },
+      { type: 'humidity', value: openWeatherMapResponseData.main.humidity },
+      { type: 'pressure', value: openWeatherMapResponseData.main.pressure },
+      { type: 'temperature', value: openWeatherMapResponseData.main.temp },
+      { type: 'wind', value: openWeatherMapResponseData.wind.speed },
       {
         type: 'aqi',
-        value: airVisualResponse.data.data.current.pollution.aqius,
+        value: airVisualResponseData.data.current.pollution.aqius,
       },
     ]
     await client.storeMeasurements({ measurements })

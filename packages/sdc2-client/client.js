@@ -1,54 +1,53 @@
-import axios from 'axios'
 import Logger from 'sdc2-logger'
 
 const log = Logger({ name: 'sdc2-client' })
 
-export default ({ url, apiKey, location }) => {
-  axios.interceptors.response.use(
-    (response) => {
-      return response
-    },
-    (err) => {
-      log.error(
-        `sdc2-client request error - status: ${err.response?.status} body:`,
-        err.response?.data
-      )
-      return Promise.reject(err)
-    }
-  )
+async function handleErrors(fetchCall) {
+  const response = await fetchCall()
 
+  if (!response.ok) {
+    log.error(
+      `sdc2-client request error - status: ${
+        response.status
+      }, body: ${await response.text()}`
+    )
+  }
+}
+
+export default ({ url, apiKey, location }) => {
   function storeMeasurement({ type, value }) {
-    return axios.post(
-      `${url}/api/measurement/location/${location}`,
-      { type, value },
-      {
+    return handleErrors(() =>
+      fetch(`${url}/api/measurement/location/${location}`, {
+        method: 'POST',
         headers: {
-          'X-API-Key': apiKey,
+          'x-api-key': apiKey,
+          'content-type': 'application/json',
         },
-      }
+        body: JSON.stringify({ type, value }),
+      })
     )
   }
 
   function storeMeasurements({ measurements }) {
-    return axios.post(
-      `${url}/api/measurement/location/${location}`,
-      measurements,
-      {
+    return handleErrors(() =>
+      fetch(`${url}/api/measurement/location/${location}`, {
+        method: 'POST',
         headers: {
-          'X-API-Key': apiKey,
+          'x-api-key': apiKey,
+          'content-type': 'application/json',
         },
-      }
+        body: JSON.stringify(measurements),
+      })
     )
   }
 
   function getLatestMeasurement({ location, type }) {
-    return axios.get(
-      `${url}/api/measurement/latest/location/${location}/type/${type}`,
-      {
+    return handleErrors(() =>
+      fetch(`${url}/api/measurement/latest/location/${location}/type/${type}`, {
         headers: {
-          'X-API-Key': apiKey,
+          'x-api-key': apiKey,
         },
-      }
+      })
     )
   }
 
