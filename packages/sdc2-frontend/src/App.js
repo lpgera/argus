@@ -1,4 +1,4 @@
-import 'fontsource-roboto'
+import '@fontsource/roboto'
 import { SnackbarProvider } from 'notistack'
 import {
   createTheme,
