@@ -6,7 +6,6 @@
   },
   "dependencies": {
     "@abandonware/noble": "^1.9.2-15",
-    "@mapbox/node-pre-gyp": "^1.0.9",
     "cron": "^2.0.0",
     "dotenv": "^16.0.1",
     "sdc2-client": "file:../sdc2-client",
