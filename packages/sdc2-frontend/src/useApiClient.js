@@ -43,15 +43,10 @@ export default function useApiClient(
         return
       }
 
-      const url =
-        process.env.NODE_ENV === 'development'
-          ? `http://${window.location.hostname}:4000/ajax${path}`
-          : `ajax${path}`
-
       dispatch({ type: 'loading' })
 
       try {
-        const response = await fetch(url, {
+        const response = await fetch(`ajax${path}`, {
           method,
           headers: {
             'x-authorization-token': token,
