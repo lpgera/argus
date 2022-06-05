@@ -12,9 +12,9 @@ import Button from '@mui/material/Button'
 import Plotly from 'plotly.js-basic-dist'
 import createPlotlyComponent from 'react-plotly.js/factory'
 import debounce from './debounce'
-import useSize from './useSize'
+import useSize from './hooks/useSize'
+import useApiClient from './hooks/useApiClient'
 import './plotly-overrides.css'
-import useApiClient from './useApiClient'
 
 const Plot = createPlotlyComponent(Plotly)
 

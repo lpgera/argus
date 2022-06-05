@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -12,13 +12,13 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Link from '@mui/material/Link'
-import useApiClient from './useApiClient'
 import Spinner from './Spinner'
-import { DarkModeContext } from './DarkModeContext'
+import useApiClient from './hooks/useApiClient'
+import useDarkMode from './hooks/useDarkMode'
 
 export default function Dashboard() {
   const theme = useTheme()
-  const { darkMode } = useContext(DarkModeContext)
+  const [darkMode] = useDarkMode()
   const [{ data = [], loading }] = useApiClient('/location')
   const [showStale, setShowStale] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])

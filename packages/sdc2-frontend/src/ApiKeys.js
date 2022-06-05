@@ -16,7 +16,7 @@ import Button from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
 import debounce from './debounce'
-import useApiClient from './useApiClient'
+import useApiClient from './hooks/useApiClient'
 import Spinner from './Spinner'
 
 function DeleteConfirm({ id, onConfirm }) {

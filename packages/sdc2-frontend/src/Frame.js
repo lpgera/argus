@@ -1,4 +1,4 @@
-import { useContext, useState, lazy, Suspense } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
@@ -24,14 +24,14 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Brightness4 from '@mui/icons-material/Brightness4'
 import BrightnessHigh from '@mui/icons-material/BrightnessHigh'
 import { ReactComponent as Logo } from './logo.svg'
-import { AuthContext } from './AuthContext'
-import { DarkModeContext } from './DarkModeContext'
 import Login from './Login'
 import Dashboard from './Dashboard'
 import ApiKeys from './ApiKeys'
 import Diagnostics from './Diagnostics'
-import useLocalStorage from './useLocalStorage'
 import Spinner from './Spinner'
+import useLocalStorage from './hooks/useLocalStorage'
+import useDarkMode from './hooks/useDarkMode'
+import useAuth from './hooks/useAuth'
 const MeasurementChart = lazy(() => import('./MeasurementChart'))
 
 const StyledLogo = styled(Logo)(({ theme }) => ({
@@ -91,12 +91,12 @@ function HideOnScroll({ children }) {
 
 export default function Frame() {
   const theme = useTheme()
-  const { state: authState, dispatch: authDispatch } = useContext(AuthContext)
-  const { darkMode, toggle: toggleDarkMode } = useContext(DarkModeContext)
+  const [token, setToken] = useAuth()
+  const [darkMode, toggleDarkMode] = useDarkMode()
   const [drawerOpen, setDrawerOpen] = useLocalStorage('sdc2-drawer-open', false)
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
 
-  if (!authState.token) {
+  if (!token) {
     return <Login />
   }
 
@@ -139,7 +139,7 @@ export default function Frame() {
         button
         onClick={() => {
           setMobileDrawerOpen(false)
-          authDispatch({ type: 'logout' })
+          setToken(null)
         }}
       >
         <ListItemIcon>

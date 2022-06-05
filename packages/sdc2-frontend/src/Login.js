@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -7,8 +7,8 @@ import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
 import Container from '@mui/material/Container'
 import logo from './logo.svg'
-import useApiClient from './useApiClient'
-import { AuthContext } from './AuthContext'
+import useApiClient from './hooks/useApiClient'
+import useAuth from './hooks/useAuth'
 
 const StyledDiv = styled.div(({ theme }) => ({
   marginTop: theme.spacing(8),
@@ -19,7 +19,7 @@ const StyledDiv = styled.div(({ theme }) => ({
 
 export default function Login() {
   const theme = useTheme()
-  const { dispatch: authDispatch } = useContext(AuthContext)
+  const [, setToken] = useAuth()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -36,7 +36,7 @@ export default function Login() {
   const onSubmit = async (e) => {
     e.preventDefault()
     const { token } = await login()
-    authDispatch({ type: 'login', token })
+    setToken(token)
   }
 
   return (

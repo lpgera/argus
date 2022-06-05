@@ -1,17 +1,14 @@
-import { useCallback, useContext, useEffect, useReducer } from 'react'
+import { useCallback, useEffect, useReducer } from 'react'
 import { useSnackbar } from 'notistack'
-import { AuthContext } from './AuthContext'
 import useIsMounted from './useIsMounted'
+import useAuth from './useAuth'
 
 export default function useApiClient(
   path = null,
   { data = null, method = 'GET', isLazy = false } = {}
 ) {
   const isMounted = useIsMounted()
-  const {
-    state: { token },
-    dispatch: authDispatch,
-  } = useContext(AuthContext)
+  const [token, setToken] = useAuth()
   const { enqueueSnackbar } = useSnackbar()
 
   const initialState = {
@@ -61,7 +58,7 @@ export default function useApiClient(
 
         if (!response.ok) {
           if (response.status === 401) {
-            authDispatch({ type: 'logout' })
+            setToken(null)
           }
 
           throw new Error(response.statusText)
@@ -87,8 +84,8 @@ export default function useApiClient(
       }
     },
     [
-      authDispatch,
       token,
+      setToken,
       isMounted,
       enqueueSnackbar,
       initPath,

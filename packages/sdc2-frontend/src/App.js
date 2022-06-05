@@ -5,13 +5,11 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react'
-import { AuthProvider } from './AuthContext'
 import Frame from './Frame'
-import { DarkModeContext, DarkModeProvider } from './DarkModeContext'
-import { useContext } from 'react'
+import useDarkMode from './hooks/useDarkMode'
 
 const CustomTheme = ({ render }) => {
-  const { darkMode } = useContext(DarkModeContext)
+  const [darkMode] = useDarkMode()
 
   const theme = createTheme({
     palette: {
@@ -54,20 +52,16 @@ const CustomTheme = ({ render }) => {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <SnackbarProvider>
-        <DarkModeProvider>
-          <CustomTheme
-            render={({ theme }) => (
-              <MuiThemeProvider theme={theme}>
-                <ThemeProvider theme={theme}>
-                  <Frame />
-                </ThemeProvider>
-              </MuiThemeProvider>
-            )}
-          />
-        </DarkModeProvider>
-      </SnackbarProvider>
-    </AuthProvider>
+    <SnackbarProvider>
+      <CustomTheme
+        render={({ theme }) => (
+          <MuiThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+              <Frame />
+            </ThemeProvider>
+          </MuiThemeProvider>
+        )}
+      />
+    </SnackbarProvider>
   )
 }

@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import useResizeObserver from '@react-hook/resize-observer'
-import debounce from './debounce'
+import debounce from '../debounce'
 
 export default function useSize(target) {
   const [size, setSize] = useState()

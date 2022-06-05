@@ -11,8 +11,8 @@ import Paper from '@mui/material/Paper'
 import Tooltip from '@mui/material/Tooltip'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
-import useApiClient from './useApiClient'
 import Spinner from './Spinner'
+import useApiClient from './hooks/useApiClient'
 
 const StyledTableHeaderCell = styled(TableCell)({
   fontWeight: 'bold',
