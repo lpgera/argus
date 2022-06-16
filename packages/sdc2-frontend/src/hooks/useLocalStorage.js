@@ -27,6 +27,7 @@ export default function useLocalStorage(key, initialValue) {
     try {
       if (value === null) {
         window.localStorage.removeItem(key)
+        window.dispatchEvent(new Event('local-storage'))
         setStoredValue(value)
         return
       }
