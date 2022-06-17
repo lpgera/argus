@@ -12,47 +12,65 @@ const log = Logger({ name: 'sdc2-client-weather' })
 
 const onTick = async () => {
   try {
-    const [openWeatherMapResponse, airVisualResponse] = await Promise.all([
+    const measurementResults = await Promise.allSettled([
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?${new URLSearchParams({
           appid: process.env.WEATHER_OPENWEATHERMAP_API_KEY,
-          lat: process.env.WEATHER_OPENWEATHERMAP_LATITUDE,
-          lon: process.env.WEATHER_OPENWEATHERMAP_LONGITUDE,
+          lat: process.env.LATITUDE,
+          lon: process.env.LONGITUDE,
           units: process.env.WEATHER_OPENWEATHERMAP_UNITS,
         })}`
-      ),
+      ).then(async (openWeatherMapResponse) => {
+        if (!openWeatherMapResponse.ok) {
+          throw new Error(
+            `OpenWeatherMap API error: ${await openWeatherMapResponse.text()}`
+          )
+        }
+
+        const responseData = await openWeatherMapResponse.json()
+
+        return [
+          { type: 'humidity', value: responseData.main.humidity },
+          { type: 'pressure', value: responseData.main.pressure },
+          { type: 'temperature', value: responseData.main.temp },
+          { type: 'wind', value: responseData.wind.speed },
+        ]
+      }),
       fetch(
-        `https://api.airvisual.com/v2/city?${new URLSearchParams({
+        `https://api.airvisual.com/v2/nearest_city?${new URLSearchParams({
           key: process.env.WEATHER_AIRVISUAL_API_KEY,
-          country: process.env.WEATHER_AIRVISUAL_COUNTRY,
-          state: process.env.WEATHER_AIRVISUAL_STATE,
-          city: process.env.WEATHER_AIRVISUAL_CITY,
+          lat: process.env.LATITUDE,
+          lon: process.env.LONGITUDE,
         })}`
-      ),
+      ).then(async (airVisualResponse) => {
+        if (!airVisualResponse.ok) {
+          throw new Error(
+            `AirVisual API error: ${await airVisualResponse.text()}`
+          )
+        }
+
+        const responseData = await airVisualResponse.json()
+
+        return [
+          {
+            type: 'aqi',
+            value: responseData.data.current.pollution.aqius,
+          },
+        ]
+      }),
     ])
-    if (!openWeatherMapResponse.ok) {
-      throw new Error(
-        `OpenWeatherMap API error: ${await openWeatherMapResponse.text()}`
-      )
-    }
-    if (!airVisualResponse.ok) {
-      throw new Error(`AirVisual API error: ${await airVisualResponse.text()}`)
-    }
 
-    const openWeatherMapResponseData = await openWeatherMapResponse.json()
-    const airVisualResponseData = await airVisualResponse.json()
+    measurementResults
+      .filter(({ status }) => status === 'rejected')
+      .forEach(({ reason }) => log.error(reason))
 
-    const measurements = [
-      { type: 'humidity', value: openWeatherMapResponseData.main.humidity },
-      { type: 'pressure', value: openWeatherMapResponseData.main.pressure },
-      { type: 'temperature', value: openWeatherMapResponseData.main.temp },
-      { type: 'wind', value: openWeatherMapResponseData.wind.speed },
-      {
-        type: 'aqi',
-        value: airVisualResponseData.data.current.pollution.aqius,
-      },
-    ]
-    await client.storeMeasurements({ measurements })
+    const measurements = measurementResults
+      .filter(({ status }) => status === 'fulfilled')
+      .flatMap(({ value }) => value)
+
+    if (measurements.length) {
+      await client.storeMeasurements({ measurements })
+    }
   } catch (err) {
     log.error(err)
   }

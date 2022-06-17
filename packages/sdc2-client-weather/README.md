@@ -14,14 +14,11 @@ services:
       - SDC2_URL=http://server:4000
       - SDC2_API_KEY=<api key with write access>
       - SDC2_LOCATION=<measurement location name>
+      - LATITUDE=
+      - LONGITUDE=
       - WEATHER_OPENWEATHERMAP_API_KEY=
-      - WEATHER_OPENWEATHERMAP_LATITUDE=
-      - WEATHER_OPENWEATHERMAP_LONGITUDE=
       - WEATHER_OPENWEATHERMAP_UNITS=
       - WEATHER_AIRVISUAL_API_KEY=
-      - WEATHER_AIRVISUAL_COUNTRY=
-      - WEATHER_AIRVISUAL_STATE=
-      - WEATHER_AIRVISUAL_CITY=
       - WEATHER_MEASUREMENT_CRON= # optional, defaults to */10 * * * *
     command: npm run start -w sdc2-client-weather
     restart: unless-stopped
