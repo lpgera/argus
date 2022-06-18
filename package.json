@@ -9,11 +9,11 @@
   },
   "scripts": {
     "bootstrap": "docker-compose run --rm backend npm i",
-    "up": "docker-compose up -d && docker-compose logs -f",
+    "up": "docker-compose up -d && docker-compose logs -tf",
     "seed": "docker-compose run --rm backend bash -c 'cd packages/sdc2-server && node db/seed.js'",
     "down": "docker-compose down --remove-orphans",
     "restart": "npm run down && npm run up",
-    "logs": "docker-compose logs -f",
+    "logs": "docker-compose logs -tf",
     "build": "docker-compose run --rm backend npm run local:build",
     "local:build": "npm run build -w sdc2-frontend",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",

@@ -14,18 +14,18 @@ const destination =
       ])
     : pino.destination(2)
 
-const prettyOptions =
-  process.env.NODE_ENV !== 'production'
-    ? {
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            colorize: true,
-            translateTime: 'yyyy-mm-dd HH:MM:ss.l',
-          },
+const prettyOptions = Boolean(process.env.SDC2_LOGGER_JSON)
+  ? {}
+  : {
+      transport: {
+        target: 'pino-pretty',
+        options: {
+          colorize: true,
+          singleLine: true,
+          ignore: 'pid,hostname,time',
         },
-      }
-    : {}
+      },
+    }
 
 export default (options) =>
   pino(

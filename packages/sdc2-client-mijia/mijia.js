@@ -51,7 +51,14 @@ const onTick = async () => {
       knownAddresses.map(async (address) => {
         const { client, temperature, humidity, battery, lastUpdatedAt } =
           locations[address]
-        log.debug({ address, temperature, humidity, battery, lastUpdatedAt })
+        log.debug({
+          address,
+          location: locationsConfig[address],
+          temperature,
+          humidity,
+          battery,
+          lastUpdatedAt,
+        })
         if (now - lastUpdatedAt > 10 * minute) {
           log.warn('Measurement is too old, skipping...')
           return
@@ -95,7 +102,7 @@ function decodeAndStoreServiceData(address, data) {
   switch (messageType) {
     case 0x0a: // battery
       const battery = data[3]
-      log.info({ address, battery })
+      log.info({ address, location: locationsConfig[address], battery })
       if (knownAddresses.includes(address)) {
         locations[address].battery = battery
       }
@@ -103,7 +110,12 @@ function decodeAndStoreServiceData(address, data) {
     case 0x0d: // temperature + humidity
       const temperature = ((data[4] << 8) | data[3]) / 10.0
       const humidity = ((data[6] << 8) | data[5]) / 10.0
-      log.info({ address, temperature, humidity })
+      log.info({
+        address,
+        location: locationsConfig[address],
+        temperature,
+        humidity,
+      })
       if (knownAddresses.includes(address)) {
         locations[address].temperature = temperature
         locations[address].humidity = humidity
@@ -120,6 +132,7 @@ const start = async () => {
     const data = [...peripheral.advertisement.serviceData[0].data].slice(11)
     log.debug({
       address,
+      location: locationsConfig[address],
       data,
     })
     decodeAndStoreServiceData(address, data)
