@@ -14,8 +14,8 @@ services:
       - SDC2_URL=http://server:4000
       - SDC2_API_KEY=<api key with write access>
       - SDC2_LOCATION=<measurement location name>
-      - LATITUDE=
-      - LONGITUDE=
+      - WEATHER_LATITUDE=
+      - WEATHER_LONGITUDE=
       - WEATHER_OPENWEATHERMAP_API_KEY=
       - WEATHER_OPENWEATHERMAP_UNITS=
       - WEATHER_AIRVISUAL_API_KEY=

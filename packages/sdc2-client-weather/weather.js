@@ -16,8 +16,8 @@ const onTick = async () => {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?${new URLSearchParams({
           appid: process.env.WEATHER_OPENWEATHERMAP_API_KEY,
-          lat: process.env.LATITUDE,
-          lon: process.env.LONGITUDE,
+          lat: process.env.WEATHER_LATITUDE,
+          lon: process.env.WEATHER_LONGITUDE,
           units: process.env.WEATHER_OPENWEATHERMAP_UNITS,
         })}`
       ).then(async (openWeatherMapResponse) => {
@@ -39,8 +39,8 @@ const onTick = async () => {
       fetch(
         `https://api.airvisual.com/v2/nearest_city?${new URLSearchParams({
           key: process.env.WEATHER_AIRVISUAL_API_KEY,
-          lat: process.env.LATITUDE,
-          lon: process.env.LONGITUDE,
+          lat: process.env.WEATHER_LATITUDE,
+          lon: process.env.WEATHER_LONGITUDE,
         })}`
       ).then(async (airVisualResponse) => {
         if (!airVisualResponse.ok) {
