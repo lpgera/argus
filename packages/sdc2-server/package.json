@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@koa/cors": "^3.3.0",
-    "@koa/router": "^10.1.1",
+    "@koa/router": "^11.0.1",
     "cron": "^2.0.0",
     "dotenv": "^16.0.1",
     "joi": "^17.6.0",
@@ -17,7 +17,7 @@
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-static": "^5.0.0",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "sdc2-logger": "file:../sdc2-logger"
   }
