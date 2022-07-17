@@ -5,7 +5,7 @@
     "start": "node dht22.js"
   },
   "dependencies": {
-    "cron": "^2.0.0",
+    "cron": "^2.1.0",
     "dotenv": "^16.0.1",
     "node-dht-sensor": "^0.4.3",
     "sdc2-client": "file:../sdc2-client",
