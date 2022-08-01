@@ -3,6 +3,7 @@
   "name": "sensor-data-collection",
   "private": true,
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": "^18.0.0",
     "npm": "^8.5.0"
