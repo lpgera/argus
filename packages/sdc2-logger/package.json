@@ -3,7 +3,7 @@
   "main": "logger.js",
   "type": "module",
   "dependencies": {
-    "pino": "^8.3.1",
+    "pino": "^8.4.1",
     "pino-pretty": "^8.1.0"
   }
 }
