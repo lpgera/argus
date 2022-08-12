@@ -6,7 +6,7 @@
     "@emotion/styled": "^11.10.0",
     "@fontsource/roboto": "^4.5.7",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.3",
+    "@mui/material": "^5.10.0",
     "@react-hook/resize-observer": "^1.2.6",
     "clsx": "^1.2.1",
     "http-proxy-middleware": "^2.0.6",
