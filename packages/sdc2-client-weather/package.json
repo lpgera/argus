@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "cron": "^2.1.0",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.2",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger"
   }
