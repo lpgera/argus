@@ -42,8 +42,8 @@ Run the selected services with: `docker-compose up -d`.
    TOKEN_SECRET=<generate_and_put_your_own_long_random_string_here>
    USERS=username:password
    ```
-3. Initialize the Docker environment: `npm run bootstrap`
-4. Seed the database: `npm run seed`
-5. Start the dev servers: `npm run up`
+3. Initialize the Docker environment: `npm run docker:bootstrap`
+4. Seed the database: `npm run docker:seed`
+5. Start the dev servers: `npm run docker:up`
 
 That's it! Now you can visit http://localhost:3000 and login with `username` and `password`.

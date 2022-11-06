@@ -9,17 +9,17 @@
     "npm": "^8.5.0"
   },
   "scripts": {
-    "bootstrap": "docker-compose run --rm backend npm i",
-    "up": "docker-compose up -d && docker-compose logs -tf",
-    "seed": "docker-compose run --rm backend bash -c 'cd packages/sdc2-server && node db/seed.js'",
-    "down": "docker-compose down --remove-orphans",
-    "restart": "npm run down && npm run up",
-    "logs": "docker-compose logs -tf",
-    "build": "docker-compose run --rm backend npm run local:build",
-    "local:build": "npm run build -w sdc2-frontend",
+    "build": "npm run build -w sdc2-frontend",
+    "seed": "npm run seed -w sdc2-server",
+    "start": "npm run start -w sdc2-server",
+    "docker:bootstrap": "docker-compose run --rm backend npm i",
+    "docker:seed": "docker-compose run --rm backend npm run seed",
+    "docker:up": "docker-compose up -d && docker-compose logs -tf",
+    "docker:build": "docker-compose run --rm backend npm run build",
+    "docker:logs": "docker-compose logs -tf",
+    "docker:down": "docker-compose down --remove-orphans",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
-    "check-updates": "npm exec --include-workspace-root -ws -- ncu",
-    "check-updates-interactive": "npm exec --include-workspace-root -ws -- ncu -i"
+    "check-updates": "npm exec --include-workspace-root -ws -- ncu -i"
   },
   "devDependencies": {
     "husky": "^8.0.1",
