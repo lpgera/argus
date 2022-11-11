@@ -19,13 +19,13 @@
     "docker:logs": "docker-compose logs -tf",
     "docker:down": "docker-compose down --remove-orphans",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
-    "check-updates": "npm exec --include-workspace-root -ws -- ncu -i",
+    "check-updates": "ncu -i -ws --root",
     "browserslist-update": "browserslist --update-db"
   },
   "devDependencies": {
-    "husky": "^8.0.1",
+    "husky": "^8.0.2",
     "nodemon": "^2.0.20",
-    "npm-check-updates": "^16.3.16",
+    "npm-check-updates": "^16.3.20",
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3"
   },
