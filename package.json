@@ -6,7 +6,7 @@
   "type": "module",
   "engines": {
     "node": "^19.0.0",
-    "npm": "^8.19.0"
+    "npm": ">8.0.0"
   },
   "scripts": {
     "build": "npm run build -w sdc2-frontend",
