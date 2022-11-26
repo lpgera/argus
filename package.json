@@ -8,6 +8,10 @@
     "node": "^19.0.0",
     "npm": ">8.0.0"
   },
+  "volta": {
+    "node": "19.1.0",
+    "npm": "9.1.2"
+  },
   "scripts": {
     "build": "npm run build -w sdc2-frontend",
     "seed": "npm run seed -w sdc2-server",
