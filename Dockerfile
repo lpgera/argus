@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY packages/sdc2-frontend/package.json packages/sdc2-frontend/
 
-RUN npm ci
+RUN npm ci --no-audit --no-fund
 
 COPY packages/sdc2-frontend packages/sdc2-frontend
 
@@ -25,7 +25,7 @@ COPY packages/sdc2-client-weather/package.json packages/sdc2-client-weather/
 COPY packages/sdc2-logger/package.json packages/sdc2-logger/
 COPY packages/sdc2-server/package.json packages/sdc2-server/
 
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
