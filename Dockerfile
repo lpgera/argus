@@ -22,6 +22,7 @@ COPY packages/sdc2-client-dht22/package.json packages/sdc2-client-dht22/
 COPY packages/sdc2-client-hcsr501/package.json packages/sdc2-client-hcsr501/
 COPY packages/sdc2-client-mijia/package.json packages/sdc2-client-mijia/
 COPY packages/sdc2-client-weather/package.json packages/sdc2-client-weather/
+COPY packages/sdc2-client-senseair/package.json packages/sdc2-client-senseair/
 COPY packages/sdc2-logger/package.json packages/sdc2-logger/
 COPY packages/sdc2-server/package.json packages/sdc2-server/
 
@@ -29,7 +30,7 @@ RUN npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
-FROM node:19-alpine as TARGET
+FROM node:19-slim as TARGET
 
 ENV NODE_ENV production
 

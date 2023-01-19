@@ -1,0 +1,15 @@
+{
+  "name": "sdc2-client-senseair",
+  "type": "module",
+  "scripts": {
+    "start": "node senseair.js"
+  },
+  "dependencies": {
+    "@serialport/parser-packet-length": "^10.5.0",
+    "cron": "^2.2.0",
+    "dotenv": "^16.0.3",
+    "sdc2-client": "file:../sdc2-client",
+    "sdc2-logger": "file:../sdc2-logger",
+    "serialport": "10.0.1"
+  }
+}
