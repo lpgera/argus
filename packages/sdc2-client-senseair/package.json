@@ -10,6 +10,6 @@
     "dotenv": "^16.0.3",
     "sdc2-client": "file:../sdc2-client",
     "sdc2-logger": "file:../sdc2-logger",
-    "serialport": "10.0.1"
+    "serialport": "^10.5.0"
   }
 }

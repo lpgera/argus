@@ -2,7 +2,7 @@ import 'dotenv/config'
 import cron from 'cron'
 import Client from 'sdc2-client'
 import Logger from 'sdc2-logger'
-import SerialPort from 'serialport'
+import { SerialPort } from 'serialport'
 import { PacketLengthParser } from '@serialport/parser-packet-length'
 
 const client = Client({
@@ -13,7 +13,10 @@ const client = Client({
 
 const log = Logger({ name: 'sdc2-client-senseair' })
 
-const port = new SerialPort(process.env.SERIAL_DEVICE_PATH ?? '/dev/serial0')
+const port = new SerialPort({
+  path: process.env.SERIAL_DEVICE_PATH ?? '/dev/serial0',
+  baudRate: 9600,
+})
 const parser = port.pipe(
   new PacketLengthParser({
     delimiter: 0xfe,
