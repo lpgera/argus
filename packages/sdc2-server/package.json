@@ -14,7 +14,7 @@
     "dotenv": "^16.0.3",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
-    "knex": "^2.4.0",
+    "knex": "^2.4.1",
     "koa": "^2.14.1",
     "koa-bodyparser": "^4.3.0",
     "koa-static": "^5.0.0",
