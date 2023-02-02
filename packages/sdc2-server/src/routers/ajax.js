@@ -6,6 +6,7 @@ import * as location from '../models/location.js'
 import * as measurement from '../models/measurement.js'
 import * as apiKey from '../models/api-key.js'
 import * as diagnostics from '../models/diagnostics.js'
+import * as alert from '../models/alert.js'
 import { validateParams, validateRequestBody } from '../validator.js'
 import config from '../config.js'
 
@@ -151,6 +152,41 @@ router.delete(
     const { id } = context.params
     await apiKey.remove(id)
     context.body = await apiKey.list()
+  }
+)
+
+router.get('/alert', async (context) => {
+  context.body = await alert.list()
+})
+
+router.post(
+  '/alert',
+  validateRequestBody(
+    Joi.object({
+      location: Joi.string().max(64).required(),
+      type: Joi.string().max(64).required(),
+      comparison: Joi.string().valid('<', '<=', '=', '>=', '>').required(),
+      value: Joi.number().required(),
+    })
+  ),
+  async (context) => {
+    const { location, type, comparison, value } = context.request.body
+    await alert.create({ location, type, comparison, value })
+    context.body = await alert.list()
+  }
+)
+
+router.delete(
+  '/alert/:id',
+  validateParams(
+    Joi.object({
+      id: Joi.string().max(64).required(),
+    })
+  ),
+  async (context) => {
+    const { id } = context.params
+    await alert.remove(id)
+    context.body = await alert.list()
   }
 )
 
