@@ -1,4 +1,3 @@
-import moment from 'moment'
 import db from '../db.js'
 
 export function list() {
@@ -8,7 +7,6 @@ export function list() {
 export function create({ location, type, comparison, value }) {
   return db
     .insert({
-      createdAt: moment().toDate(),
       location,
       type,
       comparison,

@@ -1,5 +1,6 @@
-import useApiClient from './hooks/useApiClient'
-import Spinner from './Spinner'
+import { useState } from 'react'
+import { useSnackbar } from 'notistack'
+import styled from '@emotion/styled'
 import TableContainer from '@mui/material/TableContainer'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -8,13 +9,13 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import TableBody from '@mui/material/TableBody'
 import Button from '@mui/material/Button'
-import styled from '@emotion/styled'
 import { useTheme } from '@mui/material/styles'
-import { useState } from 'react'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Popover from '@mui/material/Popover'
-import { useSnackbar } from 'notistack'
+import useApiClient from './hooks/useApiClient'
+import Spinner from './Spinner'
+import AddAlertDialog from './AddAlertDialog'
 
 const StyledTableHeaderCell = styled(TableCell)({
   fontWeight: 'bold',
@@ -72,6 +73,7 @@ export default function Alerts() {
   const [{ data = [], loading }, refetch] = useApiClient('/alert')
   const [, apiClient] = useApiClient()
   const { enqueueSnackbar } = useSnackbar()
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
   const deleteAlert = async ({ id }) => {
     await apiClient(`/alert/${id}`, { method: 'DELETE' })
@@ -123,7 +125,7 @@ export default function Alerts() {
           <Button
             variant="contained"
             color="secondary"
-            onClick={async () => {}}
+            onClick={() => setIsAddDialogOpen(true)}
           >
             Create new alert
           </Button>
@@ -135,6 +137,14 @@ export default function Alerts() {
   return (
     <>
       <h1>Alerts</h1>
+
+      <AddAlertDialog
+        isOpen={isAddDialogOpen}
+        onClose={() => {
+          setIsAddDialogOpen(false)
+          refetch()
+        }}
+      />
 
       {table()}
     </>
