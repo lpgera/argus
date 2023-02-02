@@ -16,6 +16,7 @@ import ListItemText from '@mui/material/ListItemText'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import KeyIcon from '@mui/icons-material/VpnKey'
 import DiagnosticsIcon from '@mui/icons-material/LocalHospital'
+import AlertsIcon from '@mui/icons-material/NotificationsActive'
 import LogoutIcon from '@mui/icons-material/ExitToApp'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
@@ -28,6 +29,7 @@ import Login from './Login'
 import Dashboard from './Dashboard'
 import ApiKeys from './ApiKeys'
 import Diagnostics from './Diagnostics'
+import Alerts from './Alerts'
 import Spinner from './Spinner'
 import useLocalStorage from './hooks/useLocalStorage'
 import useDarkMode from './hooks/useDarkMode'
@@ -137,6 +139,17 @@ export default function Frame() {
       </ListItem>
       <ListItem
         button
+        component={Link}
+        to="/alerts"
+        onClick={() => setMobileDrawerOpen(false)}
+      >
+        <ListItemIcon>
+          <AlertsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Alerts" />
+      </ListItem>
+      <ListItem
+        button
         onClick={() => {
           setMobileDrawerOpen(false)
           setToken(null)
@@ -234,6 +247,7 @@ export default function Frame() {
                 <Route path="api-keys" element={<ApiKeys />} />
                 <Route path="diagnostics" element={<Diagnostics />} />
                 <Route path="measurements" element={<MeasurementChart />} />
+                <Route path="alerts" element={<Alerts />} />
               </Routes>
             </Suspense>
           </StyledContainer>
