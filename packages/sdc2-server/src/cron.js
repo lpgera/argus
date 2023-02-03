@@ -89,7 +89,7 @@ const alertingTick = async () => {
         await alert.setIsAlerting(a.id, true)
       }
 
-      if (!nextIsAlerting && alert.isAlerting) {
+      if (!nextIsAlerting && a.isAlerting) {
         await alert.setIsAlerting(a.id, false)
       }
     }
