@@ -82,10 +82,11 @@ const alertingTick = async () => {
           body: JSON.stringify({
             type: 'note',
             title: 'SDC alert',
-            body: `🚨 ${a.location} ${a.type} ${a.comparison} ${a.value} 🚨\n
-            Latest measurement: ${latestMeasurement.latestValue} at ${moment(
-              latestMeasurement.latestCreatedAt
-            ).toISOString()}`,
+            body: `🚨 ${a.location} ${a.type} ${a.comparison} ${
+              a.value
+            } 🚨\nLatest measurement: ${
+              latestMeasurement.latestValue
+            } at ${moment(latestMeasurement.latestCreatedAt).toISOString()}`,
           }),
         })
         await alert.setIsAlerting(a.id, true)
@@ -104,7 +105,7 @@ const monitoringJob = new CronJob({
 })
 
 const alertingJob = new CronJob({
-  cronTime: process.env.ALERTING_CRON ?? '30 */5 * * *',
+  cronTime: process.env.ALERTING_CRON ?? '30 */5 * * * *',
   onTick: alertingTick,
 })
 
