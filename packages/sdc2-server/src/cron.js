@@ -83,7 +83,9 @@ const alertingTick = async () => {
             type: 'note',
             title: 'SDC alert',
             body: `🚨 ${a.location} ${a.type} ${a.comparison} ${a.value} 🚨\n
-            Latest measurement: ${latestMeasurement.latestValue} at ${latestMeasurement.latestCreatedAt}`,
+            Latest measurement: ${latestMeasurement.latestValue} at ${moment(
+              latestMeasurement.latestCreatedAt
+            ).toISOString()}`,
           }),
         })
         await alert.setIsAlerting(a.id, true)
