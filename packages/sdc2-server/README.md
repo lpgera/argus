@@ -26,7 +26,6 @@ services:
       - DATABASE_URL=mysql://root:your_strong_password@mariadb/sensor_data_collection
       - USERS=username_1:password_1,username_2:password_2
       - TOKEN_SECRET=RANDOM_JWT_TOKEN_SECRET
-      - PUSHBULLET_API_KEY= # optional
       - PORT= # optional, defaults to 4000
       - SESSION_TIMEOUT= # optional, defaults to 7 days
       - DAILY_QUERY_THRESHOLD_IN_DAYS= # optional, defaults to 30
@@ -34,13 +33,14 @@ services:
     depends_on:
       - mariadb
     restart: unless-stopped
-  # optional cron service, provides Pushbullet alerts for missing sensors
+  # optional cron service, handles alerting rules and missing sensor monitoring notifications with PushBullet
   cron:
     image: ghcr.io/lpgera/sensor-data-collection
     environment:
       - DATABASE_URL=mysql://root:your_strong_password@mariadb/sensor_data_collection
       - PUSHBULLET_API_KEY=
       - MONITORING_CRON= # optional, defaults to 0 */4 * * *
+      - ALERTING_CRON= # optional, defaults to 30 */5 * * * *
     depends_on:
       - mariadb
     command: npm run cron -w sdc2-server
