@@ -13,14 +13,15 @@ import useApiClient from './hooks/useApiClient'
 
 export default function AddAlertDialog({ isOpen, onClose }) {
   const [{ data = [] }] = useApiClient('/location')
-  const [location, setLocation] = useState('')
-  const [type, setType] = useState('')
-  const [comparison, setComparison] = useState('')
-  const [value, setValue] = useState('')
   const [, apiClient] = useApiClient()
   const createAlert = async (data) => {
     await apiClient(`/alert`, { data, method: 'POST' })
   }
+
+  const [location, setLocation] = useState('')
+  const [type, setType] = useState('')
+  const [comparison, setComparison] = useState('')
+  const [value, setValue] = useState('')
 
   const locations = [...new Set(data.map(({ location }) => location))]
   const types = [...new Set(data.map(({ type }) => type))]

@@ -70,14 +70,13 @@ function DeleteConfirm({ id, onConfirm }) {
 
 export default function Alerts() {
   const theme = useTheme()
+  const { enqueueSnackbar } = useSnackbar()
   const [{ data = [], loading }, refetch] = useApiClient('/alert')
   const [, apiClient] = useApiClient()
-  const { enqueueSnackbar } = useSnackbar()
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
-
   const deleteAlert = async ({ id }) => {
     await apiClient(`/alert/${id}`, { method: 'DELETE' })
   }
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
   const table = () => {
     if (loading && !data.length) {

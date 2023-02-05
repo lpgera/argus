@@ -23,7 +23,3 @@ export function setIsAlerting(id, isAlerting) {
 export function remove(id) {
   return db.table('alert').where({ id }).delete()
 }
-
-export function findByLocationAndType({ location, type }) {
-  return db.select('*').from('alert').where({ location, type }).first()
-}
