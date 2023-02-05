@@ -76,7 +76,7 @@ export default function Diagnostics() {
                       <span>{row.latestFromNow}</span>
                     </Tooltip>
                   </StyledTableCell>
-                  <StyledTableCell>{row.latestvalue}</StyledTableCell>
+                  <StyledTableCell>{row.latestValue}</StyledTableCell>
                   <StyledTableCell>{row.lastDayCount}</StyledTableCell>
                 </TableRow>
               ))}

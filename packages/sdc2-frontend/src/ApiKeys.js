@@ -67,6 +67,7 @@ function DeleteConfirm({ id, onConfirm }) {
 
 const StyledTableHeaderCell = styled(TableCell)({
   fontWeight: 'bold',
+  whiteSpace: 'nowrap',
 })
 
 export default function ApiKeys() {
@@ -99,7 +100,7 @@ export default function ApiKeys() {
                 <StyledTableHeaderCell>Read access</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Write access</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Comment</StyledTableHeaderCell>
-                <TableCell />
+                <StyledTableHeaderCell width={64} />
               </TableRow>
             </TableHead>
             <TableBody>

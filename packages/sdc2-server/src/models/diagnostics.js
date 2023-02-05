@@ -39,7 +39,7 @@ export async function get() {
       type: row.type,
       latestFromNow: moment(row.createdAt).fromNow(),
       latestCreatedAt: row.createdAt,
-      latestvalue: row.value,
+      latestValue: row.value,
       lastDayCount: row.lastDayCount || 0,
     }
   })
