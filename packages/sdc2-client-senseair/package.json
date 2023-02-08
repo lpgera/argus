@@ -2,9 +2,11 @@
   "name": "sdc2-client-senseair",
   "type": "module",
   "scripts": {
-    "start": "node senseair.js"
+    "start": "node senseair.js",
+    "calibrate": "node calibrate.js"
   },
   "dependencies": {
+    "@serialport/parser-inter-byte-timeout": "^10.5.0",
     "@serialport/parser-packet-length": "^10.5.0",
     "cron": "^2.2.0",
     "dotenv": "^16.0.3",
