@@ -1,19 +1,5 @@
 import pino from 'pino'
 
-const destination =
-  process.env.NODE_ENV === 'production'
-    ? pino.multistream([
-        {
-          stream: process.stdout,
-          level: 'info',
-        },
-        {
-          stream: process.stderr,
-          level: 'error',
-        },
-      ])
-    : pino.destination(2)
-
 const prettyOptions = Boolean(process.env.SDC2_LOGGER_JSON)
   ? {}
   : {
@@ -28,12 +14,9 @@ const prettyOptions = Boolean(process.env.SDC2_LOGGER_JSON)
     }
 
 export default (options) =>
-  pino(
-    {
-      name: 'sdc2',
-      level: 'trace',
-      ...prettyOptions,
-      ...options,
-    },
-    destination
-  )
+  pino({
+    name: 'sdc2',
+    level: process.env.NODE_ENV === 'production' ? 'info' : 'trace',
+    ...prettyOptions,
+    ...options,
+  })
