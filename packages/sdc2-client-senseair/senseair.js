@@ -80,9 +80,7 @@ const start = async () => {
     if (length === 8) {
       const statusCode = data[4] * 256 + data[5]
       const measurementValue = data[9] * 256 + data[10]
-      log.debug(
-        `sensor status code: ${statusCode}; co2: ${measurementValue}ppm`
-      )
+      log.info(`sensor status code: ${statusCode}; co2: ${measurementValue}ppm`)
 
       latestMeasurement.updatedAt = new Date()
       latestMeasurement.value = measurementValue
