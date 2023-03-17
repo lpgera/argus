@@ -16,7 +16,7 @@
     "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.2",
     "koa": "^2.14.1",
-    "koa-bodyparser": "^4.3.0",
+    "koa-bodyparser": "^4.4.0",
     "koa-static": "^5.0.0",
     "moment": "^2.29.4",
     "mysql": "^2.18.1",
