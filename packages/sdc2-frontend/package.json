@@ -11,7 +11,7 @@
     "clsx": "^1.2.1",
     "http-proxy-middleware": "^2.0.6",
     "notistack": "^2.0.8",
-    "plotly.js-basic-dist": "^2.18.2",
+    "plotly.js-basic-dist": "^2.20.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-plotly.js": "^2.6.0",
