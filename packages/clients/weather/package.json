@@ -1,13 +1,13 @@
 {
-  "name": "sdc2-client-weather",
+  "name": "weather",
   "type": "module",
   "scripts": {
     "start": "node weather.js"
   },
   "dependencies": {
-    "logger": "file:../logger",
+    "base-client": "file:../base-client",
     "cron": "^2.3.0",
     "dotenv": "^16.0.3",
-    "sdc2-client": "file:../sdc2-client"
+    "logger": "file:../../logger"
   }
 }

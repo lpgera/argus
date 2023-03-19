@@ -1,14 +1,14 @@
 import 'dotenv/config'
 import cron from 'cron'
-import Client from 'sdc2-client'
+import Client from 'base-client'
 import Logger from 'logger'
 
 const client = Client({
-  url: process.env.SDC2_URL,
-  apiKey: process.env.SDC2_API_KEY,
-  location: process.env.SDC2_LOCATION,
+  url: process.env.ARGUS_URL,
+  apiKey: process.env.ARGUS_API_KEY,
+  location: process.env.ARGUS_SENSOR_LOCATION,
 })
-const log = Logger({ name: 'sdc2-client-weather' })
+const log = Logger({ name: 'weather' })
 
 const getOpenWeatherMapMeasurements = async () => {
   const openWeatherMapResponse = await fetch(

@@ -20,11 +20,11 @@ Raspberry Pi. Available as a pre-built Docker image from GitHub Package Registry
 
 ### Measurement clients
 
-- [BME280](./packages/sdc2-client-bme280)
-- [DHT22](./packages/sdc2-client-dht22)
-- [HC-SR501](./packages/sdc2-client-hcsr501)
-- [Mijia](./packages/sdc2-client-mijia)
-- [Weather](./packages/sdc2-client-weather)
+- [BME280](./packages/clients/bme280)
+- [DHT22](./packages/clients/dht22)
+- [HC-SR501](./packages/clients/hcsr501)
+- [Mijia](./packages/clients/mijia)
+- [Weather](./packages/clients/weather)
 
 ## Usage with docker-compose
 

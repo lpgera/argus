@@ -1,4 +1,4 @@
-# sdc2-client-mijia
+# mijia
 
 Client application for Xiaomi Mijia BLE temperature and humidity sensors. It can read measurements from multiple devices.
 
@@ -8,13 +8,13 @@ Client application for Xiaomi Mijia BLE temperature and humidity sensors. It can
 version: '3.8'
 services:
   mijia:
-    image: ghcr.io/lpgera/sensor-data-collection
+    image: ghcr.io/lpgera/argus
     network_mode: host
     environment:
-      - SDC2_URL=http://localhost:4000
-      - SDC2_API_KEY=<api key with write access>
+      - ARGUS_URL=http://backend:4000
+      - ARGUS_API_KEY=<api key with write access>
       - MIJIA_LOCATIONS=mac_address_1,location_name_1,mac_address_2,location_name_2
       - MIJIA_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npm run start -w sdc2-client-mijia
+    command: npm run start -w mijia
     restart: unless-stopped
 ```

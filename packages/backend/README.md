@@ -18,7 +18,7 @@ services:
       - MYSQL_DATABASE=argus
       - MYSQL_ROOT_PASSWORD=your_strong_password
     restart: unless-stopped
-  server:
+  backend:
     image: ghcr.io/lpgera/argus
     ports:
       - 4000:4000

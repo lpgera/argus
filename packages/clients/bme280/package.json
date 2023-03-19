@@ -1,14 +1,14 @@
 {
-  "name": "sdc2-client-bme280",
+  "name": "bme280",
   "type": "module",
   "scripts": {
     "start": "node bme280.js"
   },
   "dependencies": {
-    "logger": "file:../logger",
+    "base-client": "file:../base-client",
     "bme280-sensor": "^0.1.7",
     "cron": "^2.3.0",
     "dotenv": "^16.0.3",
-    "sdc2-client": "file:../sdc2-client"
+    "logger": "file:../../logger"
   }
 }

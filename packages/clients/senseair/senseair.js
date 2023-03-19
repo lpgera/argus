@@ -1,20 +1,20 @@
 import 'dotenv/config'
 import cron from 'cron'
-import Client from 'sdc2-client'
 import Logger from 'logger'
+import Client from 'base-client'
 import { SerialPort } from 'serialport'
 import { PacketLengthParser } from '@serialport/parser-packet-length'
 
 const client = Client({
-  url: process.env.SDC2_URL,
-  apiKey: process.env.SDC2_API_KEY,
-  location: process.env.SDC2_LOCATION,
+  url: process.env.ARGUS_URL,
+  apiKey: process.env.ARGUS_API_KEY,
+  location: process.env.ARGUS_SENSOR_LOCATION,
 })
 
-const log = Logger({ name: 'sdc2-client-senseair' })
+const log = Logger({ name: 'senseair' })
 
 const port = new SerialPort({
-  path: process.env.SERIAL_DEVICE_PATH ?? '/dev/serial0',
+  path: process.env.SENSEAIR_SERIAL_DEVICE_PATH ?? '/dev/serial0',
   baudRate: 9600,
 })
 const parser = port.pipe(

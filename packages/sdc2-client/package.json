@@ -1,8 +1,0 @@
-{
-  "name": "sdc2-client",
-  "main": "client.js",
-  "type": "module",
-  "dependencies": {
-    "logger": "file:../logger"
-  }
-}

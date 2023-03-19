@@ -2,13 +2,13 @@ import 'dotenv/config'
 import BME280 from 'bme280-sensor'
 import { CronJob } from 'cron'
 import Logger from 'logger'
-import Client from 'sdc2-client'
+import Client from 'base-client'
 
-const log = Logger({ name: 'sdc2-client-bme280' })
+const log = Logger({ name: 'bme280' })
 const client = Client({
-  url: process.env.SDC2_URL,
-  apiKey: process.env.SDC2_API_KEY,
-  location: process.env.SDC2_LOCATION,
+  url: process.env.ARGUS_URL,
+  apiKey: process.env.ARGUS_API_KEY,
+  location: process.env.ARGUS_SENSOR_LOCATION,
 })
 
 const bme280 = new BME280({

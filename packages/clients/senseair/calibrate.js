@@ -2,7 +2,7 @@ import { SerialPort } from 'serialport'
 import { InterByteTimeoutParser } from '@serialport/parser-inter-byte-timeout'
 
 const port = new SerialPort({
-  path: process.env.SERIAL_DEVICE_PATH ?? '/dev/serial0',
+  path: process.env.SENSEAIR_SERIAL_DEVICE_PATH ?? '/dev/serial0',
   baudRate: 9600,
 })
 

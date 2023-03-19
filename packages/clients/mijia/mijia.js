@@ -1,10 +1,10 @@
 import 'dotenv/config'
 import cron from 'cron'
 import noble from '@abandonware/noble'
-import Client from 'sdc2-client'
 import Logger from 'logger'
+import Client from 'base-client'
 
-const log = Logger({ name: 'sdc2-client-mijia' })
+const log = Logger({ name: 'mijia' })
 
 const locationsConfig = (process.env.MIJIA_LOCATIONS ?? '')
   .split(',')
@@ -29,8 +29,8 @@ const locations = Object.fromEntries(
     address,
     {
       client: Client({
-        url: process.env.SDC2_URL,
-        apiKey: process.env.SDC2_API_KEY,
+        url: process.env.ARGUS_URL,
+        apiKey: process.env.ARGUS_API_KEY,
         location: locationsConfig[address],
       }),
       humidity: null,

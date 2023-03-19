@@ -1,13 +1,13 @@
 import Logger from 'logger'
 
-const log = Logger({ name: 'sdc2-client' })
+const log = Logger({ name: 'base-client' })
 
 async function handleErrors(fetchCall) {
   const response = await fetchCall()
 
   if (!response.ok) {
     log.error(
-      `sdc2-client request error - status: ${
+      `Argus client request error - status: ${
         response.status
       }, body: ${await response.text()}`
     )

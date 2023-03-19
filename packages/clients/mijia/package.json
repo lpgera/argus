@@ -1,14 +1,14 @@
 {
-  "name": "sdc2-client-mijia",
+  "name": "mijia",
   "type": "module",
   "scripts": {
     "start": "node mijia.js"
   },
   "dependencies": {
     "@abandonware/noble": "^1.9.2-20",
-    "logger": "file:../logger",
+    "base-client": "file:../base-client",
     "cron": "^2.3.0",
     "dotenv": "^16.0.3",
-    "sdc2-client": "file:../sdc2-client"
+    "logger": "file:../../logger"
   }
 }
