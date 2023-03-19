@@ -1,7 +1,7 @@
-# Sensor data collection
+# Argus
 
-Sensor data collection (codenamed SDC2) is a sensor monitoring solution built with MariaDB, Node.js and React.
-Developed and tested on a Raspberry Pi.
+Argus is a sensor data monitoring and alerting solution built with MariaDB, Node.js and React. Developed and tested on a
+Raspberry Pi. Available as a pre-built Docker image from GitHub Package Registry.
 
 ## Screenshots
 
@@ -15,8 +15,8 @@ Developed and tested on a Raspberry Pi.
 
 ### Server application
 
-- [Frontend](./packages/sdc2-frontend)
-- [Backend](./packages/sdc2-server)
+- [Frontend](./packages/frontend)
+- [Backend](./packages/backend)
 
 ### Measurement clients
 

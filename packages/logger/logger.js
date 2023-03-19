@@ -1,6 +1,6 @@
 import pino from 'pino'
 
-const prettyOptions = Boolean(process.env.SDC2_LOGGER_JSON)
+const prettyOptions = Boolean(process.env.USE_JSON_LOGS)
   ? {}
   : {
       transport: {
@@ -15,7 +15,7 @@ const prettyOptions = Boolean(process.env.SDC2_LOGGER_JSON)
 
 export default (options) =>
   pino({
-    name: 'sdc2',
+    name: 'argus',
     level: process.env.NODE_ENV === 'production' ? 'info' : 'trace',
     ...prettyOptions,
     ...options,

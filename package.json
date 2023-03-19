@@ -1,6 +1,6 @@
 {
   "author": "lpgera",
-  "name": "sensor-data-collection",
+  "name": "argus",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -9,13 +9,12 @@
     "npm": ">8.0.0"
   },
   "volta": {
-    "node": "19.1.0",
-    "npm": "9.1.2"
+    "node": "19.8.1"
   },
   "scripts": {
-    "build": "npm run build -w sdc2-frontend",
-    "seed": "npm run seed -w sdc2-server",
-    "start": "npm run start -w sdc2-server",
+    "build": "npm run build -w frontend",
+    "seed": "npm run seed -w backend",
+    "start": "npm run start -w backend",
     "docker:bootstrap": "docker-compose run --rm backend npm i",
     "docker:seed": "docker-compose run --rm backend npm run seed",
     "docker:up": "docker-compose up -d && docker-compose logs -tf",

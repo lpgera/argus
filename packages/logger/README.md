@@ -1,3 +1,3 @@
-# sdc2-logger
+# logger
 
 Logging library based on [pino](https://www.npmjs.com/package/pino).

@@ -1,6 +1,6 @@
 {
-  "name": "Sensor Data Collection",
-  "short_name": "SDC",
+  "name": "Argus",
+  "short_name": "Argus",
   "display": "standalone",
   "theme_color": "#283593",
   "background_color": "#1f1f1f",

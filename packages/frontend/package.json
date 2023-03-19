@@ -1,5 +1,5 @@
 {
-  "name": "sdc2-frontend",
+  "name": "frontend",
   "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.10.6",

@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import cron from 'cron'
 import Client from 'sdc2-client'
-import Logger from 'sdc2-logger'
+import Logger from 'logger'
 import { SerialPort } from 'serialport'
 import { PacketLengthParser } from '@serialport/parser-packet-length'
 

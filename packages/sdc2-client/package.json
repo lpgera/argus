@@ -3,6 +3,6 @@
   "main": "client.js",
   "type": "module",
   "dependencies": {
-    "sdc2-logger": "file:../sdc2-logger"
+    "logger": "file:../logger"
   }
 }

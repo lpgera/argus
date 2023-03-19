@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import dht from 'node-dht-sensor'
 import { CronJob } from 'cron'
-import Logger from 'sdc2-logger'
+import Logger from 'logger'
 import Client from 'sdc2-client'
 
 const log = Logger({ name: 'sdc2-client-dht22' })

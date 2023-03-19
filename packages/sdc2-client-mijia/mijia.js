@@ -2,7 +2,7 @@ import 'dotenv/config'
 import cron from 'cron'
 import noble from '@abandonware/noble'
 import Client from 'sdc2-client'
-import Logger from 'sdc2-logger'
+import Logger from 'logger'
 
 const log = Logger({ name: 'sdc2-client-mijia' })
 

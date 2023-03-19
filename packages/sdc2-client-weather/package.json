@@ -5,9 +5,9 @@
     "start": "node weather.js"
   },
   "dependencies": {
+    "logger": "file:../logger",
     "cron": "^2.3.0",
     "dotenv": "^16.0.3",
-    "sdc2-client": "file:../sdc2-client",
-    "sdc2-logger": "file:../sdc2-logger"
+    "sdc2-client": "file:../sdc2-client"
   }
 }

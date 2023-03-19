@@ -1,5 +1,5 @@
 {
-  "name": "sdc2-server",
+  "name": "backend",
   "type": "module",
   "scripts": {
     "dev": "nodemon ./src/index.js",
@@ -8,6 +8,7 @@
     "cron": "node ./src/cron.js"
   },
   "dependencies": {
+    "logger": "file:../logger",
     "@koa/cors": "^4.0.0",
     "@koa/router": "^12.0.0",
     "cron": "^2.3.0",
@@ -19,7 +20,6 @@
     "koa-bodyparser": "^4.4.0",
     "koa-static": "^5.0.0",
     "moment": "^2.29.4",
-    "mysql": "^2.18.1",
-    "sdc2-logger": "file:../sdc2-logger"
+    "mysql": "^2.18.1"
   }
 }

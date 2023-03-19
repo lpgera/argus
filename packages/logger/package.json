@@ -1,5 +1,5 @@
 {
-  "name": "sdc2-logger",
+  "name": "logger",
   "main": "logger.js",
   "type": "module",
   "dependencies": {

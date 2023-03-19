@@ -6,12 +6,12 @@
     "calibrate": "node calibrate.js"
   },
   "dependencies": {
+    "logger": "file:../logger",
     "@serialport/parser-inter-byte-timeout": "^10.5.0",
     "@serialport/parser-packet-length": "^10.5.0",
     "cron": "^2.3.0",
     "dotenv": "^16.0.3",
     "sdc2-client": "file:../sdc2-client",
-    "sdc2-logger": "file:../sdc2-logger",
     "serialport": "^10.5.0"
   }
 }

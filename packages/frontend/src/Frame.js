@@ -95,7 +95,10 @@ export default function Frame() {
   const theme = useTheme()
   const [token, setToken] = useAuth()
   const [darkMode, toggleDarkMode] = useDarkMode()
-  const [drawerOpen, setDrawerOpen] = useLocalStorage('sdc2-drawer-open', false)
+  const [drawerOpen, setDrawerOpen] = useLocalStorage(
+    'argus-drawer-open',
+    false
+  )
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
 
   if (!token) {
@@ -207,7 +210,7 @@ export default function Frame() {
                 }}
               >
                 <Typography component="h1" variant="h6" color="inherit" noWrap>
-                  Sensor Data Collection
+                  Argus
                 </Typography>
               </Link>
 

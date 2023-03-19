@@ -32,7 +32,7 @@ const monitoringTick = async () => {
       },
       body: JSON.stringify({
         type: 'note',
-        title: 'SDC warning',
+        title: 'Argus warning',
         body: message,
       }),
     })
@@ -81,7 +81,7 @@ const alertingTick = async () => {
           },
           body: JSON.stringify({
             type: 'note',
-            title: 'SDC alert',
+            title: 'Argus alert',
             body: `🚨 ${a.location} ${a.type} ${a.comparison} ${
               a.value
             } 🚨\nLatest measurement: ${

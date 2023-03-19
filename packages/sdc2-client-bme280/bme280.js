@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import BME280 from 'bme280-sensor'
 import { CronJob } from 'cron'
-import Logger from 'sdc2-logger'
+import Logger from 'logger'
 import Client from 'sdc2-client'
 
 const log = Logger({ name: 'sdc2-client-bme280' })

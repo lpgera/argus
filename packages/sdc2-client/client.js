@@ -1,4 +1,4 @@
-import Logger from 'sdc2-logger'
+import Logger from 'logger'
 
 const log = Logger({ name: 'sdc2-client' })
 
