@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:19 as FRONTEND
+FROM --platform=$BUILDPLATFORM node:20 as FRONTEND
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY packages/frontend packages/frontend
 
 RUN npm run build -w frontend
 
-FROM node:19 as DEPENDENCIES
+FROM node:20 as DEPENDENCIES
 
 WORKDIR /usr/src/app
 
@@ -26,11 +26,14 @@ COPY packages/clients/senseair/package.json packages/clients/senseair/
 COPY packages/logger/package.json packages/logger/
 COPY packages/backend/package.json packages/backend/
 
+# workaround for the timeout error of the slow arm64 builds
+RUN npm config set fetch-retry-mintimeout 100000 && npm config set fetch-retry-maxtimeout 600000
+
 RUN npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
-FROM node:19-slim as TARGET
+FROM node:20-slim as TARGET
 
 ENV NODE_ENV production
 
