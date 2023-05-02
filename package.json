@@ -23,7 +23,7 @@
     "docker:down": "docker-compose down --remove-orphans",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
     "check-updates": "ncu -i -ws --root",
-    "browserslist-update": "browserslist --update-db"
+    "browserslist-update": "npx update-browserslist-db@latest"
   },
   "devDependencies": {
     "husky": "^8.0.3",
