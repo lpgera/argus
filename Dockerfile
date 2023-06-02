@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY packages/frontend/package.json packages/frontend/
 
-RUN npm ci --no-audit --no-fund
+RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
 
 COPY packages/frontend packages/frontend
 
@@ -29,7 +29,7 @@ COPY packages/backend/package.json packages/backend/
 # workaround for the timeout error of the slow arm64 builds
 RUN npm config set fetch-retry-mintimeout 100000 && npm config set fetch-retry-maxtimeout 600000
 
-RUN npm ci --omit=dev --no-audit --no-fund
+RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
