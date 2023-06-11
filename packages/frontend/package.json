@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -10,7 +9,6 @@
     "@react-hook/resize-observer": "^1.2.6",
     "@vitejs/plugin-react": "^4.0.0",
     "clsx": "^1.2.1",
-    "http-proxy-middleware": "^2.0.6",
     "notistack": "^3.0.1",
     "plotly.js-basic-dist": "^2.24.1",
     "react": "^18.2.0",
@@ -24,22 +22,5 @@
   "scripts": {
     "start": "vite",
     "build": "vite build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
