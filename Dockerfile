@@ -26,14 +26,11 @@ COPY packages/clients/senseair/package.json packages/clients/senseair/
 COPY packages/logger/package.json packages/logger/
 COPY packages/backend/package.json packages/backend/
 
-# workaround for the timeout error of the slow arm64 builds
-RUN npm config set fetch-retry-mintimeout 100000 && npm config set fetch-retry-maxtimeout 600000
-
 RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
-FROM node:20-slim as TARGET
+FROM node:20-alpine as TARGET
 
 ENV NODE_ENV production
 

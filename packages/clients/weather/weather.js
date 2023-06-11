@@ -2,10 +2,6 @@ import 'dotenv/config'
 import cron from 'cron'
 import Client from 'base-client'
 import Logger from 'logger'
-import net from 'net'
-
-// https://github.com/nodejs/node/issues/47822
-net.setDefaultAutoSelectFamilyAttemptTimeout(20000)
 
 const client = Client({
   url: process.env.ARGUS_URL,
