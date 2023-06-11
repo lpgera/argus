@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
     "@react-hook/resize-observer": "^1.2.6",
+    "@vitejs/plugin-react": "^4.0.0",
     "clsx": "^1.2.1",
     "http-proxy-middleware": "^2.0.6",
     "notistack": "^3.0.1",
@@ -16,12 +17,13 @@
     "react-dom": "^18.2.0",
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.12.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^3.3.2"
+    "vite": "^4.3.9",
+    "vite-plugin-pwa": "^0.16.4",
+    "vite-plugin-svgr": "^3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "vite",
+    "build": "vite build"
   },
   "eslintConfig": {
     "extends": [
