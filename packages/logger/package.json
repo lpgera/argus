@@ -4,6 +4,6 @@
   "type": "module",
   "dependencies": {
     "pino": "^8.14.1",
-    "pino-pretty": "^10.0.1"
+    "pino-pretty": "^10.1.0"
   }
 }
