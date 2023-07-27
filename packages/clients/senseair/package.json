@@ -12,6 +12,6 @@
     "cron": "^2.4.0",
     "dotenv": "^16.3.1",
     "logger": "file:../../logger",
-    "serialport": "^11.0.0"
+    "serialport": "^11.0.1"
   }
 }
