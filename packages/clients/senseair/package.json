@@ -6,8 +6,8 @@
     "calibrate": "node calibrate.js"
   },
   "dependencies": {
-    "@serialport/parser-inter-byte-timeout": "^11.0.0",
-    "@serialport/parser-packet-length": "^11.0.0",
+    "@serialport/parser-inter-byte-timeout": "^11.0.1",
+    "@serialport/parser-packet-length": "^11.0.1",
     "base-client": "file:../base-client",
     "cron": "^2.4.0",
     "dotenv": "^16.3.1",

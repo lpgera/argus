@@ -27,13 +27,16 @@
   },
   "devDependencies": {
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "nodemon": "^3.0.1",
     "npm-check-updates": "^16.10.17",
-    "prettier": "^2.8.8",
-    "pretty-quick": "^3.1.3"
+    "prettier": "^3.0.0"
   },
   "workspaces": [
     "./packages/*",
     "./packages/clients/*"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,jsx,css,md,json,yml}": "prettier --write"
+  }
 }
