@@ -21,8 +21,9 @@ COPY packages/clients/bme280/package.json packages/clients/bme280/
 COPY packages/clients/dht22/package.json packages/clients/dht22/
 COPY packages/clients/hcsr501/package.json packages/clients/hcsr501/
 COPY packages/clients/mijia/package.json packages/clients/mijia/
-COPY packages/clients/weather/package.json packages/clients/weather/
 COPY packages/clients/senseair/package.json packages/clients/senseair/
+COPY packages/clients/vindstyrka/package.json packages/clients/vindstyrka/
+COPY packages/clients/weather/package.json packages/clients/weather/
 COPY packages/logger/package.json packages/logger/
 COPY packages/backend/package.json packages/backend/
 
