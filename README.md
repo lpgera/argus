@@ -24,8 +24,9 @@ Raspberry Pi. Available as a pre-built Docker image from GitHub Package Registry
 - [DHT22](./packages/clients/dht22)
 - [HC-SR501](./packages/clients/hcsr501)
 - [Mijia](./packages/clients/mijia)
-- [Weather](./packages/clients/weather)
+- [Senseair](./packages/clients/senseair)
 - [Vindstyrka](./packages/clients/vindstyrka)
+- [Weather](./packages/clients/weather)
 
 ## Usage with docker-compose
 
