@@ -1,0 +1,14 @@
+{
+  "name": "vindstyrka",
+  "type": "module",
+  "scripts": {
+    "start": "node vindstyrka.js"
+  },
+  "dependencies": {
+    "base-client": "file:../base-client",
+    "cron": "^2.4.0",
+    "dirigera": "^0.11.5",
+    "dotenv": "^16.3.1",
+    "logger": "file:../../logger"
+  }
+}
