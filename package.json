@@ -9,7 +9,7 @@
     "npm": ">9.0.0"
   },
   "volta": {
-    "node": "20.3.0"
+    "node": "20.5.1"
   },
   "scripts": {
     "build": "npm run build -w frontend",
