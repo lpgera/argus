@@ -14,7 +14,7 @@
     "cron": "^2.4.3",
     "dotenv": "^16.3.1",
     "joi": "^17.10.0",
-    "jsonwebtoken": "^9.0.1",
+    "jsonwebtoken": "^9.0.2",
     "knex": "^2.5.1",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.1",
