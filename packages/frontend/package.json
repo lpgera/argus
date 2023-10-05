@@ -5,7 +5,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.11",
-    "@mui/material": "^5.14.11",
+    "@mui/material": "^5.14.12",
     "@react-hook/resize-observer": "^1.2.6",
     "@vitejs/plugin-react": "^4.1.0",
     "notistack": "^3.0.1",
