@@ -10,7 +10,7 @@ import Slide from '@mui/material/Slide'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import DashboardIcon from '@mui/icons-material/Dashboard'
@@ -24,7 +24,7 @@ import Container from '@mui/material/Container'
 import MenuIcon from '@mui/icons-material/Menu'
 import Brightness4 from '@mui/icons-material/Brightness4'
 import BrightnessHigh from '@mui/icons-material/BrightnessHigh'
-import { ReactComponent as Logo } from './logo.svg'
+import Logo from './logo.svg?react'
 import Login from './Login'
 import Dashboard from './Dashboard'
 import ApiKeys from './ApiKeys'
@@ -107,8 +107,7 @@ export default function Frame() {
 
   const drawer = () => (
     <List>
-      <ListItem
-        button
+      <ListItemButton
         component={Link}
         to="/"
         onClick={() => setMobileDrawerOpen(false)}
@@ -117,9 +116,8 @@ export default function Frame() {
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
-      </ListItem>
-      <ListItem
-        button
+      </ListItemButton>
+      <ListItemButton
         component={Link}
         to="/api-keys"
         onClick={() => setMobileDrawerOpen(false)}
@@ -128,9 +126,8 @@ export default function Frame() {
           <KeyIcon />
         </ListItemIcon>
         <ListItemText primary="Api keys" />
-      </ListItem>
-      <ListItem
-        button
+      </ListItemButton>
+      <ListItemButton
         component={Link}
         to="/diagnostics"
         onClick={() => setMobileDrawerOpen(false)}
@@ -139,9 +136,8 @@ export default function Frame() {
           <DiagnosticsIcon />
         </ListItemIcon>
         <ListItemText primary="Diagnostics" />
-      </ListItem>
-      <ListItem
-        button
+      </ListItemButton>
+      <ListItemButton
         component={Link}
         to="/alerts"
         onClick={() => setMobileDrawerOpen(false)}
@@ -150,9 +146,8 @@ export default function Frame() {
           <AlertsIcon />
         </ListItemIcon>
         <ListItemText primary="Alerts" />
-      </ListItem>
-      <ListItem
-        button
+      </ListItemButton>
+      <ListItemButton
         onClick={() => {
           setMobileDrawerOpen(false)
           setToken(null)
@@ -162,7 +157,7 @@ export default function Frame() {
           <LogoutIcon />
         </ListItemIcon>
         <ListItemText primary="Logout" />
-      </ListItem>
+      </ListItemButton>
     </List>
   )
 

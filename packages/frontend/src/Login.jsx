@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
 import Container from '@mui/material/Container'
-import logo from './logo.svg'
+import Logo from './logo.svg?react'
 import useApiClient from './hooks/useApiClient'
 import useAuth from './hooks/useAuth'
 
@@ -43,7 +43,7 @@ export default function Login() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <StyledDiv>
-        <img src={logo} width="64" height="64" alt={'Logo'} />
+        <Logo width="64" height="64" alt={'Logo'} />
         <Typography component="h1" variant="h5">
           Login
         </Typography>
