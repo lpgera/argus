@@ -56,7 +56,7 @@ function measure() {
   return client.storeMeasurements({ measurements: measurementsToStore })
 }
 
-const measurementJob = new CronJob({
+const measurementJob = CronJob.from({
   cronTime: process.env.DHT22_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick: measure,
 })

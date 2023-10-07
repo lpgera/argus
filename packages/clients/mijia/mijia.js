@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import cron from 'cron'
+import { CronJob } from 'cron'
 import noble from '@abandonware/noble'
 import Logger from 'logger'
 import Client from 'base-client'
@@ -90,7 +90,7 @@ const onTick = async () => {
   }
 }
 
-const measurementJob = new cron.CronJob({
+const measurementJob = CronJob.from({
   cronTime: process.env.MIJIA_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick,
 })

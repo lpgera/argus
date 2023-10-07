@@ -16,7 +16,7 @@ const bme280 = new BME280({
   i2cAddress: parseInt(process.env.BME280_I2C_ADDRESS ?? 0x76),
 })
 
-const measurementJob = new CronJob({
+const measurementJob = CronJob.from({
   cronTime: process.env.BME280_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick: async function () {
     try {

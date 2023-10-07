@@ -99,12 +99,12 @@ const alertingTick = async () => {
   }
 }
 
-const monitoringJob = new CronJob({
+const monitoringJob = CronJob.from({
   cronTime: process.env.MONITORING_CRON ?? '0 */4 * * *',
   onTick: monitoringTick,
 })
 
-const alertingJob = new CronJob({
+const alertingJob = CronJob.from({
   cronTime: process.env.ALERTING_CRON ?? '30 */5 * * * *',
   onTick: alertingTick,
 })

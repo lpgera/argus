@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import cron from 'cron'
+import { CronJob } from 'cron'
 import Client from 'base-client'
 import Logger from 'logger'
 
@@ -81,7 +81,7 @@ const onTick = async () => {
   }
 }
 
-const measurementJob = new cron.CronJob({
+const measurementJob = CronJob.from({
   cronTime: process.env.WEATHER_MEASUREMENT_CRON ?? '*/10 * * * *',
   onTick,
 })

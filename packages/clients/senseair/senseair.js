@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import cron from 'cron'
+import { CronJob } from 'cron'
 import Logger from 'logger'
 import Client from 'base-client'
 import { SerialPort } from 'serialport'
@@ -62,7 +62,7 @@ const onTick = async () => {
   }
 }
 
-const measurementJob = new cron.CronJob({
+const measurementJob = CronJob.from({
   cronTime: process.env.SENSEAIR_MEASUREMENT_CRON ?? '*/5 * * * *',
   onTick,
 })
