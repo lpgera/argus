@@ -9,7 +9,7 @@
     "@serialport/parser-inter-byte-timeout": "^12.0.0",
     "@serialport/parser-packet-length": "^12.0.0",
     "base-client": "file:../base-client",
-    "cron": "^3.1.0",
+    "cron": "^3.1.1",
     "dotenv": "^16.3.1",
     "logger": "file:../../logger",
     "serialport": "^12.0.0"
