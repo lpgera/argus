@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:20 as FRONTEND
+FROM --platform=$BUILDPLATFORM node:21 as FRONTEND
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY packages/frontend packages/frontend
 
 RUN npm run build -w frontend
 
-FROM node:20 as DEPENDENCIES
+FROM node:21 as DEPENDENCIES
 
 WORKDIR /usr/src/app
 
@@ -32,7 +32,7 @@ RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
-FROM node:20-slim as TARGET
+FROM node:21-slim as TARGET
 
 ENV NODE_ENV production
 
