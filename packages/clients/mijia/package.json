@@ -7,7 +7,7 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-23",
     "base-client": "file:../base-client",
-    "cron": "^3.1.4",
+    "cron": "^3.1.5",
     "dotenv": "^16.3.1",
     "logger": "file:../../logger"
   }
