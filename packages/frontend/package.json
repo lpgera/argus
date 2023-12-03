@@ -18,6 +18,7 @@
     "vite-plugin-pwa": "^0.17.2",
     "vite-plugin-svgr": "^4.2.0"
   },
+  "type": "module",
   "scripts": {
     "start": "vite",
     "build": "vite build"
