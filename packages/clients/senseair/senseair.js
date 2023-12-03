@@ -67,11 +67,13 @@ const measurementJob = CronJob.from({
   onTick,
 })
 
+const handleOverflow = (number) => (number > 32768 ? 0 : number)
+
 const start = async () => {
   parser.on('data', (data) => {
     const length = data[2]
     if (length === 2) {
-      const measurementValue = data[3] * 256 + data[4]
+      const measurementValue = handleOverflow(data[3] * 256 + data[4])
       log.debug(`co2: ${measurementValue} ppm`)
 
       latestMeasurement.updatedAt = new Date()
@@ -79,7 +81,7 @@ const start = async () => {
     }
     if (length === 8) {
       const statusCode = data[4] * 256 + data[5]
-      const measurementValue = data[9] * 256 + data[10]
+      const measurementValue = handleOverflow(data[9] * 256 + data[10])
       log.info(`sensor status code: ${statusCode}; co2: ${measurementValue}ppm`)
 
       latestMeasurement.updatedAt = new Date()
