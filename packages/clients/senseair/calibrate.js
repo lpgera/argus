@@ -35,7 +35,7 @@ setTimeout(
 setTimeout(
   () =>
     port.write(Buffer.from([0xfe, 0x03, 0x00, 0x00, 0x00, 0x01, 0x90, 0x05])),
-  5000
+  6000
 )
 
 setTimeout(() => {
