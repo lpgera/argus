@@ -18,12 +18,8 @@ pin.watch(async (err, value) => {
     return
   }
   log.debug('motion value:', value)
-  await client.storeMeasurements({
-    measurements: [
-      {
-        type: 'motion',
-        value: value,
-      },
-    ],
+  await client.storeMeasurement({
+    type: 'motion',
+    value: value,
   })
 })

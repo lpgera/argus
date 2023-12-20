@@ -49,13 +49,9 @@ const onTick = async () => {
   }
 
   try {
-    await client.storeMeasurements({
-      measurements: [
-        {
-          type: 'co2',
-          value: latestMeasurement.value,
-        },
-      ],
+    await client.storeMeasurement({
+      type: 'co2',
+      value: latestMeasurement.value,
     })
   } catch (error) {
     log.error(error)
