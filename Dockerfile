@@ -22,6 +22,7 @@ COPY packages/clients/dht22/package.json packages/clients/dht22/
 COPY packages/clients/hcsr501/package.json packages/clients/hcsr501/
 COPY packages/clients/mijia/package.json packages/clients/mijia/
 COPY packages/clients/senseair/package.json packages/clients/senseair/
+COPY packages/clients/parasoll/package.json packages/clients/parasoll/
 COPY packages/clients/vindstyrka/package.json packages/clients/vindstyrka/
 COPY packages/clients/weather/package.json packages/clients/weather/
 COPY packages/logger/package.json packages/logger/
