@@ -1,4 +1,5 @@
 import 'dotenv/config'
+import { CronJob } from 'cron'
 import Client from 'base-client'
 import Logger from 'logger'
 import { createDirigeraClient } from 'dirigera'
@@ -32,3 +33,29 @@ dirigeraClient.startListeningForUpdates(async (update) => {
 })
 
 log.info('Listening for updates...')
+
+const onTick = async () => {
+  try {
+    const parasoll = await dirigeraClient.openCloseSensors.get({
+      id: process.env.DIRIGERA_PARASOLL_ID,
+    })
+
+    await client.storeMeasurement({
+      type: 'open',
+      value: parasoll.attributes.isOpen ? 1 : 0,
+    })
+  } catch (error) {
+    log.error(error)
+  }
+}
+
+const measurementJob = CronJob.from({
+  cronTime: process.env.PARASOLL_MEASUREMENT_CRON ?? '*/5 * * * *',
+  onTick,
+})
+
+async function start() {
+  measurementJob.start()
+}
+
+start().catch((error) => log.error(error))
