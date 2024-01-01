@@ -16,7 +16,7 @@
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
-    "koa": "^2.14.2",
+    "koa": "^2.15.0",
     "koa-bodyparser": "^4.4.1",
     "koa-static": "^5.0.0",
     "moment": "^2.30.1",
