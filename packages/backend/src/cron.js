@@ -24,17 +24,13 @@ const monitoringTick = async () => {
           `${l.location} ${l.type} ${moment(l.latestCreatedAt).toISOString()}`
       )
       .join('\n')
-    await fetch('https://api.pushbullet.com/v2/pushes', {
+    await fetch(process.env.MONITORING_NTFY_URL, {
       method: 'POST',
       headers: {
-        'Access-Token': process.env.PUSHBULLET_API_KEY,
-        'Content-Type': 'application/json',
+        Title: 'Argus warning',
+        Tag: 'warning',
       },
-      body: JSON.stringify({
-        type: 'note',
-        title: 'Argus warning',
-        body: message,
-      }),
+      body: message,
     })
   }
 }
@@ -73,21 +69,13 @@ const alertingTick = async () => {
       })
 
       if (nextIsAlerting && !a.isAlerting) {
-        await fetch('https://api.pushbullet.com/v2/pushes', {
+        await fetch(a.ntfyUrl, {
           method: 'POST',
           headers: {
-            'Access-Token': process.env.PUSHBULLET_API_KEY,
-            'Content-Type': 'application/json',
+            Title: 'Argus alert',
+            Tag: 'rotating_light',
           },
-          body: JSON.stringify({
-            type: 'note',
-            title: 'Argus alert',
-            body: `🚨 ${a.location} ${a.type} ${a.comparison} ${
-              a.value
-            } 🚨\nLatest measurement: ${
-              latestMeasurement.latestValue
-            } at ${moment(latestMeasurement.latestCreatedAt).toISOString()}`,
-          }),
+          body: `${a.location} ${a.type} ${a.comparison} ${a.value}\nLatest measurement: ${latestMeasurement.latestValue}`,
         })
         await alert.setIsAlerting(a.id, true)
       }
@@ -110,10 +98,11 @@ const alertingJob = CronJob.from({
 })
 
 async function start() {
-  if (!process.env.PUSHBULLET_API_KEY) {
-    throw new Error('process.env.PUSHBULLET_API_KEY not found')
+  if (process.env.MONITORING_NTFY_URL) {
+    monitoringJob.start()
+  } else {
+    log.warn('No MONITORING_NTFY_URL set, monitoring disabled')
   }
-  monitoringJob.start()
   alertingJob.start()
 }
 

@@ -167,11 +167,16 @@ router.post(
       type: Joi.string().max(64).required(),
       comparison: Joi.string().valid('<', '<=', '=', '>=', '>').required(),
       value: Joi.number().required(),
+      ntfyUrl: Joi.string()
+        .uri({
+          scheme: ['https'],
+        })
+        .required(),
     })
   ),
   async (context) => {
-    const { location, type, comparison, value } = context.request.body
-    await alert.create({ location, type, comparison, value })
+    const { location, type, comparison, value, ntfyUrl } = context.request.body
+    await alert.create({ location, type, comparison, value, ntfyUrl })
     context.body = await alert.list()
   }
 )

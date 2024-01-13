@@ -4,13 +4,14 @@ export function list() {
   return db.select('*').from('alert')
 }
 
-export function create({ location, type, comparison, value }) {
+export function create({ location, type, comparison, value, ntfyUrl }) {
   return db
     .insert({
       location,
       type,
       comparison,
       value,
+      ntfyUrl,
       isAlerting: false,
     })
     .into('alert')

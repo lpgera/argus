@@ -93,6 +93,7 @@ export default function Alerts() {
                 <StyledTableHeaderCell>Type</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Comparison</StyledTableHeaderCell>
                 <StyledTableHeaderCell>Value</StyledTableHeaderCell>
+                <StyledTableHeaderCell>Ntfy URL</StyledTableHeaderCell>
                 <StyledTableHeaderCell width={64} />
               </TableRow>
             </TableHead>
@@ -103,6 +104,7 @@ export default function Alerts() {
                   <TableCell>{row.type}</TableCell>
                   <TableCell>{row.comparison}</TableCell>
                   <TableCell>{row.value}</TableCell>
+                  <TableCell>{row.ntfyUrl}</TableCell>
                   <TableCell>
                     <DeleteConfirm
                       id={row.id}

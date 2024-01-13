@@ -22,6 +22,7 @@ export default function AddAlertDialog({ isOpen, onClose }) {
   const [type, setType] = useState('')
   const [comparison, setComparison] = useState('')
   const [value, setValue] = useState('')
+  const [ntfyUrl, setNtfyUrl] = useState('')
 
   const locations = [...new Set(data.map(({ location }) => location))]
   const types = [...new Set(data.map(({ type }) => type))]
@@ -101,14 +102,30 @@ export default function AddAlertDialog({ isOpen, onClose }) {
             onChange={(e) => setValue(e.target.value)}
             margin="dense"
           />
+          <TextField
+            fullWidth
+            color="secondary"
+            id="ntfyUrl"
+            label="Ntfy URL"
+            type="text"
+            value={ntfyUrl}
+            onChange={(e) => setNtfyUrl(e.target.value)}
+            margin="dense"
+          />
         </DialogContent>
         <DialogActions>
           <Button
-            disabled={!location || !type || !comparison || value === ''}
+            disabled={
+              !location ||
+              !type ||
+              !comparison ||
+              value === '' ||
+              ntfyUrl === ''
+            }
             color="secondary"
             variant="contained"
             onClick={async () => {
-              await createAlert({ location, type, comparison, value })
+              await createAlert({ location, type, comparison, value, ntfyUrl })
               clear()
               onClose()
             }}

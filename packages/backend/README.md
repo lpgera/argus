@@ -33,12 +33,12 @@ services:
     depends_on:
       - mariadb
     restart: unless-stopped
-  # optional cron service, handles alerting rules and missing sensor monitoring notifications with PushBullet
+  # optional cron service, handles alerting rules and missing sensor monitoring notifications with ntfy.sh
   cron:
     image: ghcr.io/lpgera/argus
     environment:
       - DATABASE_URL=mysql://root:your_strong_password@mariadb/argus
-      - PUSHBULLET_API_KEY=
+      - MONITORING_NTFY_URL = # optional
       - MONITORING_CRON= # optional, defaults to 0 */4 * * *
       - ALERTING_CRON= # optional, defaults to 30 */5 * * * *
     depends_on:
