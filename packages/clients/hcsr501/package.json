@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "base-client": "file:../base-client",
-    "dotenv": "^16.4.0",
+    "dotenv": "^16.4.1",
     "logger": "file:../../logger",
     "onoff": "^6.0.3"
   }
