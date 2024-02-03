@@ -21,12 +21,12 @@
     "docker:build": "docker-compose run --rm backend npm run build",
     "docker:logs": "docker-compose logs -tf",
     "docker:down": "docker-compose down --remove-orphans",
-    "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+    "prepare": "husky || true",
     "check-updates": "ncu -i -ws --root",
     "browserslist-update": "npx update-browserslist-db@latest"
   },
   "devDependencies": {
-    "husky": "^8.0.3",
+    "husky": "^9.0.10",
     "lint-staged": "^15.2.1",
     "nodemon": "^3.0.3",
     "npm-check-updates": "^16.14.14",
