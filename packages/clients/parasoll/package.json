@@ -7,7 +7,7 @@
   "dependencies": {
     "base-client": "file:../base-client",
     "cron": "^3.1.6",
-    "dirigera": "^0.15.3",
+    "dirigera": "^0.16.0",
     "dotenv": "^16.4.1",
     "logger": "file:../../logger"
   }
