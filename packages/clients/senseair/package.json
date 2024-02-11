@@ -10,7 +10,7 @@
     "@serialport/parser-packet-length": "^12.0.0",
     "base-client": "file:../base-client",
     "cron": "^3.1.6",
-    "dotenv": "^16.4.1",
+    "dotenv": "^16.4.2",
     "logger": "file:../../logger",
     "serialport": "^12.0.0"
   }
