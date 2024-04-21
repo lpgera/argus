@@ -2,13 +2,13 @@
   "name": "vindstyrka",
   "type": "module",
   "scripts": {
-    "start": "node vindstyrka.js"
+    "start": "node vindstyrka.js",
+    "dev": "node --watch --env-file=.env vindstyrka.js"
   },
   "dependencies": {
     "base-client": "file:../base-client",
     "cron": "^3.1.7",
     "dirigera": "^0.16.1",
-    "dotenv": "^16.4.5",
     "logger": "file:../../logger"
   }
 }

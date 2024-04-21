@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { CronJob } from 'cron'
 import moment from 'moment'
 import log from './log.js'

@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import BME280 from 'bme280-sensor'
 import { CronJob } from 'cron'
 import Logger from 'logger'

@@ -2,13 +2,13 @@
   "name": "parasoll",
   "type": "module",
   "scripts": {
-    "start": "node parasoll.js"
+    "start": "node parasoll.js",
+    "dev": "node --watch --env-file=.env parasoll.js"
   },
   "dependencies": {
     "base-client": "file:../base-client",
     "cron": "^3.1.7",
     "dirigera": "^0.16.1",
-    "dotenv": "^16.4.5",
     "logger": "file:../../logger"
   }
 }

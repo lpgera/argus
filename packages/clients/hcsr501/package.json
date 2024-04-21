@@ -2,11 +2,11 @@
   "name": "hcsr501",
   "type": "module",
   "scripts": {
-    "start": "node hcsr501.js"
+    "start": "node hcsr501.js",
+    "dev": "node --watch --env-file=.env hcsr501.js"
   },
   "dependencies": {
     "base-client": "file:../base-client",
-    "dotenv": "^16.4.5",
     "logger": "file:../../logger",
     "onoff": "^6.0.3"
   }

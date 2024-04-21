@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import dht from 'node-dht-sensor'
 import { CronJob } from 'cron'
 import Logger from 'logger'

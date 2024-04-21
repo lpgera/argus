@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { Gpio } from 'onoff'
 import Logger from 'logger'
 import Client from 'base-client'

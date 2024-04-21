@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
 import koaBodyparser from 'koa-bodyparser'

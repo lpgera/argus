@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { CronJob } from 'cron'
 import Logger from 'logger'
 import Client from 'base-client'

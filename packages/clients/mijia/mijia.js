@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { CronJob } from 'cron'
 import noble from '@abandonware/noble'
 import Logger from 'logger'
