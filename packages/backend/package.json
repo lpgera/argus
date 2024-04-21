@@ -2,7 +2,7 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
+    "dev": "node --watch ./src/index.js",
     "seed": "node db/seed.js",
     "start": "knex migrate:latest && node ./src/index.js",
     "cron": "node ./src/cron.js"

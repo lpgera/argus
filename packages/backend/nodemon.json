@@ -1,8 +1,0 @@
-{
-  "verbose": true,
-  "ext": "js,json",
-  "execMap": {
-    "js": "node --trace-warnings"
-  },
-  "ignore": [".git", "node_modules", "frontend"]
-}
