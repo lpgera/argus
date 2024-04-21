@@ -6,6 +6,7 @@ import koaCors from '@koa/cors'
 import log from './log.js'
 import apiRouter from './routers/api.js'
 import ajaxRouter from './routers/ajax.js'
+import db from './db.js'
 
 const app = new Koa()
 const router = new KoaRouter()
@@ -31,8 +32,9 @@ const server = app.listen(port, () => {
 
 process.on('SIGINT', () => {
   log.info('Received SIGINT, closing connections...')
-  server.close(() => {
-    log.info('Server stopped, exiting.')
-    process.exit(0)
+  server.close(async () => {
+    log.info('Server stopped, closing database connection...')
+    await db.destroy()
+    log.info('Exiting.')
   })
 })
