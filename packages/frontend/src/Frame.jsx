@@ -34,7 +34,8 @@ import Spinner from './Spinner'
 import useLocalStorage from './hooks/useLocalStorage'
 import useDarkMode from './hooks/useDarkMode'
 import useAuth from './hooks/useAuth'
-const MeasurementChart = lazy(() => import('./MeasurementChart'))
+const MeasurementChartPromise = import('./MeasurementChart') // to prefetch the module
+const MeasurementChart = lazy(() => MeasurementChartPromise)
 
 const StyledLogo = styled(Logo)(({ theme }) => ({
   width: theme.spacing(3),
