@@ -5,11 +5,11 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": "^21.0.0",
+    "node": "^22.0.0",
     "npm": ">10.0.0"
   },
   "volta": {
-    "node": "21.0.0"
+    "node": "22.0.0"
   },
   "scripts": {
     "build": "npm run build -w frontend",
