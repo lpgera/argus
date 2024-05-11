@@ -38,3 +38,10 @@ process.on('SIGINT', () => {
     log.info('Exiting.')
   })
 })
+
+process.on('SIGTERM', async () => {
+  log.info('Received SIGTERM, closing database connection...')
+  await db.destroy()
+  log.info('Exiting.')
+  process.exit(0)
+})
