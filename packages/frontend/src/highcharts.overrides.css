@@ -1,0 +1,90 @@
+.highcharts-light,
+.highcharts-dark {
+  --highcharts-color-0: #2196f3;
+  --highcharts-color-1: #e91e63;
+  --highcharts-color-2: #4caf50;
+  --highcharts-color-3: #607d8b;
+  --highcharts-color-4: #ff9800;
+  --highcharts-color-5: #673ab7;
+  --highcharts-color-6: #cddc39;
+  --highcharts-color-7: #009688;
+  --highcharts-color-8: #3f51b5;
+  --highcharts-color-9: #9c27b0;
+}
+
+.highcharts-color-0 {
+  fill: var(--highcharts-color-0);
+  stroke: var(--highcharts-color-0);
+}
+
+.highcharts-color-1 {
+  fill: var(--highcharts-color-1);
+  stroke: var(--highcharts-color-1);
+}
+
+.highcharts-color-2 {
+  fill: var(--highcharts-color-2);
+  stroke: var(--highcharts-color-2);
+}
+
+.highcharts-color-3 {
+  fill: var(--highcharts-color-3);
+  stroke: var(--highcharts-color-3);
+}
+
+.highcharts-color-4 {
+  fill: var(--highcharts-color-4);
+  stroke: var(--highcharts-color-4);
+}
+
+.highcharts-color-5 {
+  fill: var(--highcharts-color-5);
+  stroke: var(--highcharts-color-5);
+}
+
+.highcharts-color-6 {
+  fill: var(--highcharts-color-6);
+  stroke: var(--highcharts-color-6);
+}
+
+.highcharts-color-7 {
+  fill: var(--highcharts-color-7);
+  stroke: var(--highcharts-color-7);
+}
+
+.highcharts-color-8 {
+  fill: var(--highcharts-color-8);
+  stroke: var(--highcharts-color-8);
+}
+
+.highcharts-color-9 {
+  fill: var(--highcharts-color-9);
+  stroke: var(--highcharts-color-9);
+}
+
+.highcharts-dark {
+  --highcharts-background-color: #424242;
+  --highcharts-neutral-color-10: rgb(90, 90, 90);
+  --highcharts-highlight-color-10: rgb(90, 90, 90);
+}
+
+.highcharts-button {
+  transition: none;
+}
+
+.highcharts-button-disabled text {
+  fill: var(--highcharts-neutral-color-40);
+}
+
+.highcharts-range-selector-buttons .highcharts-label text {
+  display: none;
+}
+
+.highcharts-button-pressed text {
+  font-weight: normal;
+}
+
+.highcharts-axis-labels,
+.highcharts-axis-title {
+  font-size: 0.7rem;
+}
