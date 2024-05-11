@@ -281,6 +281,7 @@ export default function MeasurementChart() {
             },
             ...yAxes,
             colorway: colors,
+            showlegend: true,
             legend: {
               orientation: 'h',
               xanchor: 'center',
