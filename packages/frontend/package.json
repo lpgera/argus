@@ -6,7 +6,7 @@
     "@fontsource/roboto": "^5.0.13",
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
-    "@react-hook/resize-observer": "^1.2.6",
+    "@react-hook/resize-observer": "^2.0.1",
     "@vitejs/plugin-react": "^4.2.1",
     "notistack": "^3.0.1",
     "plotly.js-basic-dist": "^2.32.0",
