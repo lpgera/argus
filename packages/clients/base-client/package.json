@@ -4,5 +4,8 @@
   "type": "module",
   "dependencies": {
     "logger": "file:../../logger"
+  },
+  "volta": {
+    "extends": "../../../package.json"
   }
 }

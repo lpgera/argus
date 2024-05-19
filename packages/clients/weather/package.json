@@ -9,5 +9,8 @@
     "base-client": "file:../base-client",
     "cron": "^3.1.7",
     "logger": "file:../../logger"
+  },
+  "volta": {
+    "extends": "../../../package.json"
   }
 }

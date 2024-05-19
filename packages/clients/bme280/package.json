@@ -10,5 +10,8 @@
     "bme280-sensor": "^0.1.7",
     "cron": "^3.1.7",
     "logger": "file:../../logger"
+  },
+  "volta": {
+    "extends": "../../../package.json"
   }
 }
