@@ -3,6 +3,7 @@ import koaStatic from 'koa-static'
 import koaBodyparser from 'koa-bodyparser'
 import KoaRouter from '@koa/router'
 import koaCors from '@koa/cors'
+import koaCompress from 'koa-compress'
 import log from './log.js'
 import apiRouter from './routers/api.js'
 import ajaxRouter from './routers/ajax.js'
@@ -13,6 +14,7 @@ const router = new KoaRouter()
 
 app.use(koaCors())
 app.use(koaBodyparser())
+app.use(koaCompress())
 
 router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
 router.use('/ajax', ajaxRouter.routes(), ajaxRouter.allowedMethods())
