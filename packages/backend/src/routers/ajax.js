@@ -169,7 +169,7 @@ router.post(
       value: Joi.number().required(),
       ntfyUrl: Joi.string()
         .uri({
-          scheme: ['https'],
+          scheme: ['http', 'https'],
         })
         .required(),
     })
