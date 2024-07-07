@@ -236,7 +236,6 @@ export default function MeasurementChart() {
               enabled: true,
             },
             navigator: {
-              adaptToUpdatedData: false,
               xAxis: {
                 overscroll: 86400000,
               },
