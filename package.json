@@ -22,7 +22,7 @@
     "docker:logs": "docker compose logs -tf",
     "docker:down": "docker compose down --remove-orphans",
     "prepare": "husky || true",
-    "check-updates": "ncu -i -ws --root",
+    "check-updates": "ncu -i -ws",
     "browserslist-update": "npx update-browserslist-db@latest"
   },
   "devDependencies": {
