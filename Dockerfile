@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:22 as FRONTEND
+FROM --platform=$BUILDPLATFORM node:22 AS frontend
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY packages/frontend packages/frontend
 
 RUN npm run build -w frontend
 
-FROM node:22 as DEPENDENCIES
+FROM node:22 AS dependencies
 
 WORKDIR /usr/src/app
 
@@ -33,14 +33,14 @@ RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev --no-audit --no-fund
 
 COPY . .
 
-FROM node:22-slim as TARGET
+FROM node:22-slim AS target
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
-COPY --from=DEPENDENCIES /usr/src/app ./
+COPY --from=dependencies /usr/src/app ./
 
-COPY --from=FRONTEND /usr/src/app/packages/frontend/build ./packages/frontend/build
+COPY --from=frontend /usr/src/app/packages/frontend/build ./packages/frontend/build
 
 CMD ["npm", "run", "start", "-w", "backend"]
