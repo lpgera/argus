@@ -26,6 +26,7 @@ Raspberry Pi. Available as a pre-built Docker image from GitHub Package Registry
 - [Mijia](./packages/clients/mijia)
 - [Parasoll](./packages/clients/parasoll)
 - [Senseair](./packages/clients/senseair)
+- [Vallhorn](./packages/clients/vallhorn)
 - [Vindstyrka](./packages/clients/vindstyrka)
 - [Weather](./packages/clients/weather)
 

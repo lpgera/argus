@@ -1,0 +1,17 @@
+{
+  "name": "vallhorn",
+  "type": "module",
+  "scripts": {
+    "start": "node vallhorn.js",
+    "dev": "node --watch --env-file=.env vallhorn.js"
+  },
+  "dependencies": {
+    "base-client": "file:../base-client",
+    "cron": "^3.1.7",
+    "dirigera": "^1.0.0",
+    "logger": "file:../../logger"
+  },
+  "volta": {
+    "extends": "../../../package.json"
+  }
+}
