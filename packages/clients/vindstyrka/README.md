@@ -5,7 +5,6 @@ Client application for reading PM2.5 and tVOC measurements from a VINDSTYRKA sen
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   vindstyrka:
     image: ghcr.io/lpgera/argus

@@ -5,7 +5,6 @@ Client application for DHT22 humidity and temperature sensor.
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   dht22:
     image: ghcr.io/lpgera/argus

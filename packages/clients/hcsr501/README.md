@@ -5,7 +5,6 @@ Client application for HC-SR501 PIR motion sensor.
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   hcsr501:
     image: ghcr.io/lpgera/argus

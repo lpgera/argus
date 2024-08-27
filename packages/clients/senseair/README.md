@@ -5,7 +5,6 @@ Client application for SenseAir S8 LP, a low-power CO2 sensor module.
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   senseair:
     image: ghcr.io/lpgera/argus

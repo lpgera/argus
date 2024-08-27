@@ -5,7 +5,6 @@ The backend server application.
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   mariadb:
     image: mariadb:10.5

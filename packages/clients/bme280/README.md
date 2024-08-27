@@ -5,7 +5,6 @@ Client application for BME280 humidity, temperature and barometric pressure sens
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   bme280:
     image: ghcr.io/lpgera/argus

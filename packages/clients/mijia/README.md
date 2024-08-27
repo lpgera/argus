@@ -5,7 +5,6 @@ Client application for Xiaomi Mijia BLE temperature and humidity sensors. It can
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   mijia:
     image: ghcr.io/lpgera/argus

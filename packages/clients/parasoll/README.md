@@ -5,7 +5,6 @@ Client application for reading open/close state from a PARASOLL sensor.
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   parasoll:
     image: ghcr.io/lpgera/argus

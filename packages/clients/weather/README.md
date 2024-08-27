@@ -6,7 +6,6 @@ Client application for reading weather data from [OpenWeather](https://openweath
 ## docker-compose
 
 ```yaml
-version: '3.8'
 services:
   weather:
     image: ghcr.io/lpgera/argus
