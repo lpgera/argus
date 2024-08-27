@@ -9,7 +9,7 @@ const client = Client({
   location: process.env.ARGUS_SENSOR_LOCATION,
 })
 
-const log = Logger({ name: 'vindstyrka' })
+const log = Logger({ name: 'parasoll' })
 
 const dirigeraClient = await createDirigeraClient({
   gatewayIP: process.env.DIRIGERA_GATEWAY_IP,
