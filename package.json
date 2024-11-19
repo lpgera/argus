@@ -26,7 +26,7 @@
     "browserslist-update": "npx update-browserslist-db@latest"
   },
   "devDependencies": {
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "npm-check-updates": "^17.1.11",
     "prettier": "^3.3.3"
