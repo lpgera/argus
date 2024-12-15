@@ -13,7 +13,7 @@ services:
       - MYSQL_DATABASE=argus
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
   backend:
-    image: node:22
+    image: node:23
     env_file: .env
     volumes:
       - .:/opt/app:delegated
@@ -24,7 +24,7 @@ services:
     depends_on:
       - mariadb
   frontend:
-    image: node:22
+    image: node:23
     volumes:
       - .:/opt/app:delegated
     working_dir: /opt/app
