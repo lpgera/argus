@@ -13,7 +13,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
-    "vite": "^6.0.11",
+    "vite": "^6.1.0",
     "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-svgr": "^4.3.0"
   },
