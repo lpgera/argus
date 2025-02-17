@@ -9,7 +9,7 @@
     "base-client": "file:../base-client",
     "cron": "^3.5.0",
     "logger": "file:../../logger",
-    "node-dht-sensor": "^0.4.4"
+    "node-dht-sensor": "^0.4.5"
   },
   "volta": {
     "extends": "../../../package.json"
