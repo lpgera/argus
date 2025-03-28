@@ -9,6 +9,9 @@ updates:
         patterns:
           - 'serialport'
           - '@serialport/*'
+      mui:
+        patterns:
+          - '@mui/*'
     open-pull-requests-limit: 20
   - package-ecosystem: 'docker'
     directory: '/'

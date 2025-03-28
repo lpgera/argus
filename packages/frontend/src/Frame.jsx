@@ -1,9 +1,8 @@
-import { useState, lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
 import CssBaseline from '@mui/material/CssBaseline'
-import Hidden from '@mui/material/Hidden'
 import Drawer from '@mui/material/Drawer'
 import AppBar from '@mui/material/AppBar'
 import Slide from '@mui/material/Slide'
@@ -24,6 +23,7 @@ import Container from '@mui/material/Container'
 import MenuIcon from '@mui/icons-material/Menu'
 import Brightness4 from '@mui/icons-material/Brightness4'
 import BrightnessHigh from '@mui/icons-material/BrightnessHigh'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import Logo from './logo.svg?react'
 import Login from './Login'
 import Dashboard from './Dashboard'
@@ -101,6 +101,9 @@ export default function Frame() {
     false
   )
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
+  const mobileDrawerHidden = useMediaQuery((theme) =>
+    theme.breakpoints.up('sm')
+  )
 
   if (!token) {
     return <Login />
@@ -221,14 +224,12 @@ export default function Frame() {
             </Toolbar>
           </StyledAppBar>
         </HideOnScroll>
-
-        <Hidden smDown>
+        {mobileDrawerHidden ? (
           <StyledDrawer variant="permanent" open={drawerOpen}>
             <StyledToolbarSpacer />
             {drawer()}
           </StyledDrawer>
-        </Hidden>
-        <Hidden smUp>
+        ) : (
           <StyledDrawer
             onClose={() => setMobileDrawerOpen(false)}
             open={mobileDrawerOpen}
@@ -236,7 +237,7 @@ export default function Frame() {
             <StyledToolbarSpacer />
             {drawer()}
           </StyledDrawer>
-        </Hidden>
+        )}
         <StyledMain>
           <StyledToolbarSpacer />
           <StyledContainer>
