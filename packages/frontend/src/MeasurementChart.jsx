@@ -249,12 +249,13 @@ export default function MeasurementChart() {
           }}
         />
         <Grid container>
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <FormControl size="small" color="secondary">
               <InputLabel>Aggregation</InputLabel>
               <Select
                 value={aggregation}
                 onChange={(e) => setAggregation(e.target.value)}
+                variant="outlined"
                 label="Aggregation"
               >
                 <MenuItem value="average">Average</MenuItem>
@@ -265,7 +266,7 @@ export default function MeasurementChart() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={6} style={{ textAlign: 'right' }}>
+          <Grid size={{ xs: 6 }} style={{ textAlign: 'right' }}>
             <Button
               variant="contained"
               color="secondary"
