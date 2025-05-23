@@ -6,7 +6,7 @@
     "@fontsource/roboto": "^5.2.5",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.0.0",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-react": "^4.5.0",
     "highcharts": "^12.2.0",
     "highcharts-react-official": "^3.2.2",
     "notistack": "^3.0.2",
