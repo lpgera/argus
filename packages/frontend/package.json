@@ -7,7 +7,7 @@
     "@mui/icons-material": "^7.1.2",
     "@mui/material": "^7.0.0",
     "@vitejs/plugin-react": "^4.6.0",
-    "highcharts": "^12.2.0",
+    "highcharts": "^12.3.0",
     "highcharts-react-official": "^3.2.2",
     "notistack": "^3.0.2",
     "react": "^19.0.0",
