@@ -22,7 +22,17 @@ jobs:
       - name: Run browserslist update
         run: npm run browserslist-update
 
+      - name: Check for changes
+        id: git-diff
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Commit and push changes
+        if: steps.git-diff.outputs.changes == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
