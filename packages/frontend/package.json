@@ -10,7 +10,7 @@
     "highcharts": "^12.3.0",
     "highcharts-react-official": "^3.2.2",
     "notistack": "^3.0.2",
-    "react": "^19.0.0",
+    "react": "^19.1.1",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",
     "vite": "^7.0.6",
