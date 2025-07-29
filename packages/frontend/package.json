@@ -14,7 +14,7 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",
     "vite": "^7.0.6",
-    "vite-plugin-pwa": "^1.0.1",
+    "vite-plugin-pwa": "^1.0.2",
     "vite-plugin-svgr": "^4.3.0"
   },
   "type": "module",
