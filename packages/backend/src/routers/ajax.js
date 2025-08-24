@@ -1,4 +1,4 @@
-import KoaRouter from '@koa/router'
+import express from 'express'
 import moment from 'moment'
 import jwt from 'jsonwebtoken'
 import Joi from 'joi'
@@ -18,46 +18,46 @@ const users = process.env.USERS.split(',').reduce((acc, current) => {
   return [...acc, { username, password }]
 }, [])
 
-const router = new KoaRouter()
+const router = express()
 
-router.post('/login', (context) => {
-  const { username, password } = context.request.body
+router.post('/login', (req, res) => {
+  const { username, password } = req.body
   if (
     users.some(
       (user) => user.username === username && user.password === password
     )
   ) {
-    context.body = {
+    res.json({
       token: jwt.sign({ username }, process.env.TOKEN_SECRET, {
         expiresIn: process.env.SESSION_TIMEOUT ?? '7 days',
       }),
-    }
+    })
     return
   }
-  context.status = 403
+  res.sendStatus(403)
 })
 
-router.use(async (context, next) => {
-  const token = context.headers['x-authorization-token']
+router.use((req, res, next) => {
+  const token = req.headers['x-authorization-token']
   try {
     jwt.verify(token, process.env.TOKEN_SECRET)
   } catch (err) {
-    context.status = 401
+    res.sendStatus(401)
     return
   }
-  await next()
+  next()
 })
 
-router.get('/location', async (context) => {
+router.get('/location', async (req, res) => {
   const locations = await location.get()
-  context.body = locations.map((l) => {
-    return {
+  res.json(
+    locations.map((l) => ({
       ...l,
       isStale: moment(l.latestCreatedAt).isBefore(
         moment().subtract(config.staleThreshold)
       ),
-    }
-  })
+    }))
+  )
 })
 
 router.get(
@@ -73,8 +73,8 @@ router.get(
         .required(),
     })
   ),
-  async (context) => {
-    const { location, type, from, to, aggregation } = context.params
+  async (req, res) => {
+    const { location, type, from, to, aggregation } = req.params
     const measurements = await measurement.get({
       location,
       type,
@@ -82,9 +82,12 @@ router.get(
       to: moment.utc(to),
       aggregation,
     })
-    context.body = measurements.map((item) => {
-      return [moment(item.createdAt).startOf('minute').valueOf(), item.value]
-    })
+    res.json(
+      measurements.map((item) => [
+        moment(item.createdAt).startOf('minute').valueOf(),
+        item.value,
+      ])
+    )
   }
 )
 
@@ -96,27 +99,27 @@ router.get(
       type: Joi.string().max(64).required(),
     })
   ),
-  async (context) => {
-    const { location, type } = context.params
+  async (req, res) => {
+    const { location, type } = req.params
     const measurements = await measurement.get({
       location,
       type,
       from: moment.unix(0),
       to: moment(),
     })
-    context.body = measurements.map((item) => {
-      return [moment(item.createdAt).valueOf(), item.value]
-    })
+    res.json(
+      measurements.map((item) => [moment(item.createdAt).valueOf(), item.value])
+    )
   }
 )
 
-router.get('/api-key', async (context) => {
-  context.body = await apiKey.list()
+router.get('/api-key', async (req, res) => {
+  res.json(await apiKey.list())
 })
 
-router.post('/api-key', async (context) => {
+router.post('/api-key', async (req, res) => {
   await apiKey.create()
-  context.body = await apiKey.list()
+  res.json(await apiKey.list())
 })
 
 router.patch(
@@ -133,11 +136,11 @@ router.patch(
       comment: Joi.string().allow('').max(255),
     })
   ),
-  async (context) => {
-    const { id } = context.params
-    const { canRead, canWrite, comment } = context.request.body
+  async (req, res) => {
+    const { id } = req.params
+    const { canRead, canWrite, comment } = req.body
     await apiKey.update(id, { canRead, canWrite, comment })
-    context.body = await apiKey.list()
+    res.json(await apiKey.list())
   }
 )
 
@@ -148,15 +151,15 @@ router.delete(
       id: Joi.string().max(64).required(),
     })
   ),
-  async (context) => {
-    const { id } = context.params
+  async (req, res) => {
+    const { id } = req.params
     await apiKey.remove(id)
-    context.body = await apiKey.list()
+    res.json(await apiKey.list())
   }
 )
 
-router.get('/alert', async (context) => {
-  context.body = await alert.list()
+router.get('/alert', async (req, res) => {
+  res.json(await alert.list())
 })
 
 router.post(
@@ -174,10 +177,10 @@ router.post(
         .required(),
     })
   ),
-  async (context) => {
-    const { location, type, comparison, value, ntfyUrl } = context.request.body
+  async (req, res) => {
+    const { location, type, comparison, value, ntfyUrl } = req.body
     await alert.create({ location, type, comparison, value, ntfyUrl })
-    context.body = await alert.list()
+    res.json(await alert.list())
   }
 )
 
@@ -188,23 +191,23 @@ router.delete(
       id: Joi.string().max(64).required(),
     })
   ),
-  async (context) => {
-    const { id } = context.params
+  async (req, res) => {
+    const { id } = req.params
     await alert.remove(id)
-    context.body = await alert.list()
+    res.json(await alert.list())
   }
 )
 
-router.get('/diagnostics', async (context) => {
+router.get('/diagnostics', async (req, res) => {
   const locations = await diagnostics.get()
-  context.body = locations.map((l) => {
-    return {
+  res.json(
+    locations.map((l) => ({
       ...l,
       isStale: moment(l.latestCreatedAt).isBefore(
         moment().subtract(config.staleThreshold)
       ),
-    }
-  })
+    }))
+  )
 })
 
 export default router

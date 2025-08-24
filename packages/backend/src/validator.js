@@ -1,21 +1,21 @@
 import log from './log.js'
 
-export const validateParams = (schema) => async (context, next) => {
+export const validateParams = (schema) => async (req, res, next) => {
   try {
-    await schema.validateAsync(context.params)
+    await schema.validateAsync(req.params)
+    next()
   } catch (error) {
     log.warn(error, 'Validation error.')
-    context.throw(400, error)
+    res.status(400).json({ error: error.message })
   }
-  await next()
 }
 
-export const validateRequestBody = (schema) => async (context, next) => {
+export const validateRequestBody = (schema) => async (req, res, next) => {
   try {
-    await schema.validateAsync(context.request.body)
+    await schema.validateAsync(req.body)
+    next()
   } catch (error) {
     log.warn(error, 'Validation error.')
-    context.throw(400, error)
+    res.status(400).json({ error: error.message })
   }
-  await next()
 }

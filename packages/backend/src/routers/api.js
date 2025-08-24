@@ -1,4 +1,4 @@
-import KoaRouter from '@koa/router'
+import express from 'express'
 import moment from 'moment'
 import Joi from 'joi'
 import * as measurement from '../models/measurement.js'
@@ -6,7 +6,7 @@ import * as apiAuth from '../api-auth.js'
 import log from '../log.js'
 import { validateParams, validateRequestBody } from '../validator.js'
 
-const router = new KoaRouter()
+const router = express()
 
 router.use(apiAuth.ensureValidApiKey)
 
@@ -29,11 +29,9 @@ router.post(
     )
   ),
   apiAuth.ensureWritePermission,
-  async (context) => {
-    const { location } = context.params
-    const measurements = Array.isArray(context.request.body)
-      ? context.request.body
-      : [context.request.body]
+  async (req, res) => {
+    const { location } = req.params
+    const measurements = Array.isArray(req.body) ? req.body : [req.body]
     const createdAt = moment().toDate()
     log.debug({ location, measurements }, 'Received new measurements.')
 
@@ -47,7 +45,7 @@ router.post(
         })
       })
     )
-    context.body = null
+    res.json(null)
   }
 )
 
@@ -60,11 +58,11 @@ router.get(
     })
   ),
   apiAuth.ensureReadPermission,
-  async (context) => {
-    const { location, type } = context.params
+  async (req, res) => {
+    const { location, type } = req.params
     log.debug({ location, type }, 'Getting latest measurements.')
 
-    context.body = await measurement.getLatest({ location, type })
+    res.json(await measurement.getLatest({ location, type }))
   }
 )
 
