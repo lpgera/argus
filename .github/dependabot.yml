@@ -12,6 +12,9 @@ updates:
       mui:
         patterns:
           - '@mui/*'
+      aws:
+        patterns:
+          - '@aws-sdk/*'
     open-pull-requests-limit: 20
   - package-ecosystem: 'docker'
     directory: '/'
