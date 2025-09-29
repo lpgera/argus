@@ -22,13 +22,13 @@
     "docker:logs": "docker compose logs -tf",
     "docker:down": "docker compose down --remove-orphans",
     "prepare": "husky || true",
-    "check-updates": "ncu -i -ws",
+    "check-updates": "ncu -i -w",
     "browserslist-update": "npx update-browserslist-db@latest"
   },
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.2.3",
-    "npm-check-updates": "^18.3.0",
+    "npm-check-updates": "^19.0.0",
     "prettier": "^3.6.2"
   },
   "workspaces": [
