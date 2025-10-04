@@ -17,6 +17,6 @@ services:
       - BME280_I2C_BUS_NUMBER= # optional, defaults to 1
       - BME280_I2C_ADDRESS= # optional, defaults to 0x76
       - BME280_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npm run start -w bme280
+    working_dir: /usr/src/app/packages/clients/bme280
     restart: unless-stopped
 ```

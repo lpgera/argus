@@ -15,6 +15,6 @@ services:
       - ARGUS_API_KEY=<api key with write access>
       - ARGUS_SENSOR_LOCATION=<sensor location name>
       - HCSR501_GPIO_PIN= # optional, defaults to 18
-    command: npm run start -w hcsr501
+    working_dir: /usr/src/app/packages/clients/hcsr501
     restart: unless-stopped
 ```

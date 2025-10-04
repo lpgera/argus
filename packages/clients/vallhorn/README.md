@@ -16,6 +16,6 @@ services:
       - DIRIGERA_ACCESS_TOKEN=
       - DIRIGERA_VALLHORN_ID=
       - VALLHORN_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npm run start -w vallhorn
+    working_dir: /usr/src/app/packages/clients/vallhorn
     restart: unless-stopped
 ```

@@ -17,6 +17,6 @@ services:
       - ARGUS_SENSOR_LOCATION=<sensor location name>
       - DHT22_GPIO_PIN= # optional, defaults to 4
       - DHT22_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npm run start -w dht22
+    working_dir: /usr/src/app/packages/clients/dht22
     restart: unless-stopped
 ```

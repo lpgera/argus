@@ -19,6 +19,6 @@ services:
       - WEATHER_OPENWEATHERMAP_UNITS=
       - WEATHER_AIRVISUAL_API_KEY=
       - WEATHER_MEASUREMENT_CRON= # optional, defaults to */10 * * * *
-    command: npm run start -w weather
+    working_dir: /usr/src/app/packages/clients/weather
     restart: unless-stopped
 ```

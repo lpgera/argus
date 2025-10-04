@@ -16,6 +16,6 @@ services:
       - ARGUS_SENSOR_LOCATION=<sensor location name>
       - SENSEAIR_SERIAL_DEVICE_PATH= # optional, defaults to /dev/serial0
       - SENSEAIR_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npm run start -w senseair
+    working_dir: /usr/src/app/packages/clients/senseair
     restart: unless-stopped
 ```

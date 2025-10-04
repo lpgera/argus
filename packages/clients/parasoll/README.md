@@ -16,6 +16,6 @@ services:
       - DIRIGERA_ACCESS_TOKEN=
       - DIRIGERA_PARASOLL_ID=
       - PARASOLL_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npm run start -w parasoll
+    working_dir: /usr/src/app/packages/clients/parasoll
     restart: unless-stopped
 ```

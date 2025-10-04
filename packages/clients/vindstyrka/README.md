@@ -16,6 +16,6 @@ services:
       - DIRIGERA_ACCESS_TOKEN=
       - DIRIGERA_VINDSTYRKA_ID=
       - VINDSTYRKA_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
-    command: npm run start -w vindstyrka
+    working_dir: /usr/src/app/packages/clients/vindstyrka
     restart: unless-stopped
 ```
