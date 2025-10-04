@@ -21,7 +21,8 @@ dirigeraClient.startListeningForUpdates(async (update) => {
   if (
     update.type === 'deviceStateChanged' &&
     update.data.deviceType === 'motionSensor' &&
-    update.data.id === process.env.DIRIGERA_VALLHORN_ID
+    update.data.id === process.env.DIRIGERA_VALLHORN_ID &&
+    update.data.attributes
   ) {
     log.info(update, 'Received VALLHORN state change update')
     await client.storeMeasurement({
