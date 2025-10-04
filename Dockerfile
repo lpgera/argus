@@ -43,4 +43,6 @@ COPY --from=dependencies /usr/src/app ./
 
 COPY --from=frontend /usr/src/app/packages/frontend/build ./packages/frontend/build
 
-CMD ["npm", "run", "start", "-w", "backend"]
+WORKDIR /usr/src/app/packages/backend
+
+CMD ["node", "--run", "start"]
