@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "pino": "^10.0.0",
-    "pino-pretty": "^13.1.1"
+    "pino-pretty": "^13.1.2"
   },
   "volta": {
     "extends": "../../package.json"
