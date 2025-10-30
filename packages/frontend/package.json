@@ -12,7 +12,7 @@
     "notistack": "^3.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.4",
+    "react-router-dom": "^7.9.5",
     "vite": "^7.1.12",
     "vite-plugin-pwa": "^1.1.0",
     "vite-plugin-svgr": "^4.5.0"
