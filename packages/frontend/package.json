@@ -24,10 +24,5 @@
   },
   "volta": {
     "extends": "../../package.json"
-  },
-  "overrides": {
-    "notistack": {
-      "react": "$react"
-    }
   }
 }
