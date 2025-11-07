@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "base-client": "file:../base-client",
-    "cron": "^4.3.3",
+    "cron": "^4.3.4",
     "logger": "file:../../logger",
     "node-dht-sensor": "^0.4.5"
   },
