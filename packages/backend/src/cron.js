@@ -2,6 +2,7 @@ import { CronJob } from 'cron'
 import moment from 'moment'
 import log from './log.js'
 import config from './config.js'
+import db from './db.js'
 import * as location from './models/location.js'
 import * as alert from './models/alert.js'
 import * as diagnostics from './models/diagnostics.js'
@@ -96,13 +97,20 @@ const alertingJob = CronJob.from({
   onTick: alertingTick,
 })
 
-async function start() {
-  if (process.env.MONITORING_NTFY_URL) {
-    monitoringJob.start()
-  } else {
-    log.warn('No MONITORING_NTFY_URL set, monitoring disabled')
-  }
-  alertingJob.start()
+if (process.env.MONITORING_NTFY_URL) {
+  monitoringJob.start()
+} else {
+  log.warn('No MONITORING_NTFY_URL set, monitoring disabled')
+}
+alertingJob.start()
+
+const stopSignalHandler = async (signal) => {
+  log.info(`Received ${signal}, stopping...`)
+  await alertingJob.stop()
+  await monitoringJob.stop()
+  await db.destroy()
+  log.info('Stopped, exiting.')
 }
 
-start().catch((err) => log.error(err))
+process.once('SIGINT', stopSignalHandler)
+process.once('SIGTERM', stopSignalHandler)

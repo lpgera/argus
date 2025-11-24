@@ -95,8 +95,8 @@ const stopSignalHandler = async (signal) => {
   log.info(`Received ${signal}, stopping...`)
   await measurementJob.stop()
   port.close()
-  parser.destroy()
   log.info('Stopped, exiting.')
+  process.exit(0)
 }
 
 process.once('SIGINT', stopSignalHandler)
