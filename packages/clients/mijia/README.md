@@ -15,5 +15,6 @@ services:
       - MIJIA_LOCATIONS=mac_address_1,location_name_1,mac_address_2,location_name_2
       - MIJIA_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
     working_dir: /usr/src/app/packages/clients/mijia
+    command: node mijia.js
     restart: unless-stopped
 ```

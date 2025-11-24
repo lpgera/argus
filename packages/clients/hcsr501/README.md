@@ -16,5 +16,6 @@ services:
       - ARGUS_SENSOR_LOCATION=<sensor location name>
       - HCSR501_GPIO_PIN= # optional, defaults to 18
     working_dir: /usr/src/app/packages/clients/hcsr501
+    command: node hcsr501.js
     restart: unless-stopped
 ```

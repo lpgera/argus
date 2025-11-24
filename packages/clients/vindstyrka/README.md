@@ -17,5 +17,6 @@ services:
       - DIRIGERA_VINDSTYRKA_ID=
       - VINDSTYRKA_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
     working_dir: /usr/src/app/packages/clients/vindstyrka
+    command: node vindstyrka.js
     restart: unless-stopped
 ```

@@ -29,18 +29,14 @@ const server = app.listen(port, () => {
   log.info(`Server is listening on port: ${port}`)
 })
 
-process.on('SIGINT', () => {
-  log.info('Received SIGINT, closing connections...')
+const stopSignalHandler = (signal) => {
+  log.info(`Received ${signal}, closing connections...`)
   server.close(async () => {
     log.info('Server stopped, closing database connection...')
     await db.destroy()
     log.info('Exiting.')
   })
-})
+}
 
-process.on('SIGTERM', async () => {
-  log.info('Received SIGTERM, closing database connection...')
-  await db.destroy()
-  log.info('Exiting.')
-  process.exit(0)
-})
+process.once('SIGINT', stopSignalHandler)
+process.once('SIGTERM', stopSignalHandler)

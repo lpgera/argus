@@ -20,5 +20,6 @@ services:
       - WEATHER_AIRVISUAL_API_KEY=
       - WEATHER_MEASUREMENT_CRON= # optional, defaults to */10 * * * *
     working_dir: /usr/src/app/packages/clients/weather
+    command: node weather.js
     restart: unless-stopped
 ```

@@ -42,6 +42,6 @@ services:
       - ALERTING_CRON= # optional, defaults to 30 */5 * * * *
     depends_on:
       - mariadb
-    command: npm run cron
+    command: node src/cron.js
     restart: unless-stopped
 ```

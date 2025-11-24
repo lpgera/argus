@@ -17,5 +17,6 @@ services:
       - DIRIGERA_PARASOLL_ID=
       - PARASOLL_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
     working_dir: /usr/src/app/packages/clients/parasoll
+    command: node parasoll.js
     restart: unless-stopped
 ```

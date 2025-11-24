@@ -17,5 +17,6 @@ services:
       - DIRIGERA_VALLHORN_ID=
       - VALLHORN_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
     working_dir: /usr/src/app/packages/clients/vallhorn
+    command: node vallhorn.js
     restart: unless-stopped
 ```

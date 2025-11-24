@@ -17,5 +17,6 @@ services:
       - SENSEAIR_SERIAL_DEVICE_PATH= # optional, defaults to /dev/serial0
       - SENSEAIR_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
     working_dir: /usr/src/app/packages/clients/senseair
+    command: node senseair.js
     restart: unless-stopped
 ```

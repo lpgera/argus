@@ -18,5 +18,6 @@ services:
       - DHT22_GPIO_PIN= # optional, defaults to 4
       - DHT22_MEASUREMENT_CRON= # optional, defaults to */5 * * * *
     working_dir: /usr/src/app/packages/clients/dht22
+    command: node dht22.js
     restart: unless-stopped
 ```
