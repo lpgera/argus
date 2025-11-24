@@ -64,33 +64,39 @@ const measurementJob = CronJob.from({
 
 const handleOverflow = (number) => (number > 32768 ? 0 : number)
 
-const start = async () => {
-  parser.on('data', (data) => {
-    const length = data[2]
-    if (length === 2) {
-      const rawValue = data[3] * 256 + data[4]
-      const measurementValue = handleOverflow(rawValue)
-      log.debug(`co2: ${rawValue} ppm`)
+parser.on('data', (data) => {
+  const length = data[2]
+  if (length === 2) {
+    const rawValue = data[3] * 256 + data[4]
+    const measurementValue = handleOverflow(rawValue)
+    log.debug(`co2: ${rawValue} ppm`)
 
-      latestMeasurement.updatedAt = new Date()
-      latestMeasurement.value = measurementValue
-    }
-    if (length === 8) {
-      const statusCode = data[4] * 256 + data[5]
-      const rawValue = data[9] * 256 + data[10]
-      const measurementValue = handleOverflow(rawValue)
-      log.info(`sensor status code: ${statusCode}; co2: ${rawValue}ppm`)
+    latestMeasurement.updatedAt = new Date()
+    latestMeasurement.value = measurementValue
+  }
+  if (length === 8) {
+    const statusCode = data[4] * 256 + data[5]
+    const rawValue = data[9] * 256 + data[10]
+    const measurementValue = handleOverflow(rawValue)
+    log.info(`sensor status code: ${statusCode}; co2: ${rawValue}ppm`)
 
-      latestMeasurement.updatedAt = new Date()
-      latestMeasurement.value = measurementValue
-    }
-  })
+    latestMeasurement.updatedAt = new Date()
+    latestMeasurement.value = measurementValue
+  }
+})
 
-  setInterval(() => port.write(READ_CO2_COMMAND), 30000)
+setInterval(() => port.write(READ_CO2_COMMAND), 30000)
 
-  port.write(STATUS_COMMAND)
+port.write(STATUS_COMMAND)
 
-  measurementJob.start()
+measurementJob.start()
+
+const stopSignalHandler = async (signal) => {
+  log.info(`Received ${signal}, stopping...`)
+  await measurementJob.stop()
+  port.close()
+  log.info('Stopped, exiting.')
 }
 
-start().catch((error) => log.error(error))
+process.once('SIGINT', stopSignalHandler)
+process.once('SIGTERM', stopSignalHandler)

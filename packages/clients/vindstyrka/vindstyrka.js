@@ -43,8 +43,14 @@ const measurementJob = CronJob.from({
   onTick,
 })
 
-async function start() {
-  measurementJob.start()
+measurementJob.start()
+
+const stopSignalHandler = async (signal) => {
+  log.info(`Received ${signal}, stopping...`)
+  dirigeraClient.stopListeningForUpdates()
+  await measurementJob.stop()
+  log.info('Stopped, exiting.')
 }
 
-start().catch((error) => log.error(error))
+process.once('SIGINT', stopSignalHandler)
+process.once('SIGTERM', stopSignalHandler)

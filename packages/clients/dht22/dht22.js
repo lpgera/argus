@@ -61,3 +61,12 @@ const measurementJob = CronJob.from({
 })
 
 measurementJob.start()
+
+const stopSignalHandler = async (signal) => {
+  log.info(`Received ${signal}, stopping...`)
+  await measurementJob.stop()
+  log.info('Stopped, exiting.')
+}
+
+process.once('SIGINT', stopSignalHandler)
+process.once('SIGTERM', stopSignalHandler)

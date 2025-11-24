@@ -125,22 +125,28 @@ function decodeAndStoreServiceData(address, data) {
   }
 }
 
-const start = async () => {
-  noble.on('discover', async (peripheral) => {
-    const address = peripheral.address
-    const data = [...peripheral.advertisement.serviceData[0].data].slice(11)
-    log.debug({
-      address,
-      location: locationsConfig[address],
-      data,
-    })
-    decodeAndStoreServiceData(address, data)
+noble.on('discover', async (peripheral) => {
+  const address = peripheral.address
+  const data = [...peripheral.advertisement.serviceData[0].data].slice(11)
+  log.debug({
+    address,
+    location: locationsConfig[address],
+    data,
   })
+  decodeAndStoreServiceData(address, data)
+})
 
-  const allowDuplicates = true
-  await noble.startScanningAsync(['fe95'], allowDuplicates)
+const allowDuplicates = true
+await noble.startScanningAsync(['fe95'], allowDuplicates)
 
-  measurementJob.start()
+measurementJob.start()
+
+const stopSignalHandler = async (signal) => {
+  log.info(`Received ${signal}, stopping...`)
+  noble.stopScanning()
+  await measurementJob.stop()
+  log.info('Stopped, exiting.')
 }
 
-start().catch((error) => log.error(error))
+process.once('SIGINT', stopSignalHandler)
+process.once('SIGTERM', stopSignalHandler)

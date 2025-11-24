@@ -22,3 +22,12 @@ pin.watch(async (err, value) => {
     value: value,
   })
 })
+
+const stopSignalHandler = async (signal) => {
+  log.info(`Received ${signal}, stopping...`)
+  pin.unwatchAll()
+  log.info('Stopped, exiting.')
+}
+
+process.once('SIGINT', stopSignalHandler)
+process.once('SIGTERM', stopSignalHandler)
