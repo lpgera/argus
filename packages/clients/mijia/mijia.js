@@ -146,6 +146,7 @@ const stopSignalHandler = async (signal) => {
   noble.stopScanning()
   await measurementJob.stop()
   log.info('Stopped, exiting.')
+  process.exit(0)
 }
 
 process.once('SIGINT', stopSignalHandler)

@@ -45,4 +45,4 @@ COPY --from=frontend /usr/src/app/packages/frontend/build ./packages/frontend/bu
 
 WORKDIR /usr/src/app/packages/backend
 
-CMD ["sh", "-c", "npx knex migrate:latest && node ./src/index.js"]
+CMD ["node", "src/index.js"]

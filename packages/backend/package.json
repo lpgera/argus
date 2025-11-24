@@ -2,10 +2,10 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "dev": "node --watch ./src/index.js",
+    "dev": "node --watch src/index.js",
     "seed": "node db/seed.js",
-    "start": "knex migrate:latest && node ./src/index.js",
-    "cron": "node ./src/cron.js"
+    "start": "node src/index.js",
+    "cron": "node src/cron.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.937.0",

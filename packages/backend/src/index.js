@@ -8,6 +8,10 @@ import apiRouter from './routers/api.js'
 import ajaxRouter from './routers/ajax.js'
 import db from './db.js'
 
+if (process.env.NODE_ENV === 'production') {
+  await db.migrate.latest()
+}
+
 const app = express()
 
 app.use(cors())
