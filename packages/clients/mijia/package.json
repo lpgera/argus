@@ -8,7 +8,7 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-26",
     "base-client": "file:../base-client",
-    "cron": "^4.3.4",
+    "cron": "^4.3.5",
     "logger": "file:../../logger"
   },
   "volta": {
