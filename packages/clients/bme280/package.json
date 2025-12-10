@@ -8,7 +8,7 @@
   "dependencies": {
     "base-client": "file:../base-client",
     "bme280-sensor": "^0.1.7",
-    "cron": "^4.3.5",
+    "cron": "^4.4.0",
     "logger": "file:../../logger"
   },
   "volta": {
