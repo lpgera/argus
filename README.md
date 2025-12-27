@@ -22,6 +22,7 @@ Raspberry Pi. Available as a pre-built Docker image from GitHub Package Registry
 
 - [BME280](./packages/clients/bme280)
 - [DHT22](./packages/clients/dht22)
+- [Dirigera light sensor](./packages/clients/dirigera-light-sensor)
 - [HC-SR501](./packages/clients/hcsr501)
 - [Mijia](./packages/clients/mijia)
 - [Parasoll](./packages/clients/parasoll)

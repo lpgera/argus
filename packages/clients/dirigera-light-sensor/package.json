@@ -1,9 +1,9 @@
 {
-  "name": "vallhorn",
+  "name": "dirigera-light-sensor",
   "type": "module",
   "scripts": {
-    "start": "node vallhorn.js",
-    "dev": "node --watch --env-file=.env vallhorn.js"
+    "start": "node dirigera-light-sensor.js",
+    "dev": "node --watch --env-file=.env dirigera-light-sensor.js"
   },
   "dependencies": {
     "base-client": "file:../base-client",
