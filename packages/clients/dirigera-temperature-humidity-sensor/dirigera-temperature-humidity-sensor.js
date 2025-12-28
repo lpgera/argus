@@ -34,6 +34,10 @@ const onTick = async () => {
         type: 'humidity',
         value: humiditySensor.attributes.currentRH,
       },
+      {
+        type: 'battery',
+        value: temperatureSensor.attributes.batteryPercentage,
+      },
     ]
 
     await client.storeMeasurements({ measurements })
