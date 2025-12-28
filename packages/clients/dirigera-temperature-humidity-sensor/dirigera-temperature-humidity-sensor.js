@@ -17,19 +17,22 @@ const dirigeraClient = await createDirigeraClient({
 
 const onTick = async () => {
   try {
-    const temperatureHumiditySensor =
-      await dirigeraClient.environmentSensors.get({
-        id: process.env.DIRIGERA_TEMPERATURE_HUMIDITY_SENSOR_ID,
-      })
+    const temperatureSensor = await dirigeraClient.environmentSensors.get({
+      id: `${process.env.DIRIGERA_TEMPERATURE_HUMIDITY_SENSOR_ID}_1`,
+    })
+
+    const humiditySensor = await dirigeraClient.environmentSensors.get({
+      id: `${process.env.DIRIGERA_TEMPERATURE_HUMIDITY_SENSOR_ID}_2`,
+    })
 
     const measurements = [
       {
         type: 'temperature',
-        value: temperatureHumiditySensor.attributes.currentTemperature,
+        value: temperatureSensor.attributes.currentTemperature,
       },
       {
         type: 'humidity',
-        value: temperatureHumiditySensor.attributes.currentRH,
+        value: humiditySensor.attributes.currentRH,
       },
     ]
 
