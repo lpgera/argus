@@ -20,6 +20,7 @@ COPY packages/clients/base-client/package.json packages/clients/base-client/
 COPY packages/clients/bme280/package.json packages/clients/bme280/
 COPY packages/clients/dht22/package.json packages/clients/dht22/
 COPY packages/clients/dirigera-light-sensor/package.json packages/clients/dirigera-light-sensor/
+COPY packages/clients/dirigera-temperature-humidity-sensor/package.json packages/clients/dirigera-temperature-humidity-sensor/
 COPY packages/clients/hcsr501/package.json packages/clients/hcsr501/
 COPY packages/clients/mijia/package.json packages/clients/mijia/
 COPY packages/clients/senseair/package.json packages/clients/senseair/
