@@ -1,15 +1,16 @@
 {
-  "name": "dirigera-light-sensor",
+  "name": "dirigera-universal",
   "type": "module",
   "scripts": {
-    "start": "node dirigera-light-sensor.js",
-    "dev": "node --watch --env-file=.env dirigera-light-sensor.js"
+    "start": "node dirigera-universal.js",
+    "dev": "node --watch --env-file=.env dirigera-universal.js"
   },
   "dependencies": {
     "base-client": "file:../base-client",
     "cron": "^4.4.0",
     "dirigera": "^1.7.0",
-    "logger": "file:../../logger"
+    "logger": "file:../../logger",
+    "zod": "^4.3.4"
   },
   "volta": {
     "extends": "../../../package.json"

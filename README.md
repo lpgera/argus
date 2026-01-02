@@ -22,14 +22,12 @@ Raspberry Pi. Available as a pre-built Docker image from GitHub Package Registry
 
 - [BME280](./packages/clients/bme280)
 - [DHT22](./packages/clients/dht22)
-- [Dirigera light sensor](./packages/clients/dirigera-light-sensor)
-- [Dirigera temperature/humidity sensor](./packages/clients/dirigera-temperature-humidity-sensor)
+- [Dirigera universal](./packages/clients/dirigera-universal)
 - [HC-SR501](./packages/clients/hcsr501)
 - [Mijia](./packages/clients/mijia)
 - [Parasoll](./packages/clients/parasoll)
 - [Senseair](./packages/clients/senseair)
 - [Vallhorn](./packages/clients/vallhorn)
-- [Vindstyrka](./packages/clients/vindstyrka)
 - [Weather](./packages/clients/weather)
 
 ## Usage with docker-compose
