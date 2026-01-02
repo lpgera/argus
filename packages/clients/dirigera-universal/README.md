@@ -26,7 +26,6 @@ services:
     environment:
       - ARGUS_URL=http://backend:4000
       - ARGUS_API_KEY=<api key with write access>
-      - ARGUS_SENSOR_LOCATION=<sensor location name>
       - DIRIGERA_GATEWAY_IP=
       - DIRIGERA_ACCESS_TOKEN=
       - DIRIGERA_SENSORS=
