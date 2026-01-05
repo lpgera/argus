@@ -10,7 +10,7 @@
     "cron": "^4.4.0",
     "dirigera": "^1.7.0",
     "logger": "file:../../logger",
-    "zod": "^4.3.4"
+    "zod": "^4.3.5"
   },
   "volta": {
     "extends": "../../../package.json"
