@@ -12,7 +12,7 @@
     "@aws-sdk/lib-storage": "^3.972.0",
     "body-parser": "^2.2.2",
     "compression": "^1.8.1",
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "cron": "^4.4.0",
     "express": "^5.2.1",
     "joi": "^18.0.2",
