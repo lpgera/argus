@@ -1,5 +1,5 @@
 import { CronJob } from 'cron'
-import noble from '@abandonware/noble'
+import noble from '@stoprocent/noble'
 import Logger from 'logger'
 import Client from 'base-client'
 
@@ -136,6 +136,7 @@ noble.on('discover', async (peripheral) => {
   decodeAndStoreServiceData(address, data)
 })
 
+await noble.waitForPoweredOnAsync()
 const allowDuplicates = true
 await noble.startScanningAsync(['fe95'], allowDuplicates)
 
