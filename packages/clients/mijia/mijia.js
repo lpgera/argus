@@ -137,6 +137,7 @@ noble.on('discover', async (peripheral) => {
   decodeAndStoreServiceData(address, data)
 })
 
+await noble.waitForPoweredOnAsync()
 const allowDuplicates = true
 await noble.startScanningAsync(['fe95'], allowDuplicates)
 
