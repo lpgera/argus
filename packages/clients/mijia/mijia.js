@@ -128,9 +128,8 @@ function decodeAndStoreServiceData(address, data) {
 noble.on('discover', async (peripheral) => {
   const address = peripheral.address
   const data = [...peripheral.advertisement.serviceData[0].data].slice(11)
-  log.info({
+  log.debug({
     address,
-    id: peripheral.id,
     location: locationsConfig[address],
     data,
   })
