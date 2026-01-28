@@ -1,5 +1,5 @@
 import { CronJob } from 'cron'
-import noble from '@abandonware/noble'
+import noble from '@stoprocent/noble'
 import Logger from 'logger'
 import Client from 'base-client'
 
