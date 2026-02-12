@@ -53,6 +53,14 @@ const onTick = async () => {
             id: sensorConfig.deviceId,
           })
 
+          if (
+            new Date(sensor.lastSeen) < new Date(Date.now() - 10 * 60 * 1000)
+          ) {
+            throw new Error(
+              `Sensor ${sensorConfig.deviceId} has not been seen for more than 10 minutes`
+            )
+          }
+
           return Object.entries(sensorConfig.attributeMapping).map(
             ([attribute, type]) => ({
               type,
