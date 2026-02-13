@@ -54,10 +54,11 @@ const onTick = async () => {
           })
 
           if (
-            new Date(sensor.lastSeen) < new Date(Date.now() - 10 * 60 * 1000)
+            new Date(sensor.lastSeen) <
+            new Date(Date.now() - 12 * 60 * 60 * 1000)
           ) {
             throw new Error(
-              `Sensor ${sensorConfig.deviceId} has not been seen for more than 10 minutes`
+              `Sensor ${sensorConfig.deviceId} has not been seen for more than 12 hours`
             )
           }
 
