@@ -6,7 +6,7 @@
     "dev": "node --watch --env-file=.env mijia.js"
   },
   "dependencies": {
-    "@stoprocent/noble": "^2.3.15",
+    "@stoprocent/noble": "^2.3.16",
     "base-client": "file:../base-client",
     "cron": "^4.4.0",
     "logger": "file:../../logger"
