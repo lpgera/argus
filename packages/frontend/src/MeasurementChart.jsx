@@ -8,8 +8,7 @@ import InputLabel from '@mui/material/InputLabel'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
-import { HighchartsReact } from 'highcharts-react-official'
-import HighStock from 'highcharts/highstock'
+import { StockChart } from '@highcharts/react/Stock'
 import 'highcharts/css/highcharts.css'
 import './highcharts.overrides.css'
 import useApiClient from './hooks/useApiClient'
@@ -177,10 +176,8 @@ export default function MeasurementChart() {
         style={{ padding: theme.spacing(2) }}
         className={`highcharts-${isDarkMode ? 'dark' : 'light'}`}
       >
-        <HighchartsReact
+        <StockChart
           containerProps={{ style: { marginBottom: theme.spacing(1) } }}
-          highcharts={HighStock}
-          constructorType={'stockChart'}
           options={{
             chart: {
               type: 'line',
