@@ -17,6 +17,11 @@
     "vite-plugin-pwa": "^1.2.0",
     "vite-plugin-svgr": "^5.0.0"
   },
+  "overrides": {
+    "vite-plugin-pwa": {
+      "vite": "$vite"
+    }
+  },
   "type": "module",
   "scripts": {
     "start": "vite",
