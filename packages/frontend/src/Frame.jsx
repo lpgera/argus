@@ -116,7 +116,7 @@ export default function Frame() {
         to="/"
         onClick={() => setMobileDrawerOpen(false)}
       >
-        <ListItemIcon>
+        <ListItemIcon style={{ minWidth: '56px' }}>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
@@ -126,7 +126,7 @@ export default function Frame() {
         to="/api-keys"
         onClick={() => setMobileDrawerOpen(false)}
       >
-        <ListItemIcon>
+        <ListItemIcon style={{ minWidth: '56px' }}>
           <KeyIcon />
         </ListItemIcon>
         <ListItemText primary="Api keys" />
@@ -136,7 +136,7 @@ export default function Frame() {
         to="/diagnostics"
         onClick={() => setMobileDrawerOpen(false)}
       >
-        <ListItemIcon>
+        <ListItemIcon style={{ minWidth: '56px' }}>
           <DiagnosticsIcon />
         </ListItemIcon>
         <ListItemText primary="Diagnostics" />
@@ -146,7 +146,7 @@ export default function Frame() {
         to="/alerts"
         onClick={() => setMobileDrawerOpen(false)}
       >
-        <ListItemIcon>
+        <ListItemIcon style={{ minWidth: '56px' }}>
           <AlertsIcon />
         </ListItemIcon>
         <ListItemText primary="Alerts" />
@@ -157,7 +157,7 @@ export default function Frame() {
           setToken(null)
         }}
       >
-        <ListItemIcon>
+        <ListItemIcon style={{ minWidth: '56px' }}>
           <LogoutIcon />
         </ListItemIcon>
         <ListItemText primary="Logout" />
