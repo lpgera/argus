@@ -14,13 +14,8 @@
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.14.1",
     "vite": "^8.0.8",
-    "vite-plugin-pwa": "^1.2.0",
+    "vite-plugin-pwa": "github:vite-pwa/vite-plugin-pwa#276af62eeecf8b5513b80a7021f39be981e5b670",
     "vite-plugin-svgr": "^5.2.0"
-  },
-  "overrides": {
-    "vite-plugin-pwa": {
-      "vite": "$vite"
-    }
   },
   "type": "module",
   "scripts": {
