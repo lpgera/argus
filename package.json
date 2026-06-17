@@ -37,5 +37,16 @@
   ],
   "lint-staged": {
     "*.{js,jsx,css,md,json,yml}": "prettier --write"
+  },
+  "allowScripts": {
+    "@serialport/bindings-cpp@13.0.0": true,
+    "@serialport/bindings-cpp@12.0.1": true,
+    "@stoprocent/bluetooth-hci-socket@2.2.6": true,
+    "@stoprocent/noble@2.5.4": true,
+    "epoll@4.0.2": true,
+    "fsevents@2.3.3": true,
+    "i2c-bus@5.2.3": true,
+    "node-dht-sensor@0.5.1": true,
+    "usb@2.17.0": true
   }
 }
