@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react'
-import { HashRouter as Router, Link, Route, Routes } from 'react-router-dom'
+import { HashRouter as Router, Link, Route, Routes } from 'react-router'
 import { useTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
 import CssBaseline from '@mui/material/CssBaseline'
