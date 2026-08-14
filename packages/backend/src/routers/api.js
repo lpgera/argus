@@ -17,6 +17,7 @@ const measurementSchema = Joi.object({
 
 router.post(
   '/measurement/location/:location',
+  apiAuth.ensureWritePermission,
   validateParams(
     Joi.object({
       location: Joi.string().max(64).required(),
@@ -25,10 +26,9 @@ router.post(
   validateRequestBody(
     Joi.alternatives().try(
       measurementSchema,
-      Joi.array().items(measurementSchema).min(1)
+      Joi.array().items(measurementSchema).min(1).max(128)
     )
   ),
-  apiAuth.ensureWritePermission,
   async (req, res) => {
     const { location } = req.params
     const measurements = Array.isArray(req.body) ? req.body : [req.body]
@@ -51,13 +51,13 @@ router.post(
 
 router.get(
   '/measurement/latest/location/:location/type/:type',
+  apiAuth.ensureReadPermission,
   validateParams(
     Joi.object({
       location: Joi.string().max(64).required(),
       type: Joi.string().max(64).required(),
     })
   ),
-  apiAuth.ensureReadPermission,
   async (req, res) => {
     const { location, type } = req.params
     log.debug({ location, type }, 'Getting latest measurements.')
