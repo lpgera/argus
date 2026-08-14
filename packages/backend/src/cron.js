@@ -42,7 +42,7 @@ const shouldAlert = ({ value, comparison, alertValue }) => {
     case '<=':
       return value <= alertValue
     case '=':
-      return (value = alertValue)
+      return value === alertValue
     case '>=':
       return value >= alertValue
     case '>':
