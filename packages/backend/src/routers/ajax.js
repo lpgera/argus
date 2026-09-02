@@ -34,7 +34,7 @@ router.post('/login', (req, res) => {
     })
     return
   }
-  res.sendStatus(403)
+  res.sendStatus(401)
 })
 
 router.use((req, res, next) => {
