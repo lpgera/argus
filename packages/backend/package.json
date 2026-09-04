@@ -15,7 +15,7 @@
     "cors": "^2.8.6",
     "cron": "^4.4.0",
     "express": "^5.2.1",
-    "joi": "^18.2.5",
+    "joi": "^18.2.8",
     "jsonwebtoken": "^9.0.3",
     "knex": "^3.3.0",
     "logger": "file:../logger",
