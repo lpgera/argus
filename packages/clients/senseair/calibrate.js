@@ -1,3 +1,4 @@
+import { setTimeout } from 'node:timers/promises'
 import { SerialPort } from 'serialport'
 import { InterByteTimeoutParser } from '@serialport/parser-inter-byte-timeout'
 
@@ -22,23 +23,26 @@ parser.on('data', (data) => {
   }
 })
 
+console.log('Waking up sensor...')
+
+// CO2 read is used to wake up the sensor
+port.write(Buffer.from([0xfe, 0x04, 0x00, 0x03, 0x00, 0x01, 0xd5, 0xc5]))
+
+await setTimeout(1000)
+
 console.log('Starting outdoor calibration sequence...')
 
 port.write(Buffer.from([0xfe, 0x06, 0x00, 0x00, 0x00, 0x00, 0x9d, 0xc5]))
 
-setTimeout(
-  () =>
-    port.write(Buffer.from([0xfe, 0x06, 0x00, 0x01, 0x7c, 0x06, 0x6c, 0xc7])),
-  2000
-)
+await setTimeout(2000)
 
-setTimeout(
-  () =>
-    port.write(Buffer.from([0xfe, 0x03, 0x00, 0x00, 0x00, 0x01, 0x90, 0x05])),
-  6000
-)
+port.write(Buffer.from([0xfe, 0x06, 0x00, 0x01, 0x7c, 0x06, 0x6c, 0xc7]))
 
-setTimeout(() => {
-  console.log('Calibration timed out')
-  process.exit(1)
-}, 20000)
+await setTimeout(4000)
+
+port.write(Buffer.from([0xfe, 0x03, 0x00, 0x00, 0x00, 0x01, 0x90, 0x05]))
+
+await setTimeout(14000)
+
+console.log('Calibration timed out')
+process.exit(1)
