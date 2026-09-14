@@ -11,7 +11,7 @@
     "@aws-sdk/client-s3": "^3.1129.0",
     "@aws-sdk/lib-storage": "^3.1129.0",
     "body-parser": "^2.3.0",
-    "compression": "^1.8.1",
+    "compression": "^1.8.2",
     "cors": "^2.8.6",
     "cron": "^4.4.0",
     "express": "^5.2.1",
