@@ -19,7 +19,7 @@
     "jsonwebtoken": "^9.0.3",
     "knex": "^3.3.0",
     "logger": "file:../logger",
-    "moment": "^2.30.1",
+    "moment": "^2.31.0",
     "mysql": "^2.18.1"
   },
   "volta": {
