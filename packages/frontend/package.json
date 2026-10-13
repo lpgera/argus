@@ -5,7 +5,7 @@
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.3.0",
     "@highcharts/react": "5.2.2",
-    "@mui/icons-material": "^9.4.0",
+    "@mui/icons-material": "^9.5.0",
     "@mui/material": "^9.4.0",
     "@vitejs/plugin-react": "^6.1.2",
     "highcharts": "^13.1.1",
