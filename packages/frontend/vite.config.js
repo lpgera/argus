@@ -54,8 +54,20 @@ export default defineConfig({
     }),
   ],
   base: './',
+  optimizeDeps: {
+    rolldownOptions: {
+      output: {
+        strictExecutionOrder: true,
+      },
+    },
+  },
   build: {
     outDir: 'build',
+    rolldownOptions: {
+      output: {
+        strictExecutionOrder: true,
+      },
+    },
   },
   server: {
     port: 3000,
