@@ -13,7 +13,7 @@
     "body-parser": "^2.4.0",
     "compression": "^1.8.2",
     "cors": "^2.8.6",
-    "cron": "^4.4.0",
+    "cron": "^4.4.1",
     "express": "^5.3.0",
     "joi": "^18.3.2",
     "jsonwebtoken": "^9.0.3",
